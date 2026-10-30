@@ -1,0 +1,11 @@
+{
+  "name": "ptc-br",
+  "owner": { "name": "Irisson do Nascimento de Lima" },
+  "plugins": [
+    {
+      "name": "ptc-br",
+      "source": "./",
+      "description": "Português Técnico Controlado (PTC-BR) para textos técnicos em pt-BR."
+    }
+  ]
+}

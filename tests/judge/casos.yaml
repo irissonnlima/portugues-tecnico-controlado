@@ -1,0 +1,114 @@
+# Pares rotulados para calibrar o judge (references/rubrica-judge.md).
+# esperado: só as perguntas listadas são comparadas; o veredito é sempre comparado.
+# Rótulos iniciais propostos pelo Claude e revisados após a 1ª calibração — REVISE antes de confiar na métrica.
+
+- id: spec-8.1-boa
+  regras_alvo: [PTC-04, PTC-05, PTC-06, PTC-11]
+  original: "Quando o certificado utilizado para a autenticação encontrar-se fora do seu período de validade, deverá ser realizado o procedimento de renovação para possibilitar a continuidade da operação."
+  reescrita: "Se o certificado de autenticação estiver fora do período de validade, renove o certificado para continuar a operação."
+  esperado: {Q1: false, Q2: false, Q3: false, Q4: false, veredito: aprovado}
+
+# Era o exemplo "bom" da spec 0.1.1-rc; o judge mostrou que troca a finalidade por uma ação nova.
+- id: spec-8.1-finalidade
+  regras_alvo: [PTC-04, PTC-05, PTC-11]
+  original: "Quando o certificado utilizado para a autenticação encontrar-se fora do seu período de validade, deverá ser realizado o procedimento de renovação para possibilitar a continuidade da operação."
+  reescrita: "Se o certificado de autenticação estiver fora do período de validade, renove o certificado. Depois, execute a operação novamente."
+  esperado: {veredito: reprovado}
+
+- id: spec-8.1-escopo
+  regras_alvo: [PTC-04, PTC-05, PTC-11]
+  original: "Quando o certificado utilizado para a autenticação encontrar-se fora do seu período de validade, deverá ser realizado o procedimento de renovação para possibilitar a continuidade da operação."
+  reescrita: "Se o certificado estiver expirado, renove o certificado. Depois, execute novamente a operação."
+  esperado: {Q3: true, veredito: reprovado}
+
+- id: spec-8.2-boa
+  regras_alvo: [PTC-04, PTC-11]
+  original: "O presente estudo objetiva proceder à comparação de metodologias estocásticas aplicadas à maximização do desempenho de configurações aeronáuticas sujeitas a alterações regulamentares."
+  reescrita: "Este estudo compara métodos estocásticos usados para maximizar o desempenho de configurações de aeronaves sujeitas a alterações de regulamento."
+  esperado: {Q1: false, Q2: false, Q4: false, veredito: aprovado}
+
+# Era o exemplo "bom" da spec 0.1.1-rc; o judge mostrou que a divisão desloca a restrição.
+- id: spec-8.2-divisao
+  regras_alvo: [PTC-04, PTC-11]
+  original: "O presente estudo objetiva proceder à comparação de metodologias estocásticas aplicadas à maximização do desempenho de configurações aeronáuticas sujeitas a alterações regulamentares."
+  reescrita: "Este estudo compara métodos estocásticos usados para maximizar o desempenho de configurações de aeronaves. A comparação considera mudanças no regulamento."
+  esperado: {veredito: reprovado}
+
+- id: spec-8.2-adicao
+  regras_alvo: [PTC-04, PTC-11]
+  original: "O presente estudo objetiva proceder à comparação de metodologias estocásticas aplicadas à maximização do desempenho de configurações aeronáuticas sujeitas a alterações regulamentares."
+  reescrita: "Este estudo compara três algoritmos de otimização estocástica usados no projeto de aeronaves. A comparação considera as mudanças nas regras da competição."
+  esperado: {Q2: true, veredito: reprovado}
+
+- id: spec-8.3-boa
+  regras_alvo: [PTC-06]
+  original: "O sistema só aprova a assinatura quando o certificado é válido e não está revogado."
+  reescrita: "Somente se o certificado estiver válido e não estiver revogado, o sistema aprova a assinatura."
+  esperado: {Q1: false, Q2: false, Q3: false, Q5: true, veredito: aprovado}
+
+- id: spec-8.3-ordem
+  regras_alvo: [PTC-06]
+  original: "O sistema só aprova a assinatura quando o certificado é válido e não está revogado."
+  reescrita: "O sistema aprova a assinatura somente se o certificado estiver válido e não estiver revogado."
+  esperado: {Q1: false, Q2: false, Q5: false, veredito: reprovado}
+
+- id: spec-8.3-perda
+  regras_alvo: [PTC-06]
+  original: "O sistema só aprova a assinatura quando o certificado é válido e não está revogado."
+  reescrita: "O sistema aprova a assinatura quando o certificado é válido."
+  esperado: {Q1: true, veredito: reprovado}
+
+- id: passiva-ativa
+  regras_alvo: [PTC-05, PTC-11]
+  original: "Deverá ser realizada a reinicialização do serviço após a alteração do arquivo de configuração."
+  reescrita: "Depois de alterar o arquivo de configuração, reinicie o serviço."
+  esperado: {Q1: false, Q2: false, Q3: false, Q4: false, Q5: true, veredito: aprovado}
+
+- id: hiponimo
+  regras_alvo: [PTC-04]
+  original: "Os usuários autorizados podem exportar o relatório em PDF ou CSV a partir do painel administrativo do sistema de cobrança."
+  reescrita: "Os usuários podem exportar o relatório em PDF ou CSV no painel administrativo."
+  esperado: {Q3: true, veredito: reprovado}
+
+- id: alternativa-perdida
+  regras_alvo: [PTC-04]
+  original: "Autentique-se com o certificado digital ou com o token de hardware antes de assinar o contrato."
+  reescrita: "Antes de assinar o contrato, autentique-se com o certificado digital."
+  esperado: {Q1: true, veredito: reprovado}
+
+- id: termo-tecnico-trocado
+  regras_alvo: [PTC-11]
+  original: "Realize a revogação do certificado digital comprometido na autoridade certificadora."
+  reescrita: "Cancele o certificado comprometido no site."
+  esperado: {Q4: true, veredito: reprovado}
+
+- id: causa-inventada
+  regras_alvo: [PTC-04]
+  original: "A sincronização foi interrompida às 02h10 e o processo de conciliação não foi executado no lote noturno de ontem."
+  reescrita: "A sincronização parou às 02h10 por falta de memória. Por isso, a conciliação não rodou no lote noturno de ontem."
+  esperado: {Q2: true, veredito: reprovado}
+
+# Rótulo inicial estava errado: "Confirme a operação" sai do alcance da condição.
+- id: divisao-tira-condicao
+  regras_alvo: [PTC-02, PTC-03]
+  original: "Abra o painel, selecione a aba Usuários e, se o usuário estiver bloqueado, clique em Desbloquear e confirme a operação."
+  reescrita: "Abra o painel. Selecione a aba Usuários. Se o usuário estiver bloqueado, clique em Desbloquear. Confirme a operação."
+  esperado: {Q1: true, veredito: reprovado}
+
+- id: divisao-legitima
+  regras_alvo: [PTC-03]
+  original: "Abra o painel, selecione a aba Usuários e, se o usuário estiver bloqueado, clique em Desbloquear e confirme a operação."
+  reescrita: "Abra o painel. Selecione a aba Usuários. Se o usuário estiver bloqueado, clique em Desbloquear e confirme a operação."
+  esperado: {Q1: false, Q2: false, Q3: false, veredito: aprovado}
+
+- id: limite-numerico
+  regras_alvo: [PTC-12]
+  original: "Aguarde um tempo adequado, no máximo 30 segundos, até o serviço responder."
+  reescrita: "Aguarde até o serviço responder, por no máximo 30 s."
+  esperado: {Q1: false, Q2: false, Q3: false, veredito: aprovado}
+
+- id: nova-violacao
+  regras_alvo: [PTC-11]
+  original: "Efetue o envio do arquivo para o servidor de homologação."
+  reescrita: "Envie o arquivo para o servidor de homologação, que normalmente responde rapidamente e grava os dados no SGBD configurado pelo time."
+  esperado: {Q2: true, Q6: true, veredito: reprovado}

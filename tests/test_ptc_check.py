@@ -1,0 +1,132 @@
+"""Testes do verificador determinístico. Rode: python3 -m unittest discover -s tests"""
+import sys
+import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "skills" / "ptc-br" / "scripts"))
+import ptc_check as pc  # noqa: E402
+
+
+def regras(texto, perfil="T"):
+    return [a["regra"] for a in pc.verificar(texto, perfil)["achados"]]
+
+
+class Contagem(unittest.TestCase):
+    """Seção 5 da spec."""
+
+    def test_palavras_simples(self):
+        self.assertEqual(pc.contar_palavras("Renove o certificado."), 3)
+
+    def test_hifen_e_enclise(self):
+        self.assertEqual(pc.contar_palavras("Renove-o com o guarda-chuva."), 4)
+
+    def test_numero_com_unidade(self):
+        self.assertEqual(pc.contar_palavras("Aplique 20 mV por 1,5 s."), 4)
+
+    def test_identificador_de_norma(self):
+        self.assertEqual(pc.contar_palavras("Siga a ABNT NBR ISO 24495-1 agora."), 4)
+
+    def test_codigo_e_url(self):
+        txt = pc.limpar_inline("Rode `kubectl get pods -A` e abra https://exemplo.com/a/b.")
+        self.assertEqual(pc.contar_palavras(txt), 5)
+
+    def test_pontuacao_isolada_nao_conta(self):
+        self.assertEqual(pc.contar_palavras("Abra o arquivo — depois feche."), 5)
+
+
+class Frases(unittest.TestCase):
+    def test_abreviacao_nao_divide(self):
+        self.assertEqual(len(pc.dividir_frases("Use um formato, p. ex. JSON. Depois salve.")), 2)
+
+    def test_decimal_e_versao_nao_dividem(self):
+        self.assertEqual(len(pc.dividir_frases("Instale a v2.1.0 com 1.5 GB livres. Reinicie.")), 2)
+
+
+class Regras(unittest.TestCase):
+    def test_ptc03_passo_longo(self):
+        passo = "1. " + " ".join(["palavra"] * 21) + "."
+        self.assertIn("PTC-03", regras(passo))
+
+    def test_ptc03_limite_exato_passa(self):
+        passo = "1. Abra " + " ".join(["palavra"] * 19) + "."
+        self.assertNotIn("PTC-03", regras(passo))
+
+    def test_ptc04_descricao_longa(self):
+        self.assertIn("PTC-04", regras(" ".join(["palavra"] * 26) + "."))
+
+    def test_ptc11_nominalizacao(self):
+        self.assertIn("PTC-11", regras("Realize a verificação do arquivo."))
+
+    def test_ptc11_locucao_fixa(self):
+        self.assertIn("PTC-11", regras("O time vai fazer uso de filas."))
+
+    def test_ptc11_nao_marca_execute_os_testes(self):
+        self.assertNotIn("PTC-11", regras("Execute os testes antes do merge."))
+
+    def test_ptc12_vaga(self):
+        self.assertIn("PTC-12", regras("Responda rapidamente ao alerta."))
+
+    def test_ptc05_passiva_com_agente(self):
+        r = pc.verificar("O arquivo é validado pelo sistema.")["achados"]
+        self.assertTrue(any(a["regra"] == "PTC-05" and a["confianca"] == "media" for a in r))
+
+    def test_ptc05_ignora_adjetivo(self):
+        self.assertNotIn("PTC-05", regras("O valor é adequado para o teste."))
+
+    def test_ptc15_paragrafo_longo(self):
+        self.assertIn("PTC-15", regras(" ".join(["Abra o arquivo."] * 7)))
+
+    def test_ptc17_sigla_sem_definicao(self):
+        self.assertIn("PTC-17", regras("O ERP grava os pedidos."))
+
+    def test_ptc17_sigla_definida(self):
+        self.assertNotIn("PTC-17", regras("O Planejamento de Recursos (ERP) grava os pedidos. O ERP responde."))
+
+    def test_ptc17_sigla_declarada(self):
+        self.assertNotIn("PTC-17", regras("<!-- ptc-siglas: ERP -->\nO ERP grava os pedidos."))
+
+    def test_ptc18_infinitivo_em_passo(self):
+        self.assertIn("PTC-18", regras("1. Selecionar o arquivo."))
+
+    def test_ptc18_imperativo_passa(self):
+        self.assertNotIn("PTC-18", regras("1. Selecione o arquivo."))
+
+    def test_ptc21_aviso_vazio(self):
+        self.assertIn("PTC-21", regras("> **Atenção:** confira o arquivo."))
+
+    def test_ptc21_aviso_com_consequencia(self):
+        self.assertNotIn("PTC-21", regras("> **Atenção:** não desligue o servidor: a base pode corromper."))
+
+    def test_ptc23_negacoes(self):
+        self.assertIn("PTC-23", regras("Não é possível não validar sem token."))
+
+    def test_excecao_suprime_regra(self):
+        txt = "<!-- ptc-excecao: PTC-03; motivo: parâmetro longo -->\n1. " + " ".join(["palavra"] * 22) + "."
+        res = pc.verificar(txt)
+        self.assertNotIn("PTC-03", [a["regra"] for a in res["achados"]])
+        self.assertEqual(res["excecoes_aplicadas"][0]["regra"], "PTC-03")
+
+    def test_excecao_sem_motivo(self):
+        self.assertIn("PTC-24", regras("<!-- ptc-excecao: PTC-03 -->\n1. Abra."))
+
+    def test_codigo_e_titulo_ignorados(self):
+        txt = "# Realize a verificação do ERP\n\n```\nrealize a verificação\n```\n"
+        self.assertEqual(regras(txt), [])
+
+
+class Perfis(unittest.TestCase):
+    def test_perfil_L_nao_aplica_ptc04(self):
+        self.assertNotIn("PTC-04", regras(" ".join(["palavra"] * 26) + ".", "L"))
+
+    def test_perfil_C_torna_ptc11_obrigatoria(self):
+        r = pc.verificar("Realize a verificação do arquivo.", "C")["achados"]
+        self.assertEqual([a["nivel"] for a in r if a["regra"] == "PTC-11"], ["O"])
+
+    def test_exemplos_da_spec_nao_quebram(self):
+        spec = (Path(pc.__file__).resolve().parents[1] / "references" / "regras.md").read_text(encoding="utf-8")
+        res = pc.verificar(spec)
+        self.assertGreater(res["blocos_verificados"], 50)
+
+
+if __name__ == "__main__":
+    unittest.main()
