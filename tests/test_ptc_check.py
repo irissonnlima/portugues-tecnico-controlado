@@ -114,6 +114,45 @@ class Regras(unittest.TestCase):
         self.assertEqual(regras(txt), [])
 
 
+class PrecisaoCorpus(unittest.TestCase):
+    """Falsos positivos encontrados no corpus real (0.2.0)."""
+
+    def conf(self, texto, regra):
+        return [a["confianca"] for a in pc.verificar(texto)["achados"] if a["regra"] == regra]
+
+    def test_concordancia_negativa_nao_conta(self):
+        for f in ["Não há fallback nem cache.", "Então não precisa de mais nada.", "Nunca use X nem Y como chave."]:
+            self.assertEqual(self.conf(f, "PTC-23"), [], f)
+
+    def test_oracoes_coordenadas_nao_somam(self):
+        self.assertEqual(self.conf("O DNS não resolve e os IPs não têm rota.", "PTC-23"), [])
+
+    def test_negacao_dupla_e_baixa(self):
+        self.assertEqual(self.conf("Nunca entregue tabela sem índice.", "PTC-23"), ["baixa"])
+
+    def test_dois_nao_na_oracao_e_media(self):
+        self.assertEqual(self.conf("Não é possível não validar o token.", "PTC-23"), ["media"])
+
+    def test_nome_de_arquivo_nao_e_sigla(self):
+        self.assertEqual(self.conf("Edite o SKILL.md e o README.md.", "PTC-17"), [])
+
+    def test_caixa_alta_de_enfase_e_baixa(self):
+        self.assertEqual(self.conf("Antes de editar, LEIA o guia.", "PTC-17"), ["baixa"])
+
+    def test_siglas_extra_pela_cli(self):
+        res = pc.verificar("O DDL cria a tabela em HML.", siglas_extra={"DDL", "HML"})
+        self.assertNotIn("PTC-17", [a["regra"] for a in res["achados"]])
+
+    def test_quantificador_vago_e_baixa(self):
+        self.assertEqual(self.conf("Várias tabelas têm índice.", "PTC-12"), ["baixa"])
+
+    def test_passo_com_substantivo_em_or_nao_e_infinitivo(self):
+        self.assertEqual(self.conf("1. Valor sensível nunca vai para o repositório.", "PTC-18"), [])
+
+    def test_levar_correcao_nao_e_nominalizacao(self):
+        self.assertEqual(self.conf("O back-merge leva a correção para HML.", "PTC-11"), [])
+
+
 class Perfis(unittest.TestCase):
     def test_perfil_L_nao_aplica_ptc04(self):
         self.assertNotIn("PTC-04", regras(" ".join(["palavra"] * 26) + ".", "L"))

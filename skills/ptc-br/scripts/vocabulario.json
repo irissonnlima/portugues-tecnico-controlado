@@ -1,0 +1,1208 @@
+{
+ "spec_version": "0.2.0",
+ "aviso": "Arquivo gerado por tools/compilar_vocabulario.py. Edite os .yaml em references/vocabulario/.",
+ "total": 68,
+ "verbetes": [
+  {
+   "id": "V-0001",
+   "lema": "verificar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "examinar um estado ou resultado para determinar se atende a um critério",
+   "preferida_em_instrucoes": "verifique",
+   "exemplo_correto": "Verifique a versão do certificado.",
+   "exemplo_incorreto": "Realize a verificação da versão do certificado.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:verificam\\-se|verificar\\-se|verificassem|verifique\\-se|verifica\\-se|verificadas|verificados|verificando|verificaram|verificarão|verificasse|verificavam|verificada|verificado|verificará|verificava|verifiquem|verificam|verificar|verificou|verifique|verifica)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0002",
+   "lema": "validar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "confirmar, por regra ou ferramenta, que um dado atende a um formato ou a uma especificação",
+   "motivo": "Não é sinônimo de verificar. Validar aplica uma regra formal; verificar examina um estado.",
+   "exemplo_correto": "O sistema valida o CPF antes de gravar o cadastro.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:validam\\-se|validar\\-se|validassem|valida\\-se|validadas|validados|validando|validaram|validarão|validasse|validavam|valide\\-se|validada|validado|validará|validava|validam|validar|validem|validou|valida|valide)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0003",
+   "lema": "confirmar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "aceitar uma ação proposta pelo sistema, ou declarar que um fato é verdadeiro",
+   "preferida_em_instrucoes": "confirme",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:confirmam\\-se|confirmar\\-se|confirmassem|confirma\\-se|confirmadas|confirmados|confirmando|confirmaram|confirmarão|confirmasse|confirmavam|confirme\\-se|confirmada|confirmado|confirmará|confirmava|confirmam|confirmar|confirmem|confirmou|confirma|confirme)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0004",
+   "lema": "selecionar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "escolher um item em uma interface",
+   "preferida_em_instrucoes": "selecione",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:selecionam\\-se|selecionar\\-se|selecionassem|seleciona\\-se|selecionadas|selecionados|selecionando|selecionaram|selecionarão|selecionasse|selecionavam|selecione\\-se|selecionada|selecionado|selecionará|selecionava|selecionam|selecionar|selecionem|selecionou|seleciona|selecione)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0005",
+   "lema": "executar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "iniciar e completar a execução de um programa, comando ou procedimento",
+   "preferida_em_instrucoes": "execute",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:executam\\-se|executar\\-se|executassem|executa\\-se|executadas|executados|executando|executaram|executarão|executasse|executavam|execute\\-se|executada|executado|executará|executava|executam|executar|executem|executou|executa|execute)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0006",
+   "lema": "iniciar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "pôr em funcionamento um serviço, processo ou etapa",
+   "preferida_em_instrucoes": "inicie",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:iniciam\\-se|iniciar\\-se|iniciassem|inicia\\-se|iniciadas|iniciados|iniciando|iniciaram|iniciarão|iniciasse|iniciavam|inicie\\-se|iniciada|iniciado|iniciará|iniciava|iniciam|iniciar|iniciem|iniciou|inicia|inicie)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0007",
+   "lema": "terminar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "chegar ao fim de uma execução ou etapa",
+   "motivo": "Para um processo interrompido de propósito, use parar ou encerrar.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:terminam\\-se|terminar\\-se|terminassem|termina\\-se|terminadas|terminados|terminando|terminaram|terminarão|terminasse|terminavam|termine\\-se|terminada|terminado|terminará|terminava|terminam|terminar|terminem|terminou|termina|termine)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0008",
+   "lema": "usar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "empregar um recurso, ferramenta ou método",
+   "preferida_em_instrucoes": "use",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:usam\\-se|usar\\-se|usassem|usa\\-se|usadas|usados|usando|usaram|usarão|usasse|usavam|use\\-se|usada|usado|usará|usava|usam|usar|usem|usou|usa|use)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0100",
+   "lema": "utilizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "empregar um recurso",
+   "preferir": [
+    "usar"
+   ],
+   "motivo": "Utilizar não é errado; o vocabulário escolhe um termo para o conceito.",
+   "exemplo_correto": "Use o certificado A1.",
+   "exemplo_incorreto": "Utilize o certificado A1.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:utilizam\\-se|utilizar\\-se|utilizassem|utiliza\\-se|utilizadas|utilizados|utilizando|utilizaram|utilizarão|utilizasse|utilizavam|utilize\\-se|utilizada|utilizado|utilizará|utilizava|utilizam|utilizar|utilizem|utilizou|utiliza|utilize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0101",
+   "lema": "efetuar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "fazer",
+   "preferir": [
+    "verbo direto do substantivo",
+    "fazer"
+   ],
+   "exemplo_correto": "Pague a fatura.",
+   "exemplo_incorreto": "Efetue o pagamento da fatura.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:efetuam\\-se|efetuar\\-se|efetuassem|efetua\\-se|efetuadas|efetuados|efetuando|efetuaram|efetuarão|efetuasse|efetuavam|efetue\\-se|efetuada|efetuado|efetuará|efetuava|efetuam|efetuar|efetuem|efetuou|efetua|efetue)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0102",
+   "lema": "finalizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "chegar ao fim",
+   "preferir": [
+    "terminar",
+    "concluir"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:finalizam\\-se|finalizar\\-se|finalizassem|finaliza\\-se|finalizadas|finalizados|finalizando|finalizaram|finalizarão|finalizasse|finalizavam|finalize\\-se|finalizada|finalizado|finalizará|finalizava|finalizam|finalizar|finalizem|finalizou|finaliza|finalize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0103",
+   "lema": "possibilitar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar possível",
+   "preferir": [
+    "permitir"
+   ],
+   "exemplo_correto": "O token permite o acesso.",
+   "exemplo_incorreto": "O token possibilita o acesso.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:possibilitam\\-se|possibilitar\\-se|possibilitassem|possibilita\\-se|possibilitadas|possibilitados|possibilitando|possibilitaram|possibilitarão|possibilitasse|possibilitavam|possibilite\\-se|possibilitada|possibilitado|possibilitará|possibilitava|possibilitam|possibilitar|possibilitem|possibilitou|possibilita|possibilite)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0104",
+   "lema": "viabilizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar possível",
+   "preferir": [
+    "permitir"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:viabilizam\\-se|viabilizar\\-se|viabilizassem|viabiliza\\-se|viabilizadas|viabilizados|viabilizando|viabilizaram|viabilizarão|viabilizasse|viabilizavam|viabilize\\-se|viabilizada|viabilizado|viabilizará|viabilizava|viabilizam|viabilizar|viabilizem|viabilizou|viabiliza|viabilize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0105",
+   "lema": "visualizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ver na tela",
+   "preferir": [
+    "ver",
+    "abrir",
+    "exibir"
+   ],
+   "exemplo_correto": "Abra o relatório.",
+   "exemplo_incorreto": "Visualize o relatório.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:visualizam\\-se|visualizar\\-se|visualizassem|visualiza\\-se|visualizadas|visualizados|visualizando|visualizaram|visualizarão|visualizasse|visualizavam|visualize\\-se|visualizada|visualizado|visualizará|visualizava|visualizam|visualizar|visualizem|visualizou|visualiza|visualize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0106",
+   "lema": "disponibilizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar disponível",
+   "preferir": [
+    "publicar",
+    "liberar",
+    "oferecer"
+   ],
+   "motivo": "Diga a ação real. Publicar uma versão, liberar um acesso, oferecer uma função.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:disponibilizam\\-se|disponibilizar\\-se|disponibilizassem|disponibiliza\\-se|disponibilizadas|disponibilizados|disponibilizando|disponibilizaram|disponibilizarão|disponibilizasse|disponibilizavam|disponibilize\\-se|disponibilizada|disponibilizado|disponibilizará|disponibilizava|disponibilizam|disponibilizar|disponibilizem|disponibilizou|disponibiliza|disponibilize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0107",
+   "lema": "necessitar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ter necessidade",
+   "preferir": [
+    "precisar"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:necessitam\\-se|necessitar\\-se|necessitassem|necessita\\-se|necessitadas|necessitados|necessitando|necessitaram|necessitarão|necessitasse|necessitavam|necessite\\-se|necessitada|necessitado|necessitará|necessitava|necessitam|necessitar|necessitem|necessitou|necessita|necessite)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0108",
+   "lema": "auxiliar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "dar ajuda",
+   "preferir": [
+    "ajudar"
+   ],
+   "motivo": "O adjetivo auxiliar (tabela auxiliar) é aceito. O verbete vale só para o verbo.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:auxiliando|auxiliará|auxiliam|auxiliem|auxiliou|auxilie)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0109",
+   "lema": "ocasionar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ser a causa de",
+   "preferir": [
+    "causar"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ocasionam\\-se|ocasionar\\-se|ocasionassem|ocasiona\\-se|ocasionadas|ocasionados|ocasionando|ocasionaram|ocasionarão|ocasionasse|ocasionavam|ocasione\\-se|ocasionada|ocasionado|ocasionará|ocasionava|ocasionam|ocasionar|ocasionem|ocasionou|ocasiona|ocasione)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0110",
+   "lema": "acarretar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ter como consequência",
+   "preferir": [
+    "causar"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:acarretam\\-se|acarretar\\-se|acarretassem|acarreta\\-se|acarretadas|acarretados|acarretando|acarretaram|acarretarão|acarretasse|acarretavam|acarrete\\-se|acarretada|acarretado|acarretará|acarretava|acarretam|acarretar|acarretem|acarretou|acarreta|acarrete)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0111",
+   "lema": "elucidar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar claro",
+   "preferir": [
+    "explicar"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:elucidam\\-se|elucidar\\-se|elucidassem|elucida\\-se|elucidadas|elucidados|elucidando|elucidaram|elucidarão|elucidasse|elucidavam|elucide\\-se|elucidada|elucidado|elucidará|elucidava|elucidam|elucidar|elucidem|elucidou|elucida|elucide)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0112",
+   "lema": "averiguar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "examinar um estado",
+   "preferir": [
+    "verificar"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:averiguando|averiguada|averiguado|averiguará|averiguam|averiguar|averiguem|averiguou|averigua|averigue)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0113",
+   "lema": "checar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "examinar um estado",
+   "preferir": [
+    "verificar"
+   ],
+   "motivo": "Um termo por conceito (PTC-08). O vocabulário adota verificar.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:checam\\-se|checar\\-se|checassem|cheque\\-se|checa\\-se|checadas|checados|checando|checaram|checarão|checasse|checavam|checada|checado|checará|checava|chequem|checam|checar|checou|cheque|checa)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0114",
+   "lema": "conferir",
+   "classe": "verbo",
+   "status": "em_analise",
+   "significado_aprovado": "examinar um estado",
+   "preferir": [
+    "verificar"
+   ],
+   "motivo": "Uso muito frequente no corpus do time. Decidir se vira sinônimo aceito ou se padroniza em verificar.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:conferindo|conferida|conferido|conferirá|conferem|conferir|conferiu|confiram|confere|confira)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0115",
+   "lema": "efetivar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar efetivo",
+   "preferir": [
+    "aplicar",
+    "concluir"
+   ],
+   "exemplo_correto": "Reinicie o serviço para aplicar a alteração.",
+   "exemplo_incorreto": "Reinicie o serviço para que a alteração possa ser efetivada.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:efetivam\\-se|efetivar\\-se|efetivassem|efetiva\\-se|efetivadas|efetivados|efetivando|efetivaram|efetivarão|efetivasse|efetivavam|efetive\\-se|efetivada|efetivado|efetivará|efetivava|efetivam|efetivar|efetivem|efetivou|efetiva|efetive)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0116",
+   "lema": "alavancar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "aumentar ou aproveitar",
+   "preferir": [
+    "aumentar",
+    "melhorar",
+    "usar"
+   ],
+   "motivo": "Jargão corporativo sem sentido técnico preciso.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:alavancam\\-se|alavancar\\-se|alavancassem|alavanque\\-se|alavanca\\-se|alavancadas|alavancados|alavancando|alavancaram|alavancarão|alavancasse|alavancavam|alavancada|alavancado|alavancará|alavancava|alavanquem|alavancam|alavancar|alavancou|alavanque|alavanca)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0117",
+   "lema": "constar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "estar registrado",
+   "preferir": [
+    "estar",
+    "aparecer"
+   ],
+   "exemplo_correto": "O valor está no relatório.",
+   "exemplo_incorreto": "O valor consta no relatório.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:constam\\-se|constar\\-se|constassem|consta\\-se|constadas|constados|constando|constaram|constarão|constasse|constavam|conste\\-se|constada|constado|constará|constava|constam|constar|constem|constou|consta|conste)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0118",
+   "lema": "encontrar-se",
+   "classe": "locucao_verbal",
+   "status": "nao_preferido",
+   "significado_aprovado": "estar em um estado",
+   "preferir": [
+    "estar"
+   ],
+   "exemplo_correto": "Se o certificado estiver vencido…",
+   "exemplo_incorreto": "Quando o certificado encontrar-se vencido…",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:encontrava\\-se|se\\s+encontrava|encontram\\-se|encontrar\\-se|se\\s+encontram|se\\s+encontrar|se\\s+encontrem|encontra\\-se|se\\s+encontra|se\\s+encontre)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0119",
+   "lema": "tratar-se de",
+   "classe": "locucao_verbal",
+   "status": "nao_preferido",
+   "significado_aprovado": "ser",
+   "preferir": [
+    "ser"
+   ],
+   "exemplo_correto": "O erro é de permissão.",
+   "exemplo_incorreto": "Trata-se de um erro de permissão.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:tratava\\-se\\s+de|se\\s+tratam\\s+de|tratam\\-se\\s+de|tratar\\-se\\s+de|se\\s+trata\\s+de|trata\\-se\\s+de)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0120",
+   "lema": "dispor de",
+   "classe": "locucao_verbal",
+   "status": "nao_preferido",
+   "significado_aprovado": "ter",
+   "preferir": [
+    "ter"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:disponham\\s+de|disponha\\s+de|dispunha\\s+de|dispõem\\s+da|dispõem\\s+de|dispõem\\s+do|dispor\\s+de|dispõe\\s+da|dispõe\\s+de|dispõe\\s+do)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0121",
+   "lema": "proceder",
+   "classe": "locucao_verbal",
+   "status": "nao_preferido",
+   "significado_aprovado": "fazer",
+   "preferir": [
+    "verbo direto"
+   ],
+   "exemplo_correto": "Instale o pacote.",
+   "exemplo_incorreto": "Proceda com a instalação do pacote.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "\\b(?:proceder|procede|procedem|proceda|procedam|procedeu|procedendo)\\s+(?:a|à|ao|às|aos|com)\\b"
+  },
+  {
+   "id": "V-0122",
+   "lema": "solicitar",
+   "classe": "verbo",
+   "status": "em_analise",
+   "significado_aprovado": "pedir formalmente",
+   "preferir": [
+    "pedir"
+   ],
+   "motivo": "Aceito em formulários e telas (Solicitar acesso). Decidir se o vocabulário restringe ao contexto de interface.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:solicitam\\-se|solicitar\\-se|solicitassem|solicita\\-se|solicitadas|solicitados|solicitando|solicitaram|solicitarão|solicitasse|solicitavam|solicite\\-se|solicitada|solicitado|solicitará|solicitava|solicitam|solicitar|solicitem|solicitou|solicita|solicite)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0123",
+   "lema": "parametrizar",
+   "classe": "verbo",
+   "status": "em_analise",
+   "significado_aprovado": "definir parâmetros",
+   "preferir": [
+    "configurar"
+   ],
+   "motivo": "Tem sentido técnico próprio (parametrizar uma consulta). Avaliar se é sinônimo de configurar no domínio.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:parametrizam\\-se|parametrizar\\-se|parametrizassem|parametriza\\-se|parametrizadas|parametrizados|parametrizando|parametrizaram|parametrizarão|parametrizasse|parametrizavam|parametrize\\-se|parametrizada|parametrizado|parametrizará|parametrizava|parametrizam|parametrizar|parametrizem|parametrizou|parametriza|parametrize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0124",
+   "lema": "rodar",
+   "classe": "verbo",
+   "status": "em_analise",
+   "significado_aprovado": "executar um programa ou comando",
+   "preferir": [
+    "executar"
+   ],
+   "motivo": "Registro informal muito usado no time (rode o teste). Decidir entre aceitar no PTC-L e no PTC-T ou padronizar em executar.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:rodam\\-se|rodar\\-se|rodassem|roda\\-se|rodadas|rodados|rodando|rodaram|rodarão|rodasse|rodavam|rode\\-se|rodada|rodado|rodará|rodava|rodam|rodar|rodem|rodou|roda|rode)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0200",
+   "lema": "tendo em vista que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "relação de causa",
+   "preferir": [
+    "porque"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:tendo\\s+em\\s+vista\\s+que)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0201",
+   "lema": "devido ao fato de que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "relação de causa",
+   "preferir": [
+    "porque"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:devido\\s+ao\\s+fato\\s+de\\s+que)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0202",
+   "lema": "em virtude de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "relação de causa",
+   "preferir": [
+    "por causa de",
+    "porque"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+virtude\\s+de)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0203",
+   "lema": "haja vista",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "relação de causa",
+   "preferir": [
+    "porque"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:haja\\s+vista)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0204",
+   "lema": "previamente a",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "antes",
+   "preferir": [
+    "antes de"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:previamente\\s+aos|previamente\\s+ao|previamente\\s+às|previamente\\s+a|previamente\\s+à)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0205",
+   "lema": "posteriormente a",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "depois",
+   "preferir": [
+    "depois de"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:subsequentemente\\s+ao|posteriormente\\s+aos|subsequentemente\\s+a|subsequentemente\\s+à|posteriormente\\s+ao|posteriormente\\s+às|posteriormente\\s+a|posteriormente\\s+à)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0206",
+   "lema": "na hipótese de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "condição",
+   "preferir": [
+    "se",
+    "caso"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:na\\s+hipótese\\s+de\\s+que|na\\s+hipótese\\s+de)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0207",
+   "lema": "com o objetivo de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "finalidade",
+   "preferir": [
+    "para"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:com\\s+a\\s+finalidade\\s+de|com\\s+o\\s+objetivo\\s+de|com\\s+o\\s+intuito\\s+de|no\\s+intuito\\s+de|com\\s+vistas\\s+a)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0208",
+   "lema": "no que diz respeito a",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "assunto",
+   "preferir": [
+    "sobre",
+    "quanto a"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:no\\s+que\\s+diz\\s+respeito\\s+ao|no\\s+que\\s+diz\\s+respeito\\s+a|no\\s+que\\s+diz\\s+respeito\\s+à|no\\s+que\\s+tange\\s+ao|no\\s+que\\s+tange\\s+a|no\\s+que\\s+tange\\s+à|no\\s+tocante\\s+ao|no\\s+tocante\\s+a|no\\s+tocante\\s+à)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0209",
+   "lema": "a partir do momento em que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "momento",
+   "preferir": [
+    "quando",
+    "depois que"
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+partir\\s+do\\s+momento\\s+em\\s+que|a\\s+partir\\s+do\\s+momento\\s+que)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0210",
+   "lema": "a nível de",
+   "classe": "conectivo",
+   "status": "proibido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "em",
+    "no nível de",
+    "quanto a"
+   ],
+   "motivo": "Uso considerado incorreto pela norma culta e vago. \"Ao nível de\" significa \"à altura de\".",
+   "exemplo_correto": "No nível do servidor, o limite é 10 conexões.",
+   "exemplo_incorreto": "A nível de servidor, o limite é 10 conexões.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+nível\\s+de)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0211",
+   "lema": "sendo assim",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "consequência",
+   "preferir": [
+    "por isso",
+    "então"
+   ],
+   "motivo": "\"Sendo que\" costuma juntar frases que deveriam ser separadas.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:sendo\\s+assim|sendo\\s+que)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0300",
+   "lema": "o mesmo (pronome)",
+   "classe": "padrao",
+   "status": "nao_preferido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "repita o substantivo",
+    "ele",
+    "ela"
+   ],
+   "motivo": "\"O mesmo\" como pronome esconde o referente. \"O mesmo arquivo\" (adjetivo) e \"o valor é sempre o mesmo\" (igual) são aceitos.",
+   "exemplo_correto": "Abra o arquivo e salve o arquivo.",
+   "exemplo_incorreto": "Abra o arquivo e salve o mesmo.",
+   "regra": "PTC-07",
+   "fonte": "geral.yaml",
+   "regex": "(?<!é )(?<!são )(?<!era )(?<!eram )(?<!seja )(?<!sejam )(?<!sempre )(?<!fica )(?<!ficam )(?<!continua )(?<!permanece )\\b(?:o|a|os|as|do|da|dos|das|no|na|nos|nas|ao|à|aos|às|pelo|pela|pelos|pelas)\\s+mesm[oa]s?(?=\\s*[.,;:)!?]|\\s*$)"
+  },
+  {
+   "id": "V-0301",
+   "lema": "gerundismo",
+   "classe": "padrao",
+   "status": "nao_preferido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "futuro simples",
+    "presente"
+   ],
+   "motivo": "\"Pode estar ocorrendo\" (probabilidade) não é gerundismo e não é marcado.",
+   "exemplo_correto": "Vamos enviar o arquivo amanhã.",
+   "exemplo_incorreto": "Vamos estar enviando o arquivo amanhã.",
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "\\b(?:vou|vai|vamos|vão|irei|irá|iremos|irão)\\s+estar\\s+[a-zà-ÿ]+ndo\\b"
+  },
+  {
+   "id": "V-0400",
+   "lema": "subir",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "publicar uma versão em um ambiente",
+     "dominio": "software",
+     "preferir": "publicar",
+     "exemplo": "Suba para produção → Publique em produção"
+    },
+    {
+     "sentido": "pôr um serviço ou container em execução",
+     "dominio": "software",
+     "preferir": "iniciar",
+     "exemplo": "Suba o container → Inicie o container"
+    },
+    {
+     "sentido": "enviar um arquivo",
+     "dominio": "software",
+     "preferir": "enviar",
+     "exemplo": "Suba o CSV → Envie o CSV"
+    },
+    {
+     "sentido": "aumentar um valor",
+     "dominio": "geral",
+     "preferir": "aumentar",
+     "exemplo": "Suba o limite → Aumente o limite"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:subindo|subiram|subido|subirá|sobem|subam|subir|subiu|sobe|suba)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0401",
+   "lema": "baixar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "transferir um arquivo para o computador local",
+     "dominio": "software",
+     "preferir": "baixar"
+    },
+    {
+     "sentido": "parar um serviço",
+     "dominio": "software",
+     "preferir": "parar"
+    },
+    {
+     "sentido": "reduzir um valor",
+     "dominio": "geral",
+     "preferir": "reduzir"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:baixam\\-se|baixar\\-se|baixassem|baixa\\-se|baixadas|baixados|baixando|baixaram|baixarão|baixasse|baixavam|baixe\\-se|baixada|baixado|baixará|baixava|baixam|baixar|baixem|baixou|baixa|baixe)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0402",
+   "lema": "base",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "banco de dados",
+     "dominio": "dados",
+     "preferir": "banco de dados"
+    },
+    {
+     "sentido": "conjunto de registros de um tipo (base de clientes)",
+     "dominio": "negócio",
+     "preferir": "carteira, cadastro"
+    },
+    {
+     "sentido": "branch de origem de um merge ou PR",
+     "dominio": "git",
+     "preferir": "branch de destino, branch de origem"
+    },
+    {
+     "sentido": "fundamento",
+     "dominio": "geral"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:bases|base)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0403",
+   "lema": "ambiente",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "estágio de implantação (DEV, HML, PRD)",
+     "dominio": "software",
+     "preferir": "ambiente de homologação, ambiente de produção"
+    },
+    {
+     "sentido": "ambiente virtual de dependências (venv, conda)",
+     "dominio": "software",
+     "preferir": "ambiente virtual"
+    },
+    {
+     "sentido": "local físico",
+     "dominio": "geral"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ambientes|ambiente)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0404",
+   "lema": "chave",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "coluna que identifica um registro",
+     "dominio": "dados",
+     "preferir": "chave primária, chave estrangeira"
+    },
+    {
+     "sentido": "segredo de autenticação",
+     "dominio": "segurança",
+     "preferir": "chave de API, segredo"
+    },
+    {
+     "sentido": "nome de um campo em JSON, YAML ou dicionário",
+     "dominio": "software",
+     "preferir": "chave do campo"
+    },
+    {
+     "sentido": "marcador no texto de um commit que dispara uma automação ([deploy])",
+     "dominio": "git",
+     "preferir": "marcador do commit"
+    },
+    {
+     "sentido": "opção liga/desliga",
+     "dominio": "software",
+     "preferir": "flag, opção"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:chaves|chave)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0405",
+   "lema": "cliente",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "pessoa ou empresa que compra",
+     "dominio": "negócio"
+    },
+    {
+     "sentido": "programa que consome um serviço (cliente HTTP)",
+     "dominio": "software",
+     "preferir": "cliente HTTP, biblioteca cliente"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:clientes|cliente)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0406",
+   "lema": "serviço",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "aplicação que roda em segundo plano e atende requisições (microsserviço)",
+     "dominio": "software",
+     "preferir": "microsserviço"
+    },
+    {
+     "sentido": "objeto Service do Kubernetes",
+     "dominio": "infraestrutura",
+     "preferir": "Service"
+    },
+    {
+     "sentido": "serviço do sistema operacional (systemd)",
+     "dominio": "infraestrutura"
+    },
+    {
+     "sentido": "trabalho prestado",
+     "dominio": "negócio"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:serviços|serviço)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0407",
+   "lema": "servidor",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "máquina física ou virtual",
+     "dominio": "infraestrutura",
+     "preferir": "máquina, VM"
+    },
+    {
+     "sentido": "programa que atende requisições (servidor web)",
+     "dominio": "software",
+     "preferir": "servidor web, processo"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:servidores|servidor)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0408",
+   "lema": "registro",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "linha de uma tabela",
+     "dominio": "dados",
+     "preferir": "linha"
+    },
+    {
+     "sentido": "entrada de log",
+     "dominio": "software",
+     "preferir": "entrada de log"
+    },
+    {
+     "sentido": "cadastro de uma pessoa ou objeto",
+     "dominio": "negócio",
+     "preferir": "cadastro"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:registros|registro)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0409",
+   "lema": "índice",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "estrutura que acelera consultas em uma tabela",
+     "dominio": "dados"
+    },
+    {
+     "sentido": "indicador numérico (índice de inadimplência)",
+     "dominio": "risco",
+     "preferir": "indicador, taxa"
+    },
+    {
+     "sentido": "sumário de um documento",
+     "dominio": "geral",
+     "preferir": "sumário"
+    },
+    {
+     "sentido": "posição em uma lista ou vetor",
+     "dominio": "software",
+     "preferir": "posição"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:índices|índice)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0410",
+   "lema": "limite",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "valor máximo de crédito de um cliente",
+     "dominio": "risco",
+     "preferir": "limite de crédito"
+    },
+    {
+     "sentido": "quantidade máxima de requisições ou recursos",
+     "dominio": "software",
+     "preferir": "limite de requisições, cota"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:limites|limite)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0411",
+   "lema": "conta",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "identidade de acesso a um sistema",
+     "dominio": "software",
+     "preferir": "conta de usuário"
+    },
+    {
+     "sentido": "conta financeira de um cliente",
+     "dominio": "negócio",
+     "preferir": "conta-corrente, conta de cartão"
+    },
+    {
+     "sentido": "cálculo",
+     "dominio": "geral",
+     "preferir": "cálculo"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:contas|conta)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0412",
+   "lema": "operação",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "transação financeira",
+     "dominio": "negócio",
+     "preferir": "transação"
+    },
+    {
+     "sentido": "ação executada em um sistema",
+     "dominio": "software"
+    },
+    {
+     "sentido": "operação matemática",
+     "dominio": "geral"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:operações|operação)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0413",
+   "lema": "usuário",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "pessoa que usa o sistema",
+     "dominio": "software"
+    },
+    {
+     "sentido": "login técnico de banco de dados ou de serviço",
+     "dominio": "dados",
+     "preferir": "usuário de banco, conta de serviço"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:usuários|usuário)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0414",
+   "lema": "processo",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "programa em execução no sistema operacional",
+     "dominio": "infraestrutura"
+    },
+    {
+     "sentido": "sequência de atividades de negócio",
+     "dominio": "negócio",
+     "preferir": "fluxo, procedimento"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:processos|processo)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0415",
+   "lema": "carga",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "gravação de dados em um destino (ETL)",
+     "dominio": "dados",
+     "preferir": "carga de dados"
+    },
+    {
+     "sentido": "volume de trabalho de um sistema",
+     "dominio": "infraestrutura",
+     "preferir": "carga de trabalho"
+    },
+    {
+     "sentido": "carga elétrica ou mecânica",
+     "dominio": "engenharia"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:cargas|carga)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0416",
+   "lema": "lote",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "conjunto de registros processados juntos",
+     "dominio": "dados",
+     "preferir": "lote de processamento"
+    },
+    {
+     "sentido": "conjunto de produtos de uma mesma produção",
+     "dominio": "negócio"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:lotes|lote)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0417",
+   "lema": "liberar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "conceder um acesso ou permissão",
+     "dominio": "segurança",
+     "preferir": "conceder"
+    },
+    {
+     "sentido": "publicar uma versão",
+     "dominio": "software",
+     "preferir": "publicar"
+    },
+    {
+     "sentido": "devolver um recurso (memória, conexão)",
+     "dominio": "software"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:liberam\\-se|liberar\\-se|liberassem|libera\\-se|liberadas|liberados|liberando|liberaram|liberarão|liberasse|liberavam|libere\\-se|liberada|liberado|liberará|liberava|liberam|liberar|liberem|liberou|libera|libere)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0418",
+   "lema": "atualizar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "instalar uma versão nova",
+     "dominio": "software"
+    },
+    {
+     "sentido": "recarregar uma tela",
+     "dominio": "software",
+     "preferir": "recarregar"
+    },
+    {
+     "sentido": "alterar um registro existente",
+     "dominio": "dados",
+     "preferir": "alterar"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:atualizam\\-se|atualizar\\-se|atualizassem|atualiza\\-se|atualizadas|atualizados|atualizando|atualizaram|atualizarão|atualizasse|atualizavam|atualize\\-se|atualizada|atualizado|atualizará|atualizava|atualizam|atualizar|atualizem|atualizou|atualiza|atualize)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0419",
+   "lema": "endereçar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "atribuir endereço (memória, rede)",
+     "dominio": "infraestrutura"
+    },
+    {
+     "sentido": "tratar um problema (decalque de \"to address\")",
+     "dominio": "geral",
+     "preferir": "tratar, resolver"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:endereçam\\-se|endereçar\\-se|endereçassem|enderece\\-se|endereça\\-se|endereçadas|endereçados|endereçando|endereçaram|endereçarão|endereçasse|endereçavam|endereçada|endereçado|endereçará|endereçava|enderecem|endereçam|endereçar|endereçou|enderece|endereça)(?![\\wÀ-ÿ-])"
+  },
+  {
+   "id": "V-0420",
+   "lema": "risco",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "probabilidade de perda de crédito",
+     "dominio": "risco",
+     "preferir": "risco de crédito"
+    },
+    {
+     "sentido": "possibilidade de dano à segurança ou à operação",
+     "dominio": "geral",
+     "preferir": "risco operacional"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "geral.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:riscos|risco)(?![\\wÀ-ÿ-])"
+  }
+ ]
+}

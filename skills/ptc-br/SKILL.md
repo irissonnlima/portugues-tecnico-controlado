@@ -1,12 +1,12 @@
 ---
 name: ptc-br
-description: Revisa, reescreve e verifica textos técnicos em português segundo o PTC-BR (Português Técnico Controlado), um padrão de linguagem controlada inspirado no ASD-STE100 e na linguagem simples (ISO 24495-1). Use quando pedirem "revise em PTC", "português técnico controlado", "linguagem controlada", "simplifique este texto técnico", "deixe o procedimento mais claro", "verifique a conformidade PTC", ou ao revisar manuais, procedimentos, requisitos, relatórios e documentação técnica em pt-BR. Use também para conferir se uma reescrita preservou o sentido do original. Para documentação do time BT, combine com a skill de escrita do time, que acrescenta o vocabulário do setor.
+description: Revisa, reescreve e verifica textos técnicos em português segundo o PTC-BR (Português Técnico Controlado), um padrão de linguagem controlada inspirado no ASD-STE100 e na linguagem simples (ISO 24495-1). Use quando pedirem "revise em PTC", "português técnico controlado", "linguagem controlada", "simplifique este texto técnico", "deixe o procedimento mais claro", "verifique a conformidade PTC", ou ao revisar manuais, procedimentos, requisitos, relatórios e documentação técnica em pt-BR. Use também para conferir se uma reescrita preservou o sentido do original. Se o time tiver uma skill de escrita própria, combine as duas: ela acrescenta o vocabulário e as siglas do domínio.
 argument-hint: "[revisar|reescrever|verificar] <arquivo> [perfil L|T|C]"
 ---
 
 # PTC-BR — Português Técnico Controlado
 
-Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.1.1).
+Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.2.0).
 Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (seção 3.1) ou das regras de contagem (seção 5).
 
 ## Modos
@@ -27,14 +27,15 @@ Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (se
 python3 ${CLAUDE_SKILL_DIR}/scripts/ptc_check.py <arquivo> --perfil T --json
 ```
 
-Para texto colado no chat, use `--texto "..."`. O script cobre as regras (A) e (P). Ele **não** decide sozinho:
+Para texto colado no chat, use `--texto "..."`. Se o time tiver uma lista de siglas conhecidas, passe `--siglas arquivo.txt` (ou `--siglas "SIGLA1,SIGLA2"`). O script cobre as regras (A) e (P), inclusive o vocabulário controlado (PTC-25). Ele **não** decide sozinho:
 
 - confiança `alta`: trate como violação, salvo erro evidente do script;
-- confiança `media` ou `baixa`: confirme lendo a frase. Descarte o falso positivo e registre o motivo em uma linha.
+- confiança `media` ou `baixa`: confirme lendo a frase. Descarte o falso positivo e registre o motivo em uma linha;
+- PTC-25 com status `em_analise` (confiança baixa): não trate como violação. Cite o termo uma vez no relatório, como decisão pendente do vocabulário.
 
 ### 2. Passada global (arquivo inteiro)
 
-Leia o documento inteiro uma vez e monte um **inventário de termos**: cada conceito, o termo usado e as variações encontradas. Use o inventário para:
+Leia o documento inteiro uma vez e monte um **inventário de termos**: cada conceito, o termo usado e as variações encontradas. Comece pelo campo `vocabulario_polissemico` da saída do script: ele lista as palavras com mais de um sentido técnico, as linhas e os sentidos possíveis. Para cada uma, confira se o documento usa **um único** sentido; se usar dois (*subir* = publicar e *subir* = enviar), sugira o termo sem ambiguidade de cada sentido. Use o inventário para:
 
 - **PTC-08:** o mesmo conceito com nomes diferentes (*servidor* × *host* × *máquina*);
 - **PTC-17:** siglas que o script não pegou (minúsculas, com acento);
@@ -96,4 +97,5 @@ O script dá só uma classificação **preliminar**. A classificação final inc
 
 - O PTC-BR é uma proposta experimental. Não declare conformidade com a ABNT NBR ISO 24495-1 nem com o ASD-STE100.
 - Títulos, código, tabelas e citações literais de terceiros ficam fora da reescrita.
-- Glossários de domínio ainda não existem (previstos para a 0.4.0). Enquanto isso, o inventário de termos do próprio documento faz esse papel.
+- Glossários de domínio ainda não existem (previstos para a 0.4.0). Enquanto isso, o inventário de termos do próprio documento e a lista `--siglas` fazem esse papel.
+- O vocabulário está em `references/vocabulario/geral.yaml`. Para consultar um verbete, procure pelo lema ou pelo ID citado no alerta (ex.: V-0100).

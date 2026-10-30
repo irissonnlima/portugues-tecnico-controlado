@@ -1,0 +1,803 @@
+# Vocabulário controlado PTC-BR — geral (spec 0.2.0)
+#
+# Fonte editável. Depois de alterar, compile:
+#     python3 tools/compilar_vocabulario.py
+# O compilador valida contra schema.json e gera skills/ptc-br/scripts/vocabulario.json.
+#
+# Faixas de ID (estáveis, nunca reutilizadas):
+#   V-0001..0099  verbos de instrução aprovados
+#   V-0100..0199  verbos e locuções não preferidos
+#   V-0200..0299  conectivos não preferidos
+#   V-0300..0399  padrões (construções)
+#   V-0400..0499  palavras com mais de um sentido técnico
+#
+# Status em_analise = decisão pendente do time; gera alerta de confiança baixa.
+
+# ------------------------------------------------------------ verbos de instrução aprovados
+
+- id: V-0001
+  lema: verificar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: examinar um estado ou resultado para determinar se atende a um critério
+  preferida_em_instrucoes: verifique
+  exemplo_correto: Verifique a versão do certificado.
+  exemplo_incorreto: Realize a verificação da versão do certificado.
+  versao_inclusao: 0.1.0
+
+- id: V-0002
+  lema: validar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: confirmar, por regra ou ferramenta, que um dado atende a um formato ou a uma especificação
+  motivo: Não é sinônimo de verificar. Validar aplica uma regra formal; verificar examina um estado.
+  exemplo_correto: O sistema valida o CPF antes de gravar o cadastro.
+  versao_inclusao: 0.2.0
+
+- id: V-0003
+  lema: confirmar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: aceitar uma ação proposta pelo sistema, ou declarar que um fato é verdadeiro
+  preferida_em_instrucoes: confirme
+  versao_inclusao: 0.2.0
+
+- id: V-0004
+  lema: selecionar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: escolher um item em uma interface
+  preferida_em_instrucoes: selecione
+  versao_inclusao: 0.2.0
+
+- id: V-0005
+  lema: executar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: iniciar e completar a execução de um programa, comando ou procedimento
+  preferida_em_instrucoes: execute
+  versao_inclusao: 0.2.0
+
+- id: V-0006
+  lema: iniciar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: pôr em funcionamento um serviço, processo ou etapa
+  preferida_em_instrucoes: inicie
+  versao_inclusao: 0.1.0
+
+- id: V-0007
+  lema: terminar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: chegar ao fim de uma execução ou etapa
+  motivo: Para um processo interrompido de propósito, use parar ou encerrar.
+  versao_inclusao: 0.1.0
+
+- id: V-0008
+  lema: usar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: empregar um recurso, ferramenta ou método
+  preferida_em_instrucoes: use
+  versao_inclusao: 0.1.0
+
+# ------------------------------------------------------------ verbos e locuções não preferidos
+
+- id: V-0100
+  lema: utilizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [usar]
+  significado_aprovado: empregar um recurso
+  motivo: Utilizar não é errado; o vocabulário escolhe um termo para o conceito.
+  exemplo_correto: Use o certificado A1.
+  exemplo_incorreto: Utilize o certificado A1.
+  versao_inclusao: 0.1.0
+
+- id: V-0101
+  lema: efetuar
+  classe: verbo
+  status: nao_preferido
+  preferir: [verbo direto do substantivo, fazer]
+  significado_aprovado: fazer
+  exemplo_correto: Pague a fatura.
+  exemplo_incorreto: Efetue o pagamento da fatura.
+  versao_inclusao: 0.2.0
+
+- id: V-0102
+  lema: finalizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [terminar, concluir]
+  significado_aprovado: chegar ao fim
+  versao_inclusao: 0.1.0
+
+- id: V-0103
+  lema: possibilitar
+  classe: verbo
+  status: nao_preferido
+  preferir: [permitir]
+  significado_aprovado: tornar possível
+  exemplo_correto: O token permite o acesso.
+  exemplo_incorreto: O token possibilita o acesso.
+  versao_inclusao: 0.2.0
+
+- id: V-0104
+  lema: viabilizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [permitir]
+  significado_aprovado: tornar possível
+  versao_inclusao: 0.2.0
+
+- id: V-0105
+  lema: visualizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [ver, abrir, exibir]
+  significado_aprovado: ver na tela
+  exemplo_correto: Abra o relatório.
+  exemplo_incorreto: Visualize o relatório.
+  versao_inclusao: 0.2.0
+
+- id: V-0106
+  lema: disponibilizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [publicar, liberar, oferecer]
+  significado_aprovado: tornar disponível
+  motivo: Diga a ação real. Publicar uma versão, liberar um acesso, oferecer uma função.
+  versao_inclusao: 0.2.0
+
+- id: V-0107
+  lema: necessitar
+  classe: verbo
+  status: nao_preferido
+  preferir: [precisar]
+  significado_aprovado: ter necessidade
+  versao_inclusao: 0.2.0
+
+- id: V-0108
+  lema: auxiliar
+  classe: verbo
+  status: nao_preferido
+  preferir: [ajudar]
+  significado_aprovado: dar ajuda
+  motivo: O adjetivo auxiliar (tabela auxiliar) é aceito. O verbete vale só para o verbo.
+  formas: [auxilie, auxiliem, auxiliou, auxiliando, auxiliará, auxiliam]
+  versao_inclusao: 0.2.0
+
+- id: V-0109
+  lema: ocasionar
+  classe: verbo
+  status: nao_preferido
+  preferir: [causar]
+  significado_aprovado: ser a causa de
+  versao_inclusao: 0.2.0
+
+- id: V-0110
+  lema: acarretar
+  classe: verbo
+  status: nao_preferido
+  preferir: [causar]
+  significado_aprovado: ter como consequência
+  versao_inclusao: 0.2.0
+
+- id: V-0111
+  lema: elucidar
+  classe: verbo
+  status: nao_preferido
+  preferir: [explicar]
+  significado_aprovado: tornar claro
+  versao_inclusao: 0.2.0
+
+- id: V-0112
+  lema: averiguar
+  classe: verbo
+  status: nao_preferido
+  preferir: [verificar]
+  significado_aprovado: examinar um estado
+  formas: [averiguar, averigua, averiguam, averigue, averiguem, averiguou, averiguado, averiguada, averiguando, averiguará]
+  versao_inclusao: 0.2.0
+
+- id: V-0113
+  lema: checar
+  classe: verbo
+  status: nao_preferido
+  preferir: [verificar]
+  significado_aprovado: examinar um estado
+  motivo: Um termo por conceito (PTC-08). O vocabulário adota verificar.
+  versao_inclusao: 0.2.0
+
+- id: V-0114
+  lema: conferir
+  classe: verbo
+  status: em_analise
+  preferir: [verificar]
+  significado_aprovado: examinar um estado
+  motivo: Uso muito frequente no corpus do time. Decidir se vira sinônimo aceito ou se padroniza em verificar.
+  formas: [conferir, confere, conferem, confira, confiram, conferiu, conferido, conferida, conferindo, conferirá]
+  versao_inclusao: 0.2.0
+
+- id: V-0115
+  lema: efetivar
+  classe: verbo
+  status: nao_preferido
+  preferir: [aplicar, concluir]
+  significado_aprovado: tornar efetivo
+  exemplo_correto: Reinicie o serviço para aplicar a alteração.
+  exemplo_incorreto: Reinicie o serviço para que a alteração possa ser efetivada.
+  versao_inclusao: 0.2.0
+
+- id: V-0116
+  lema: alavancar
+  classe: verbo
+  status: nao_preferido
+  preferir: [aumentar, melhorar, usar]
+  significado_aprovado: aumentar ou aproveitar
+  motivo: Jargão corporativo sem sentido técnico preciso.
+  versao_inclusao: 0.2.0
+
+- id: V-0117
+  lema: constar
+  classe: verbo
+  status: nao_preferido
+  preferir: [estar, aparecer]
+  significado_aprovado: estar registrado
+  exemplo_correto: O valor está no relatório.
+  exemplo_incorreto: O valor consta no relatório.
+  versao_inclusao: 0.2.0
+
+- id: V-0118
+  lema: encontrar-se
+  classe: locucao_verbal
+  status: nao_preferido
+  preferir: [estar]
+  significado_aprovado: estar em um estado
+  formas: [encontrar-se, encontra-se, encontram-se, se encontra, se encontram, se encontrar, encontrava-se, se encontrava, se encontre, se encontrem]
+  exemplo_correto: Se o certificado estiver vencido…
+  exemplo_incorreto: Quando o certificado encontrar-se vencido…
+  versao_inclusao: 0.2.0
+
+- id: V-0119
+  lema: tratar-se de
+  classe: locucao_verbal
+  status: nao_preferido
+  preferir: [ser]
+  significado_aprovado: ser
+  formas: [trata-se de, tratam-se de, tratava-se de, se trata de, se tratam de, tratar-se de]
+  exemplo_correto: O erro é de permissão.
+  exemplo_incorreto: Trata-se de um erro de permissão.
+  versao_inclusao: 0.2.0
+
+- id: V-0120
+  lema: dispor de
+  classe: locucao_verbal
+  status: nao_preferido
+  preferir: [ter]
+  significado_aprovado: ter
+  formas: [dispor de, dispõe de, dispõem de, dispunha de, disponha de, disponham de, dispõe da, dispõe do, dispõem da, dispõem do]
+  versao_inclusao: 0.2.0
+
+- id: V-0121
+  lema: proceder
+  classe: locucao_verbal
+  status: nao_preferido
+  preferir: [verbo direto]
+  significado_aprovado: fazer
+  padrao: "\\b(?:proceder|procede|procedem|proceda|procedam|procedeu|procedendo)\\s+(?:a|à|ao|às|aos|com)\\b"
+  exemplo_correto: Instale o pacote.
+  exemplo_incorreto: Proceda com a instalação do pacote.
+  versao_inclusao: 0.2.0
+
+- id: V-0122
+  lema: solicitar
+  classe: verbo
+  status: em_analise
+  preferir: [pedir]
+  significado_aprovado: pedir formalmente
+  motivo: Aceito em formulários e telas (Solicitar acesso). Decidir se o vocabulário restringe ao contexto de interface.
+  versao_inclusao: 0.2.0
+
+- id: V-0123
+  lema: parametrizar
+  classe: verbo
+  status: em_analise
+  preferir: [configurar]
+  significado_aprovado: definir parâmetros
+  motivo: Tem sentido técnico próprio (parametrizar uma consulta). Avaliar se é sinônimo de configurar no domínio.
+  versao_inclusao: 0.2.0
+
+- id: V-0124
+  lema: rodar
+  classe: verbo
+  status: em_analise
+  preferir: [executar]
+  significado_aprovado: executar um programa ou comando
+  motivo: Registro informal muito usado no time (rode o teste). Decidir entre aceitar no PTC-L e no PTC-T ou padronizar em executar.
+  versao_inclusao: 0.2.0
+
+# ------------------------------------------------------------ conectivos não preferidos
+
+- id: V-0200
+  lema: tendo em vista que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [porque]
+  significado_aprovado: relação de causa
+  flexao: nenhuma
+  versao_inclusao: 0.1.0
+
+- id: V-0201
+  lema: devido ao fato de que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [porque]
+  significado_aprovado: relação de causa
+  flexao: nenhuma
+  versao_inclusao: 0.2.0
+
+- id: V-0202
+  lema: em virtude de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [por causa de, porque]
+  significado_aprovado: relação de causa
+  flexao: nenhuma
+  versao_inclusao: 0.2.0
+
+- id: V-0203
+  lema: haja vista
+  classe: conectivo
+  status: nao_preferido
+  preferir: [porque]
+  significado_aprovado: relação de causa
+  flexao: nenhuma
+  versao_inclusao: 0.2.0
+
+- id: V-0204
+  lema: previamente a
+  classe: conectivo
+  status: nao_preferido
+  preferir: [antes de]
+  significado_aprovado: antes
+  formas: [previamente a, previamente ao, previamente à, previamente aos, previamente às]
+  versao_inclusao: 0.1.0
+
+- id: V-0205
+  lema: posteriormente a
+  classe: conectivo
+  status: nao_preferido
+  preferir: [depois de]
+  significado_aprovado: depois
+  formas: [posteriormente a, posteriormente ao, posteriormente à, posteriormente aos, posteriormente às, subsequentemente a, subsequentemente ao, subsequentemente à]
+  versao_inclusao: 0.1.0
+
+- id: V-0206
+  lema: na hipótese de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [se, caso]
+  significado_aprovado: condição
+  formas: [na hipótese de, na hipótese de que]
+  versao_inclusao: 0.1.0
+
+- id: V-0207
+  lema: com o objetivo de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [para]
+  significado_aprovado: finalidade
+  formas: [com o objetivo de, com a finalidade de, com o intuito de, no intuito de, com vistas a]
+  versao_inclusao: 0.1.0
+
+- id: V-0208
+  lema: no que diz respeito a
+  classe: conectivo
+  status: nao_preferido
+  preferir: [sobre, quanto a]
+  significado_aprovado: assunto
+  formas: [no que diz respeito a, no que diz respeito ao, no que diz respeito à, no que tange a, no que tange ao, no que tange à, no tocante a, no tocante ao, no tocante à]
+  versao_inclusao: 0.2.0
+
+- id: V-0209
+  lema: a partir do momento em que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [quando, depois que]
+  significado_aprovado: momento
+  formas: [a partir do momento em que, a partir do momento que]
+  versao_inclusao: 0.2.0
+
+- id: V-0210
+  lema: a nível de
+  classe: conectivo
+  status: proibido
+  preferir: [em, no nível de, quanto a]
+  significado_aprovado: —
+  motivo: Uso considerado incorreto pela norma culta e vago. "Ao nível de" significa "à altura de".
+  exemplo_correto: No nível do servidor, o limite é 10 conexões.
+  exemplo_incorreto: A nível de servidor, o limite é 10 conexões.
+  flexao: nenhuma
+  versao_inclusao: 0.2.0
+
+- id: V-0211
+  lema: sendo assim
+  classe: conectivo
+  status: nao_preferido
+  preferir: [por isso, então]
+  significado_aprovado: consequência
+  formas: [sendo assim, sendo que]
+  motivo: '"Sendo que" costuma juntar frases que deveriam ser separadas.'
+  versao_inclusao: 0.2.0
+
+# ------------------------------------------------------------ padrões
+
+- id: V-0300
+  lema: o mesmo (pronome)
+  classe: padrao
+  status: nao_preferido
+  regra: PTC-07
+  preferir: [repita o substantivo, ele, ela]
+  significado_aprovado: —
+  padrao: "(?<!é )(?<!são )(?<!era )(?<!eram )(?<!seja )(?<!sejam )(?<!sempre )(?<!fica )(?<!ficam )(?<!continua )(?<!permanece )\\b(?:o|a|os|as|do|da|dos|das|no|na|nos|nas|ao|à|aos|às|pelo|pela|pelos|pelas)\\s+mesm[oa]s?(?=\\s*[.,;:)!?]|\\s*$)"
+  motivo: '"O mesmo" como pronome esconde o referente. "O mesmo arquivo" (adjetivo) e "o valor é sempre o mesmo" (igual) são aceitos.'
+  exemplo_correto: Abra o arquivo e salve o arquivo.
+  exemplo_incorreto: Abra o arquivo e salve o mesmo.
+  versao_inclusao: 0.2.0
+
+- id: V-0301
+  lema: gerundismo
+  classe: padrao
+  status: nao_preferido
+  preferir: [futuro simples, presente]
+  significado_aprovado: —
+  padrao: "\\b(?:vou|vai|vamos|vão|irei|irá|iremos|irão)\\s+estar\\s+[a-zà-ÿ]+ndo\\b"
+  motivo: '"Pode estar ocorrendo" (probabilidade) não é gerundismo e não é marcado.'
+  exemplo_correto: Vamos enviar o arquivo amanhã.
+  exemplo_incorreto: Vamos estar enviando o arquivo amanhã.
+  versao_inclusao: 0.2.0
+
+# ------------------------------------------------------------ palavras com mais de um sentido técnico
+
+- id: V-0400
+  lema: subir
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  formas: [subir, sobe, sobem, suba, subam, subiu, subiram, subindo, subirá, subido]
+  sentidos:
+    - sentido: "publicar uma versão em um ambiente"
+      dominio: "software"
+      preferir: "publicar"
+      exemplo: "Suba para produção → Publique em produção"
+    - sentido: "pôr um serviço ou container em execução"
+      dominio: "software"
+      preferir: "iniciar"
+      exemplo: "Suba o container → Inicie o container"
+    - sentido: "enviar um arquivo"
+      dominio: "software"
+      preferir: "enviar"
+      exemplo: "Suba o CSV → Envie o CSV"
+    - sentido: "aumentar um valor"
+      dominio: "geral"
+      preferir: "aumentar"
+      exemplo: "Suba o limite → Aumente o limite"
+  versao_inclusao: 0.2.0
+
+- id: V-0401
+  lema: baixar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "transferir um arquivo para o computador local"
+      dominio: "software"
+      preferir: "baixar"
+    - sentido: "parar um serviço"
+      dominio: "software"
+      preferir: "parar"
+    - sentido: "reduzir um valor"
+      dominio: "geral"
+      preferir: "reduzir"
+  versao_inclusao: 0.2.0
+
+- id: V-0402
+  lema: base
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "banco de dados"
+      dominio: "dados"
+      preferir: "banco de dados"
+    - sentido: "conjunto de registros de um tipo (base de clientes)"
+      dominio: "negócio"
+      preferir: "carteira, cadastro"
+    - sentido: "branch de origem de um merge ou PR"
+      dominio: "git"
+      preferir: "branch de destino, branch de origem"
+    - sentido: "fundamento"
+      dominio: "geral"
+  versao_inclusao: 0.2.0
+
+- id: V-0403
+  lema: ambiente
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "estágio de implantação (DEV, HML, PRD)"
+      dominio: "software"
+      preferir: "ambiente de homologação, ambiente de produção"
+    - sentido: "ambiente virtual de dependências (venv, conda)"
+      dominio: "software"
+      preferir: "ambiente virtual"
+    - sentido: "local físico"
+      dominio: "geral"
+  versao_inclusao: 0.2.0
+
+- id: V-0404
+  lema: chave
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "coluna que identifica um registro"
+      dominio: "dados"
+      preferir: "chave primária, chave estrangeira"
+    - sentido: "segredo de autenticação"
+      dominio: "segurança"
+      preferir: "chave de API, segredo"
+    - sentido: "nome de um campo em JSON, YAML ou dicionário"
+      dominio: "software"
+      preferir: "chave do campo"
+    - sentido: "marcador no texto de um commit que dispara uma automação ([deploy])"
+      dominio: "git"
+      preferir: "marcador do commit"
+    - sentido: "opção liga/desliga"
+      dominio: "software"
+      preferir: "flag, opção"
+  versao_inclusao: 0.2.0
+
+- id: V-0405
+  lema: cliente
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "pessoa ou empresa que compra"
+      dominio: "negócio"
+    - sentido: "programa que consome um serviço (cliente HTTP)"
+      dominio: "software"
+      preferir: "cliente HTTP, biblioteca cliente"
+  versao_inclusao: 0.2.0
+
+- id: V-0406
+  lema: serviço
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "aplicação que roda em segundo plano e atende requisições (microsserviço)"
+      dominio: "software"
+      preferir: "microsserviço"
+    - sentido: "objeto Service do Kubernetes"
+      dominio: "infraestrutura"
+      preferir: "Service"
+    - sentido: "serviço do sistema operacional (systemd)"
+      dominio: "infraestrutura"
+    - sentido: "trabalho prestado"
+      dominio: "negócio"
+  versao_inclusao: 0.2.0
+
+- id: V-0407
+  lema: servidor
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "máquina física ou virtual"
+      dominio: "infraestrutura"
+      preferir: "máquina, VM"
+    - sentido: "programa que atende requisições (servidor web)"
+      dominio: "software"
+      preferir: "servidor web, processo"
+  versao_inclusao: 0.2.0
+
+- id: V-0408
+  lema: registro
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "linha de uma tabela"
+      dominio: "dados"
+      preferir: "linha"
+    - sentido: "entrada de log"
+      dominio: "software"
+      preferir: "entrada de log"
+    - sentido: "cadastro de uma pessoa ou objeto"
+      dominio: "negócio"
+      preferir: "cadastro"
+  versao_inclusao: 0.2.0
+
+- id: V-0409
+  lema: índice
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "estrutura que acelera consultas em uma tabela"
+      dominio: "dados"
+    - sentido: "indicador numérico (índice de inadimplência)"
+      dominio: "risco"
+      preferir: "indicador, taxa"
+    - sentido: "sumário de um documento"
+      dominio: "geral"
+      preferir: "sumário"
+    - sentido: "posição em uma lista ou vetor"
+      dominio: "software"
+      preferir: "posição"
+  versao_inclusao: 0.2.0
+
+- id: V-0410
+  lema: limite
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "valor máximo de crédito de um cliente"
+      dominio: "risco"
+      preferir: "limite de crédito"
+    - sentido: "quantidade máxima de requisições ou recursos"
+      dominio: "software"
+      preferir: "limite de requisições, cota"
+  versao_inclusao: 0.2.0
+
+- id: V-0411
+  lema: conta
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "identidade de acesso a um sistema"
+      dominio: "software"
+      preferir: "conta de usuário"
+    - sentido: "conta financeira de um cliente"
+      dominio: "negócio"
+      preferir: "conta-corrente, conta de cartão"
+    - sentido: "cálculo"
+      dominio: "geral"
+      preferir: "cálculo"
+  versao_inclusao: 0.2.0
+
+- id: V-0412
+  lema: operação
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "transação financeira"
+      dominio: "negócio"
+      preferir: "transação"
+    - sentido: "ação executada em um sistema"
+      dominio: "software"
+    - sentido: "operação matemática"
+      dominio: "geral"
+  versao_inclusao: 0.2.0
+
+- id: V-0413
+  lema: usuário
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "pessoa que usa o sistema"
+      dominio: "software"
+    - sentido: "login técnico de banco de dados ou de serviço"
+      dominio: "dados"
+      preferir: "usuário de banco, conta de serviço"
+  versao_inclusao: 0.2.0
+
+- id: V-0414
+  lema: processo
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "programa em execução no sistema operacional"
+      dominio: "infraestrutura"
+    - sentido: "sequência de atividades de negócio"
+      dominio: "negócio"
+      preferir: "fluxo, procedimento"
+  versao_inclusao: 0.2.0
+
+- id: V-0415
+  lema: carga
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "gravação de dados em um destino (ETL)"
+      dominio: "dados"
+      preferir: "carga de dados"
+    - sentido: "volume de trabalho de um sistema"
+      dominio: "infraestrutura"
+      preferir: "carga de trabalho"
+    - sentido: "carga elétrica ou mecânica"
+      dominio: "engenharia"
+  versao_inclusao: 0.2.0
+
+- id: V-0416
+  lema: lote
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "conjunto de registros processados juntos"
+      dominio: "dados"
+      preferir: "lote de processamento"
+    - sentido: "conjunto de produtos de uma mesma produção"
+      dominio: "negócio"
+  versao_inclusao: 0.2.0
+
+- id: V-0417
+  lema: liberar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "conceder um acesso ou permissão"
+      dominio: "segurança"
+      preferir: "conceder"
+    - sentido: "publicar uma versão"
+      dominio: "software"
+      preferir: "publicar"
+    - sentido: "devolver um recurso (memória, conexão)"
+      dominio: "software"
+  versao_inclusao: 0.2.0
+
+- id: V-0418
+  lema: atualizar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "instalar uma versão nova"
+      dominio: "software"
+    - sentido: "recarregar uma tela"
+      dominio: "software"
+      preferir: "recarregar"
+    - sentido: "alterar um registro existente"
+      dominio: "dados"
+      preferir: "alterar"
+  versao_inclusao: 0.2.0
+
+- id: V-0419
+  lema: endereçar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "atribuir endereço (memória, rede)"
+      dominio: "infraestrutura"
+    - sentido: "tratar um problema (decalque de \"to address\")"
+      dominio: "geral"
+      preferir: "tratar, resolver"
+  versao_inclusao: 0.2.0
+
+- id: V-0420
+  lema: risco
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "probabilidade de perda de crédito"
+      dominio: "risco"
+      preferir: "risco de crédito"
+    - sentido: "possibilidade de dano à segurança ou à operação"
+      dominio: "geral"
+      preferir: "risco operacional"
+  versao_inclusao: 0.2.0

@@ -1,5 +1,5 @@
 {
-  "spec_version": "0.1.1",
+  "spec_version": "0.2.0",
   "abreviacoes": [
     "ex",
     "p. ex",
@@ -123,14 +123,7 @@
     "frequentemente",
     "eventualmente",
     "oportunamente",
-    "devidamente",
-    "alguns",
-    "algumas",
-    "vários",
-    "várias",
-    "diversos",
-    "diversas",
-    "etc"
+    "devidamente"
   ],
   "verbos_suporte": [
     "realizar",
@@ -176,11 +169,7 @@
     "dá",
     "dê",
     "dão",
-    "deu",
-    "levar",
-    "leva",
-    "leve",
-    "levam"
+    "deu"
   ],
   "deverbais": {
     "verificação": "verificar",
@@ -243,16 +232,7 @@
     "dar início a": "iniciar",
     "dar início ao": "iniciar",
     "dar início à": "iniciar",
-    "levar a cabo": "executar",
-    "tendo em vista que": "porque",
-    "devido ao fato de que": "porque",
-    "em virtude do fato de que": "porque",
-    "previamente a": "antes de",
-    "posteriormente a": "depois de",
-    "subsequentemente a": "depois de",
-    "na hipótese de que": "se",
-    "com o objetivo de": "para",
-    "com a finalidade de": "para"
+    "levar a cabo": "executar"
   },
   "rotulos_aviso": [
     "atenção",
@@ -455,6 +435,47 @@
     "IEEE",
     "NR",
     "ASD",
-    "STE"
+    "STE",
+    "IDE",
+    "CLI",
+    "SDK",
+    "WSL",
+    "AWS",
+    "GCP",
+    "SSO",
+    "OTP",
+    "JWT",
+    "MFA",
+    "2FA",
+    "ETL",
+    "CRUD",
+    "LGPD",
+    "SLA",
+    "KPI",
+    "FAQ",
+    "GUI",
+    "SSD",
+    "HD",
+    "LAN",
+    "WAN",
+    "REST",
+    "SMTP",
+    "IMAP",
+    "FTP",
+    "SFTP",
+    "TLS",
+    "SSL",
+    "UUID",
+    "ASCII",
+    "UTF"
+  ],
+  "quantificadores_vagos": [
+    "alguns",
+    "algumas",
+    "vários",
+    "várias",
+    "diversos",
+    "diversas",
+    "etc"
   ]
 }

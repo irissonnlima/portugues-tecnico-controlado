@@ -20,17 +20,23 @@ import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-SPEC_VERSION = "0.1.1"
+SPEC_VERSION = "0.2.0"
 LEXICO = json.loads((Path(__file__).with_name("lexico.json")).read_text(encoding="utf-8"))
+_VOCAB_ARQ = Path(__file__).with_name("vocabulario.json")
+VOCABULARIO = json.loads(_VOCAB_ARQ.read_text(encoding="utf-8"))["verbetes"] if _VOCAB_ARQ.exists() else []
+for _v in VOCABULARIO:
+    _v["_re"] = re.compile(_v["regex"], re.I)
 
 # Nível de cada regra por perfil (seção 3.1 da spec). Ausente = não se aplica.
 MATRIZ = {
-    "L": {"PTC-03": "R", "PTC-05": "R", "PTC-11": "R", "PTC-12": "R", "PTC-17": "R", "PTC-18": "R",
-          "PTC-21": "O", "PTC-23": "R"},
-    "T": {"PTC-03": "O", "PTC-04": "R", "PTC-05": "O", "PTC-11": "R", "PTC-12": "R", "PTC-15": "R",
-          "PTC-17": "O", "PTC-18": "O", "PTC-21": "O", "PTC-23": "R", "PTC-24": "O"},
-    "C": {"PTC-03": "O", "PTC-04": "O", "PTC-05": "O", "PTC-11": "O", "PTC-12": "O", "PTC-15": "O",
-          "PTC-17": "O", "PTC-18": "O", "PTC-21": "O", "PTC-23": "O", "PTC-24": "O"},
+    "L": {"PTC-03": "R", "PTC-05": "R", "PTC-07": "O", "PTC-11": "R", "PTC-12": "R", "PTC-17": "R",
+          "PTC-18": "R", "PTC-21": "O", "PTC-23": "R", "PTC-25": "R"},
+    "T": {"PTC-03": "O", "PTC-04": "R", "PTC-05": "O", "PTC-07": "O", "PTC-11": "R", "PTC-12": "R",
+          "PTC-15": "R", "PTC-17": "O", "PTC-18": "O", "PTC-21": "O", "PTC-23": "R", "PTC-24": "O",
+          "PTC-25": "R"},
+    "C": {"PTC-03": "O", "PTC-04": "O", "PTC-05": "O", "PTC-07": "O", "PTC-11": "O", "PTC-12": "O",
+          "PTC-15": "O", "PTC-17": "O", "PTC-18": "O", "PTC-21": "O", "PTC-23": "O", "PTC-24": "O",
+          "PTC-25": "O"},
 }
 CONFIANCA = {"baixa": 0, "media": 1, "alta": 2}
 
@@ -273,25 +279,43 @@ RE_PASSIVA = re.compile(
     re.I)
 PART_ADJ = set(LEXICO["participios_adjetivos"])
 
+NEGADORES = {"não", "nunca", "jamais", "sem"}
+CONCORDANTES = {"nada", "nem", "nenhum", "nenhuma", "nenhuns", "nenhumas", "ninguém", "tampouco"}
+
+
+def negacoes_logicas(oracao: str) -> int:
+    """Conta negações lógicas. Em pt-BR, 'não… nada' e 'não há X nem Y' formam UMA negação (concordância
+    negativa): o concordante só conta quando nenhum negador apareceu antes na oração."""
+    total, negou = 0, False
+    for p in palavras(oracao):
+        if p in NEGADORES:
+            total, negou = total + 1, True
+        elif p in CONCORDANTES and not negou:
+            total, negou = total + 1, True
+    return total
+
+
 NAO_SIGLAS = {"OU", "NO", "NA", "DE", "DO", "DA", "EM", "SE", "UM", "OS", "AS", "AO", "OK", "EU"}
 RE_SIGLA = re.compile(r"(?<![\wÀ-ÿ])([A-Z][A-Z0-9]{1,5})(s?)(?![\wÀ-ÿ])")
 
 
-def verificar(texto: str, perfil: str = "T") -> dict:
+def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = None) -> dict:
     perfil = perfil.upper()
     niveis = MATRIZ[perfil]
     blocos, siglas_decl, achados = ler_blocos(texto)
     excecoes_aplicadas = []
-    conhecidas = set(LEXICO["siglas_conhecidas"]) | siglas_decl
+    conhecidas = set(LEXICO["siglas_conhecidas"]) | siglas_decl | (siglas_extra or set())
     siglas_vistas: dict[str, bool] = {}
 
-    def add(regra, conf, bloco: Bloco, trecho, msg, sug=""):
+    polissemicos: dict[str, dict] = {}
+
+    def add(regra, conf, bloco: Bloco, trecho, msg, sug="", nivel=None):
         if regra not in niveis:
             return
         if regra in bloco.excecoes:
             excecoes_aplicadas.append({"regra": regra, "linha": bloco.linha, "motivo": bloco.excecoes[regra]})
             return
-        achados.append(Achado(regra, niveis[regra], conf, bloco.linha, resumo(trecho), msg, sug))
+        achados.append(Achado(regra, nivel or niveis[regra], conf, bloco.linha, resumo(trecho), msg, sug))
 
     for a in achados:  # achados do parser (PTC-24)
         a.nivel = niveis.get(a.regra, "R")
@@ -317,7 +341,8 @@ def verificar(texto: str, perfil: str = "T") -> dict:
         # PTC-18 — passo numerado sem imperativo
         if b.tipo == "item_numerado" and frases:
             prim = (palavras(frases[0]) or [""])[0]
-            if re.fullmatch(r"[a-zà-ÿ]{3,}(ar|er|ir|or)", prim) and prim not in {"por", "para", "antes", "depois", "maior", "menor", "exterior", "interior"}:
+            if (re.fullmatch(r"[a-zà-ÿ]{3,}(ar|er|ir)", prim) or prim in {"pôr", "compor", "repor", "dispor", "propor"}) \
+                    and prim not in {"lugar", "valor", "familiar", "similar", "particular", "popular", "regular", "mar", "par", "bar"}:
                 add("PTC-18", "media", b, frases[0], f"O passo começa com o infinitivo “{prim}”.",
                     "Use o imperativo: “Selecione”, “Confirme”, “Verifique”.")
             elif re.match(r"^(deve-se|é necessário|é preciso|o usuário deve|você deve)", frases[0], re.I):
@@ -341,6 +366,10 @@ def verificar(texto: str, perfil: str = "T") -> dict:
                 if _ocorre(v, fl):
                     add("PTC-12", "baixa" if tem_numero else "media", b, f, f"Expressão vaga: “{v}”.",
                         "Troque por um critério mensurável (valor, prazo, condição).")
+            for v in LEXICO["quantificadores_vagos"]:
+                if _ocorre(v, fl):
+                    add("PTC-12", "baixa", b, f, f"Quantidade vaga: “{v}”.",
+                        "Se a quantidade importar para o leitor, informe o número ou liste os itens.")
 
             for pm in RE_PASSIVA.finditer(f):
                 if pm.group(2).lower() in PART_ADJ:
@@ -349,11 +378,39 @@ def verificar(texto: str, perfil: str = "T") -> dict:
                 add("PTC-05", conf, b, f, f"Possível voz passiva: “{pm.group(0).strip()}”.",
                     "Se o agente for conhecido, use a voz ativa: “O sistema valida o arquivo.”")
 
+            # PTC-25 (e regras dos padrões) — vocabulário controlado
+            for v in VOCABULARIO:
+                for vm in v["_re"].finditer(f):
+                    if v.get("sentidos"):
+                        reg = polissemicos.setdefault(v["id"], {"id": v["id"], "lema": v["lema"], "ocorrencias": 0,
+                                                                "linhas": [], "sentidos": v["sentidos"]})
+                        reg["ocorrencias"] += 1
+                        if b.linha not in reg["linhas"]:
+                            reg["linhas"].append(b.linha)
+                        continue
+                    if v["status"] == "aprovado":
+                        continue
+                    conf = {"proibido": "alta", "nao_preferido": "media"}.get(v["status"], "baixa")
+                    rotulo = {"proibido": "Termo proibido", "em_analise": "Termo em análise"}.get(v["status"], "Termo não preferido")
+                    if v["classe"] == "padrao":
+                        rotulo = "Construção não preferida"
+                    add(v["regra"], conf, b, f, f"{rotulo}: “{vm.group(0)}” ({v['id']}).",
+                        f"Prefira: {', '.join(v['preferir'])}." + (f" {v['motivo']}" if v.get("motivo") else ""),
+                        nivel="O" if v["status"] == "proibido" else None)
+
             pal = palavras(f)
-            neg = sum(1 for p in pal if p in LEXICO["negacoes"])
             sub = sum(1 for p in pal if p in LEXICO["subordinadores"])
-            if neg >= 2:
-                add("PTC-23", "media", b, f, f"Frase com {neg} negações.", "Reescreva na forma afirmativa ou divida.")
+            # negações encadeadas na mesma oração ("não é possível não validar", "nunca X sem Y");
+            # orações coordenadas ("não resolve e não tem rota") não contam juntas
+            oracoes = re.split(r"[,;:—–]|\s(?:e|ou|mas|porém)\s", f.lower())
+            pior = max(oracoes, key=negacoes_logicas)
+            neg, nao = negacoes_logicas(pior), palavras(pior).count("não")
+            if neg >= 3 or nao >= 2:
+                add("PTC-23", "media", b, f, f"Oração com {neg} negações encadeadas: “{resumo(pior.strip(), 60)}”.",
+                    "Reescreva na forma afirmativa ou divida a frase.")
+            elif neg == 2:
+                add("PTC-23", "baixa", b, f, f"Negação dupla: “{resumo(pior.strip(), 60)}”.",
+                    "Considere a forma afirmativa: “Nunca entregue X sem Y” → “Sempre entregue X com Y”.")
             if sub >= 3:
                 add("PTC-23", "baixa", b, f, f"Frase com {sub} conectivos de subordinação.", "Divida a frase.")
 
@@ -366,11 +423,15 @@ def verificar(texto: str, perfil: str = "T") -> dict:
                 continue
             ini, fim = sm.span()
             antes, depois = limpo[max(0, ini - 2):ini], limpo[fim:fim + 3]
+            if re.match(r"\.[a-z]{1,5}\b", limpo[fim:fim + 7]):   # nome de arquivo: SKILL.md, README.txt
+                continue
+            # caixa alta de ênfase (LEIA, NUNCA, DEPENDE) parece palavra, não sigla: confiança baixa
+            enfase = len(sigla) >= 4 and sum(c in "AEIOU" for c in sigla) >= 2
             definida = "(" in antes or depois.lstrip().startswith(("(", "—", "–", ":")) or \
                 re.search(rf"\(\s*{sigla}s?\s*\)", limpo[:ini + len(sigla) + 3]) is not None
             siglas_vistas[sigla] = definida
             if not definida:
-                add("PTC-17", "media", b, limpo[max(0, ini - 40):fim + 40],
+                add("PTC-17", "baixa" if enfase else "media", b, limpo[max(0, ini - 40):fim + 40],
                     f"Sigla “{sigla}” sem definição na primeira ocorrência.",
                     f"Escreva o nome completo e a sigla entre parênteses, ou declare <!-- ptc-siglas: {sigla} -->.")
 
@@ -386,6 +447,7 @@ def verificar(texto: str, perfil: str = "T") -> dict:
         "blocos_verificados": len(blocos),
         "achados": [asdict(a) for a in achados],
         "excecoes_aplicadas": excecoes_aplicadas,
+        "vocabulario_polissemico": sorted(polissemicos.values(), key=lambda x: -x["ocorrencias"]),
         "resumo": {
             "total": len(achados),
             "por_regra": dict(sorted(por_regra.items())),
@@ -416,6 +478,11 @@ def imprimir(res: dict) -> None:
             print(f"        ✎ {a['sugestao']}")
     for e in res["excecoes_aplicadas"]:
         print(f"L{e['linha']:<5} {e['regra']} exceção registrada: {e['motivo']}")
+    if res.get("vocabulario_polissemico"):
+        print("\nPalavras com mais de um sentido (confira a consistência — PTC-08):")
+        for p in res["vocabulario_polissemico"]:
+            sentidos = "; ".join(s["sentido"] for s in p["sentidos"])
+            print(f"  {p['lema']} ×{p['ocorrencias']} (linhas {', '.join(map(str, p['linhas'][:8]))}) — {sentidos}")
     print(f"\n{res['observacao']}")
 
 
@@ -426,6 +493,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--perfil", default="T", choices=["L", "T", "C", "l", "t", "c"])
     ap.add_argument("--json", action="store_true", help="Saída em JSON")
     ap.add_argument("--min-confianca", default="baixa", choices=list(CONFIANCA))
+    ap.add_argument("--siglas", default="",
+                    help="Siglas conhecidas do público: lista separada por vírgula ou caminho de arquivo (uma por linha)")
     args = ap.parse_args(argv)
 
     try:
@@ -439,7 +508,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"erro: {e}", file=sys.stderr)
         return 2
 
-    res = filtrar(verificar(texto, args.perfil), args.min_confianca)
+    siglas = set()
+    if args.siglas:
+        fonte = Path(args.siglas)
+        bruto = fonte.read_text(encoding="utf-8") if fonte.is_file() else args.siglas
+        siglas = {s.strip() for s in re.split(r"[,\n]", bruto) if s.strip() and not s.strip().startswith("#")}
+    res = filtrar(verificar(texto, args.perfil, siglas), args.min_confianca)
     if args.json:
         json.dump(res, sys.stdout, ensure_ascii=False, indent=2)
         print()

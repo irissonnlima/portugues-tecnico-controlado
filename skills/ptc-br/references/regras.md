@@ -1,6 +1,6 @@
 # PTC-BR — Português Técnico Controlado
 
-**Especificação experimental — versão 0.1.1**
+**Especificação experimental — versão 0.2.0**
 **Status:** rascunho para discussão
 **Idioma:** português brasileiro (pt-BR)
 **Referências conceituais:** princípios de linguagem simples da ABNT NBR ISO 24495-1 e abordagem de linguagem controlada do ASD-STE100.
@@ -69,6 +69,7 @@ O nível de cada regra muda conforme o perfil. **O** = obrigatória, **R** = rec
 | PTC-22 Preservar sentido | O | O | O |
 | PTC-23 Sem subordinação excessiva | R | R | O |
 | PTC-24 Exceção registrada | — | O | O |
+| PTC-25 Vocabulário controlado | R | R | O |
 
 ## 4. Regras de escrita
 
@@ -108,8 +109,9 @@ O nível de cada regra muda conforme o perfil. **O** = obrigatória, **R** = rec
 ### 4.5. Qualidade e revisão
 
 - **PTC-22 [OBRIGATÓRIA] (P)** — Ao reescrever, preserve números, operadores, negações, restrições (*só*, *exceto*), condições e relações de causa e efeito. **Não acrescente** informação que o original não contém.
-- **PTC-23 [RECOMENDADA] (P)** — Reescreva frases com três ou mais orações subordinadas ou com duas ou mais negações.
+- **PTC-23 [RECOMENDADA] (P)** — Reescreva frases com três ou mais orações subordinadas ou com negações encadeadas na mesma oração: *Não é possível não validar*; *Nunca entregue X sem Y*. A concordância negativa (*não há X nem Y*, *não precisa de nada*) conta como **uma** negação. Orações coordenadas (*não resolve e não tem rota*) são avaliadas separadamente.
 - **PTC-24 [OBRIGATÓRIA] (A)** — Registre exceções justificadas às regras obrigatórias (seção 6), em vez de alterar o sentido em silêncio.
+- **PTC-25 [RECOMENDADA] (A)** — Use o termo preferido do vocabulário controlado (seção 7). Um termo com status *proibido* é violação obrigatória em qualquer perfil.
 
 ## 5. Regras de contagem
 
@@ -152,7 +154,9 @@ Declare siglas conhecidas do público, uma vez por documento:
 <!-- ptc-siglas: API, SQL, HTTP -->
 ```
 
-## 7. Vocabulário controlado — exemplo inicial
+Para um time ou domínio inteiro, passe a lista ao verificador: `ptc_check.py arquivo.md --siglas siglas.txt` (uma sigla por linha) ou `--siglas "DDL,HML"`.
+
+## 7. Vocabulário controlado
 
 O objetivo **não** é limitar toda a língua portuguesa a 900 palavras. A proposta separa:
 
@@ -160,7 +164,24 @@ O objetivo **não** é limitar toda a língua portuguesa a 900 palavras. A propo
 2. **Termos técnicos por domínio:** palavras necessárias para descrever conceitos de engenharia, software, direito ou outras áreas.
 3. **Nomes próprios e identificadores:** nomes de produtos, campos, APIs, normas e equipamentos, tratados separadamente.
 
-Um vocabulário de produção exige validação linguística, análise de corpus e participação dos especialistas do domínio. A tabela abaixo é apenas uma amostra.
+Um vocabulário de produção exige validação linguística, análise de corpus e participação dos especialistas do domínio.
+
+### 7.1. Arquivos e status
+
+O vocabulário fica em `references/vocabulario/*.yaml`, um verbete por entrada, validado por `references/vocabulario/schema.json`. O verificador usa a versão compilada (`scripts/vocabulario.json`), gerada por `tools/compilar_vocabulario.py`.
+
+| Status | Efeito no verificador |
+|---|---|
+| `aprovado` | Nenhum alerta. Documenta o sentido aprovado. |
+| `nao_preferido` | Alerta PTC-25, confiança média, com o termo a preferir. |
+| `proibido` | Alerta PTC-25 obrigatório, confiança alta, em qualquer perfil. |
+| `em_analise` | Alerta PTC-25, confiança baixa. Indica uma decisão pendente do time. |
+
+Um verbete **aprovado com `sentidos`** descreve uma palavra com mais de um sentido técnico (*subir*, *base*, *chave*). Ela não gera alerta; aparece no relatório `vocabulario_polissemico` para a revisão da PTC-08.
+
+**Flexão:** o verbete guarda o lema. O compilador gera as formas de verbos regulares em *-ar*, *-er* e *-ir* e o plural de substantivos. Verbos irregulares e pronominais declaram `formas`; construções declaram `padrao` (expressão regular).
+
+### 7.2. Amostra
 
 | Prefira | Evite quando desnecessário | Observação |
 |---|---|---|
@@ -253,6 +274,8 @@ versao_inclusao: 0.1.0
 | Locuções com substantivo abstrato | PTC-11 | A | `ptc_check.py` |
 | Expressões vagas | PTC-12 | A | `ptc_check.py` |
 | Siglas sem definição | PTC-17 | P | `ptc_check.py` |
+| Vocabulário controlado | PTC-25, PTC-07 | A | `ptc_check.py` + `vocabulario.json` |
+| Palavras com mais de um sentido | PTC-08 | P | relatório `vocabulario_polissemico` + revisão |
 | Voz passiva analítica | PTC-05 | P | `ptc_check.py` + revisão |
 | Aviso sem consequência | PTC-21 | P | `ptc_check.py` + revisão |
 | Negações e subordinadas encadeadas | PTC-23 | P | `ptc_check.py` + revisão |
@@ -280,8 +303,8 @@ Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam
 
 ## 11. Próximas versões
 
-- **0.2.0:** regras de padrão para nominalizações; cerca de 100 verbetes focados em termos não preferidos e em palavras com mais de um sentido; schema de verbete validado.
-- **0.3.0:** lematização no verificador; detecção com base no dicionário.
+- **0.2.0 (atual):** vocabulário controlado com 68 verbetes, schema validado e flexão automática; regra PTC-25; PTC-23 com concordância negativa; precisão do verificador medida em corpus real.
+- **0.3.0:** decidir os verbetes `em_analise`; ampliar o vocabulário para cerca de 150 verbetes a partir de corpus; lematização opcional no verificador.
 - **0.4.0:** glossários de domínio (software e dados); política de anglicismos; casos de teste de ambiguidade.
 - **0.5.0–0.9.0:** uso real; taxa de aceitação por regra; ajustes.
 - **1.0.0:** IDs estáveis; teste de compreensão com leitores; licença e governança definidas.

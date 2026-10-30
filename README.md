@@ -4,8 +4,8 @@ Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em p
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.1.0 |
-| Especificação (`skills/ptc-br/references/regras.md`) | 0.1.1 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.2.0 |
+| Especificação (`skills/ptc-br/references/regras.md`) | 0.2.0 |
 
 ## O que o plugin faz
 
@@ -31,10 +31,15 @@ skills/ptc-br/
   references/
     regras.md            especificação PTC-BR (regras, perfis, contagem, exceções)
     rubrica-judge.md     perguntas binárias Q1–Q6 e formato JSON do judge
+    vocabulario/         verbetes em YAML (fonte editável) e schema.json
   scripts/
     ptc_check.py         verificador das regras automáticas e parciais
     ptc_diff.py          checagem determinística de preservação de sentido (PTC-22)
     lexico.json          listas: palavras vagas, deverbais, siglas conhecidas, unidades…
+    vocabulario.json     vocabulário compilado (gerado; não edite à mão)
+tools/
+  compilar_vocabulario.py  valida os YAML e gera vocabulario.json (requer PyYAML)
+  medir_corpus.py          mede achados por regra em um corpus, para controlar falsos positivos
 tests/                   testes unitários dos scripts
 tests/judge/             pares rotulados e calibração do judge
 evals/                   casos do `claude plugin eval` (comportamento da skill)
@@ -45,10 +50,18 @@ evals/                   casos do `claude plugin eval` (comportamento da skill)
 ```bash
 python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --perfil T
 python3 skills/ptc-br/scripts/ptc_check.py --texto "Realize a verificação do log." --json
+python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --siglas siglas-do-time.txt   # siglas conhecidas do público
 python3 skills/ptc-br/scripts/ptc_diff.py --original "Só admins acessam." --reescrita "Admins acessam."
 ```
 
 Código de saída: `0` sem problema grave, `1` com violação obrigatória de alta confiança (check) ou alerta alto (diff), `2` erro.
+
+## Editar o vocabulário
+
+1. Edite ou acrescente verbetes em `skills/ptc-br/references/vocabulario/*.yaml`. Use um ID novo; nunca reutilize um ID.
+2. Compile e valide: `python3 tools/compilar_vocabulario.py`.
+3. Rode os testes. O teste `ExemplosDosVerbetes` exige que o `exemplo_incorreto` dispare o alerta e o `exemplo_correto` não.
+4. Meça o ruído em um corpus real: `python3 tools/medir_corpus.py <pasta>`.
 
 ## Testes em três camadas
 

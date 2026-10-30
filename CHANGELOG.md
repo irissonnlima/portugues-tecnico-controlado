@@ -2,6 +2,39 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
 
+## [plugin 0.2.0 · spec 0.2.0] — 2026-10-30
+
+### Vocabulário controlado (novo)
+
+- 68 verbetes em `references/vocabulario/geral.yaml`: 34 não preferidos, 21 palavras com mais de um sentido técnico, 8 verbos de instrução aprovados, 4 em análise e 1 proibido.
+- `schema.json` (JSON Schema) e `tools/compilar_vocabulario.py`: valida os verbetes, gera a flexão (verbos regulares e plural) e compila `scripts/vocabulario.json`. O build é reprodutível.
+- Nova regra **PTC-25** (vocabulário controlado). Termo proibido é violação obrigatória em qualquer perfil.
+- Relatório `vocabulario_polissemico` na saída do verificador, usado na passada global da PTC-08.
+- Padrões: *o mesmo* como pronome (PTC-07) e gerundismo (*vamos estar enviando*).
+- Verbetes `em_analise` para decisão do time: *conferir*, *rodar*, *solicitar*, *parametrizar*.
+
+### Verificador
+
+- `--siglas`: lista de siglas conhecidas do público (arquivo ou lista separada por vírgula).
+- Precisão medida em corpus real de documentação técnica (60 arquivos, cerca de 41 mil palavras):
+  - **PTC-23:** de 136 para 36 alertas. Conta negações por oração e trata a concordância negativa (*não há X nem Y*) como uma negação.
+  - **PTC-17:** de 172 para 136 alertas, 43 deles com confiança baixa. Ignora nomes de arquivo (*SKILL.md*) e marca caixa alta de ênfase (*LEIA*) com confiança baixa.
+  - **PTC-12:** quantificadores (*vários*, *alguns*, *etc.*) passam a ter confiança baixa.
+  - **PTC-18:** substantivos terminados em *-or* (*valor*) deixam de ser tratados como infinitivo.
+  - **PTC-11:** *levar* sai dos verbos-suporte (*leva a correção para HML* é literal). Conectivos saem da PTC-11 e vão para o vocabulário (PTC-25).
+- `tools/medir_corpus.py`: mede os achados por regra e confiança em qualquer pasta de `.md`.
+
+### Especificação 0.1.1 → 0.2.0
+
+- **Novo:** PTC-25 e seção 7 reescrita (arquivos, status, flexão).
+- **Mudado:** PTC-23 define negação encadeada e concordância negativa.
+- **Novo:** `--siglas` documentado na seção 6.
+- Roadmap atualizado (seção 11).
+
+### Testes
+
+- 66 testes unitários (eram 45), incluindo um teste por verbete: o exemplo incorreto dispara e o correto não.
+
 ## [plugin 0.1.0 · spec 0.1.1] — 2026-10-30
 
 ### Plugin (novo)
