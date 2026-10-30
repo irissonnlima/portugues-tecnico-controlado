@@ -11,11 +11,13 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - `ptc_check.py`: verificador das regras PTC-03, 04, 05, 11, 12, 15, 17, 18, 21, 23 e 24, com perfis L/T/C, exceções e siglas declaradas.
 - `ptc_diff.py`: checagem de preservação de números, negações, restrições, condições, alternativas, comparadores e modais.
 - Rubrica do judge com perguntas binárias Q1–Q6 e saída JSON.
-- 45 testes unitários, 14 pares de calibração do judge e 4 casos de `claude plugin eval`.
+- 45 testes unitários, 18 pares de calibração do judge e 4 casos de `claude plugin eval`.
+- Calibração do judge: concordância no veredito de 71% → 97% (2 execuções × 18 pares) depois de corrigir os rótulos e a rubrica (Q5 para PTC-06, Q6 com a lista de regras obrigatórias, alcance de condições em frases divididas).
 
 ### Especificação 0.1.0 → 0.1.1
 
 - **Corrigido:** o exemplo 8.2 acrescentava "três" e "competição", informações ausentes do original. O exemplo antigo virou "reescrita a evitar".
+- **Corrigido (achado pelo judge):** as reescritas "corretas" de 8.1, 8.2 e 8.3 mudavam a finalidade, deslocavam uma restrição ou mantinham a condição depois da ação.
 - **Corrigido:** o exemplo 8.1 trocava "fora do período de validade" por "expirado", o que reduz o escopo. O exemplo antigo virou "reescrita a evitar".
 - **Novo:** tipo de verificação por regra: (A) automática, (P) parcial, (J) julgamento.
 - **Novo:** matriz regra × perfil (seção 3.1). Os perfis PTC-L e PTC-C passam a ter efeito.

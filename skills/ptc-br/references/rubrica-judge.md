@@ -32,6 +32,8 @@ Responda cada pergunta com `true` ou `false` e cite o trecho que comprova a resp
 
 **Q6 — regras obrigatórias no perfil PTC-T:** PTC-01, 02, 03, 05, 06, 07, 08, 10, 13, 14, 17, 18, 19, 20, 21, 22, 24. Para os perfis L e C, veja a seção 3.1 da spec. Exemplos frequentes: sigla nova sem definição (PTC-17), voz passiva com agente conhecido (PTC-05), instrução com mais de 20 palavras (PTC-03), duas ações na mesma frase de um procedimento (PTC-02).
 
+**Q5 para PTC-06:** a regra só é corrigida se, no texto da reescrita, a condição (*se…*, *somente se…*, *quando…*) aparece **antes** do verbo da ação principal. *O sistema aprova X somente se Y* ainda viola a PTC-06; *Somente se Y, o sistema aprova X* corrige.
+
 **Escopo de condições em frases divididas:** quando uma frase com condição vira várias, confira se **todas** as ações que dependiam da condição continuam dependentes dela. *Se X, faça A e B* → *Se X, faça A. Faça B.* tira B do alcance da condição (Q1).
 
 **Como usar o `diff`:** cada alerta `alta` do diff é um candidato a Q1 ou Q2, não uma resposta pronta. Confirme lendo o texto. A troca de *quando* por *se* mantém a condição. A troca de *deverá ser feito* pelo imperativo mantém a obrigação.
