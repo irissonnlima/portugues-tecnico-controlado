@@ -4,8 +4,8 @@ Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em p
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.2.0 |
-| Especificação (`skills/ptc-br/references/regras.md`) | 0.2.0 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.3.0 |
+| Especificação (`skills/ptc-br/references/regras.md`) | 0.3.0 |
 
 ## O que o plugin faz
 
@@ -31,15 +31,18 @@ skills/ptc-br/
   references/
     regras.md            especificação PTC-BR (regras, perfis, contagem, exceções)
     rubrica-judge.md     perguntas binárias Q1–Q6 e formato JSON do judge
-    vocabulario/         verbetes em YAML (fonte editável) e schema.json
+    vocabulario/         verbetes em YAML (geral, formal, polissemia) e schema.json
   scripts/
     ptc_check.py         verificador das regras automáticas e parciais
     ptc_diff.py          checagem determinística de preservação de sentido (PTC-22)
+    ptc_vocab.py         flexão, regex e camadas de vocabulário
     lexico.json          listas: palavras vagas, deverbais, siglas conhecidas, unidades…
     vocabulario.json     vocabulário compilado (gerado; não edite à mão)
 tools/
   compilar_vocabulario.py  valida os YAML e gera vocabulario.json (requer PyYAML)
   medir_corpus.py          mede achados por regra em um corpus, para controlar falsos positivos
+exemplos/
+  camada-time.yaml       modelo de camada de vocabulário de um time
 tests/                   testes unitários dos scripts
 tests/judge/             pares rotulados e calibração do judge
 evals/                   casos do `claude plugin eval` (comportamento da skill)
@@ -51,10 +54,16 @@ evals/                   casos do `claude plugin eval` (comportamento da skill)
 python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --perfil T
 python3 skills/ptc-br/scripts/ptc_check.py --texto "Realize a verificação do log." --json
 python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --siglas siglas-do-time.txt   # siglas conhecidas do público
+python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --vocabulario exemplos/camada-time.yaml
+python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --lematizar   # opcional: pip install simplemma
 python3 skills/ptc-br/scripts/ptc_diff.py --original "Só admins acessam." --reescrita "Admins acessam."
 ```
 
 Código de saída: `0` sem problema grave, `1` com violação obrigatória de alta confiança (check) ou alerta alto (diff), `2` erro.
+
+## Camada de vocabulário do time
+
+O PTC-BR geral fica neutro em escolhas que variam por time. Por exemplo, aceita *verificar* e *conferir* como sinônimos. Cada time registra as próprias escolhas em uma camada (YAML ou JSON): muda verbetes (`sobrepor`), acrescenta verbetes (`verbetes`) e declara siglas (`siglas`). Veja `exemplos/camada-time.yaml` e a seção 7.3 da spec.
 
 ## Editar o vocabulário
 
@@ -81,4 +90,4 @@ Rode os unitários a cada mudança. Rode a calibração quando mudar a rubrica o
 
 ## Licença
 
-Ainda não definida. Sugestão em discussão: CC BY 4.0 para a especificação e MIT para o código.
+[MIT](LICENSE). Vale para o código, a especificação e o vocabulário.

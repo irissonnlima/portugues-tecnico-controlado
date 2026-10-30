@@ -6,7 +6,7 @@ argument-hint: "[revisar|reescrever|verificar] <arquivo> [perfil L|T|C]"
 
 # PTC-BR — Português Técnico Controlado
 
-Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.2.0).
+Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.3.0).
 Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (seção 3.1) ou das regras de contagem (seção 5).
 
 ## Modos
@@ -27,11 +27,12 @@ Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (se
 python3 ${CLAUDE_SKILL_DIR}/scripts/ptc_check.py <arquivo> --perfil T --json
 ```
 
-Para texto colado no chat, use `--texto "..."`. Se o time tiver uma lista de siglas conhecidas, passe `--siglas arquivo.txt` (ou `--siglas "SIGLA1,SIGLA2"`). O script cobre as regras (A) e (P), inclusive o vocabulário controlado (PTC-25). Ele **não** decide sozinho:
+Para texto colado no chat, use `--texto "..."`. Se o time tiver uma camada de vocabulário (escolhas de termos e siglas do time), passe `--vocabulario camada.yaml`; para só uma lista de siglas, `--siglas arquivo.txt`. Se o `simplemma` estiver instalado, acrescente `--lematizar` para achar formas verbais irregulares. O script cobre as regras (A) e (P), inclusive o vocabulário controlado (PTC-25). Ele **não** decide sozinho:
 
 - confiança `alta`: trate como violação, salvo erro evidente do script;
 - confiança `media` ou `baixa`: confirme lendo a frase. Descarte o falso positivo e registre o motivo em uma linha;
-- PTC-25 com status `em_analise` (confiança baixa): não trate como violação. Cite o termo uma vez no relatório, como decisão pendente do vocabulário.
+- PTC-25 com status `em_analise` (confiança baixa): não trate como violação. Cite o termo uma vez no relatório, como decisão pendente do vocabulário;
+- sinônimos aceitos (*verificar*/*conferir*, *executar*/*rodar*) não geram alerta. Se o documento alternar os dois para o mesmo conceito, aponte na passada global (PTC-08) e sugira um só.
 
 ### 2. Passada global (arquivo inteiro)
 

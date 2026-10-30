@@ -61,17 +61,20 @@ class ExemplosDosVerbetes(unittest.TestCase):
 
 class Deteccao(unittest.TestCase):
     def test_nivel_por_status(self):
-        conf = {a["mensagem"].split("(")[-1].rstrip(").") : (a["nivel"], a["confianca"])
+        conf = {a["mensagem"].split("(")[-1].rstrip(").").split(",")[0]: (a["nivel"], a["confianca"])
                 for a in achados("Utilize o token. A nível de servidor, confira o log.")}
         self.assertEqual(conf["V-0100"], ("R", "media"))   # não preferido
         self.assertEqual(conf["V-0210"], ("O", "alta"))    # proibido: obrigatória em qualquer perfil
-        self.assertEqual(conf["V-0114"], ("R", "baixa"))   # em análise
+        self.assertNotIn("V-0114", conf)                   # conferir: sinônimo aceito (decisão 0.3.0)
 
     def test_o_mesmo_adjetivo_nao_dispara(self):
         self.assertEqual(achados("Use o mesmo nome nos dois ambientes.", "PTC-07"), [])
 
     def test_o_mesmo_predicativo_nao_dispara(self):
         self.assertEqual(achados("O contrato é sempre o mesmo.", "PTC-07"), [])
+
+    def test_se_encontrar_condicional_nao_dispara(self):
+        self.assertFalse([a for a in achados("Se encontrar esse valor, pergunte antes.") if "V-0118" in a["mensagem"]])
 
     def test_pode_estar_ocorrendo_nao_e_gerundismo(self):
         self.assertFalse([a for a in achados("O erro pode estar ocorrendo no proxy.") if "V-0301" in a["mensagem"]])
@@ -92,3 +95,85 @@ class Deteccao(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+CAMADA = RAIZ / "exemplos" / "camada-time.yaml"
+
+
+@unittest.skipIf(cv is None, "PyYAML ausente")
+class Camadas(unittest.TestCase):
+    def setUp(self):
+        self.vocab, self.siglas, self.nomes = pc.carregar_camadas([str(CAMADA)])
+
+    def ids(self, texto):
+        res = pc.verificar(texto, siglas_extra=self.siglas, vocabulario=self.vocab, camadas=self.nomes)
+        return {a["mensagem"].split("(")[-1].split(",")[0].rstrip(").") for a in res["achados"]}
+
+    def test_sem_camada_verificar_e_conferir_sao_aceitos(self):
+        self.assertEqual({a["regra"] for a in achados("Verifique o log. Confira o log.")}, set())
+
+    def test_camada_sobrepoe_verbete_geral(self):
+        self.assertIn("V-0001", self.ids("Verifique o log."))
+        self.assertNotIn("V-0114", self.ids("Confira o log."))
+
+    def test_camada_acrescenta_verbete(self):
+        self.assertIn("T-0001", self.ids("Abra o dashboard."))
+
+    def test_camada_traz_siglas(self):
+        res = pc.verificar("O ETL grava no DW.", siglas_extra=self.siglas, vocabulario=self.vocab)
+        self.assertNotIn("PTC-17", [a["regra"] for a in res["achados"]])
+
+    def test_mensagem_cita_a_camada(self):
+        res = pc.verificar("Verifique o log.", vocabulario=self.vocab)
+        self.assertIn("camada time-exemplo", res["achados"][0]["mensagem"])
+
+    def test_camada_json_sem_pyyaml(self):
+        import json, tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump({"nome": "j", "sobrepor": [{"lema": "usar", "status": "proibido", "preferir": ["empregar"]}]}, f)
+        vocab, _, _ = pc.carregar_camadas([f.name])
+        r = pc.verificar("Use o token.", vocabulario=vocab)["achados"]
+        self.assertEqual([(a["nivel"], a["confianca"]) for a in r], [("O", "alta")])
+
+    def test_ultima_camada_vence(self):
+        import json, tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump({"nome": "volta", "sobrepor": [{"id": "V-0001", "status": "aprovado"}]}, f)
+        vocab, _, _ = pc.carregar_camadas([str(CAMADA), f.name])
+        self.assertEqual(pc.verificar("Verifique o log.", vocabulario=vocab)["achados"], [])
+
+    def test_camada_invalida_falha_com_mensagem(self):
+        import json, tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump({"sobrepor": [{"id": "V-9999", "status": "aprovado"}]}, f)
+        with self.assertRaisesRegex(ValueError, "não encontrado: V-9999"):
+            pc.carregar_camadas([f.name])
+
+    def test_cli_codigo_2_para_camada_invalida(self):
+        r = subprocess.run([sys.executable, str(RAIZ / "skills/ptc-br/scripts/ptc_check.py"), "--texto", "x",
+                            "--vocabulario", "/nao/existe.yaml"], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 2)
+
+
+try:
+    LEM = pc.criar_lematizador()
+except ImportError:
+    LEM = None
+
+
+@unittest.skipIf(LEM is None, "simplemma ausente (opcional)")
+class Lematizacao(unittest.TestCase):
+    def ids(self, texto):
+        return [a["mensagem"] for a in pc.verificar(texto, lematizar=LEM)["achados"] if a["regra"] == "PTC-25"]
+
+    def test_acha_forma_que_a_flexao_nao_gera(self):
+        self.assertTrue(any("V-0100" in m and "por lema" in m for m in self.ids("Nós utilizaremos o token.")))
+
+    def test_nao_duplica_o_que_a_regex_achou(self):
+        self.assertEqual(len([m for m in self.ids("Utilize o token.") if "V-0100" in m]), 1)
+
+    def test_respeita_formas_explicitas(self):
+        self.assertFalse([m for m in self.ids("Crie uma tabela auxiliar.") if "V-0108" in m])
+
+    def test_sem_lematizar_nao_acha(self):
+        self.assertFalse([a for a in pc.verificar("Nós utilizaremos o token.")["achados"] if "V-0100" in a["mensagem"]])

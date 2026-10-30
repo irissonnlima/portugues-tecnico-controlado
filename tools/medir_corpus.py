@@ -26,8 +26,12 @@ def main() -> int:
     ap.add_argument("--exemplos", type=int, default=0, help="Exemplos por regra")
     ap.add_argument("--regra", help="Mostra exemplos só desta regra")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--lematizar", action="store_true", help="Requer simplemma")
+    ap.add_argument("--vocabulario", action="append", default=[], help="Camada de vocabulário do time")
     a = ap.parse_args()
 
+    lem = ptc_check.criar_lematizador() if a.lematizar else None
+    vocab, siglas, camadas = ptc_check.carregar_camadas(a.vocabulario) if a.vocabulario else (None, set(), [])
     arquivos = sorted({f for p in a.pastas for f in Path(p).expanduser().rglob("*.md")
                        if "node_modules" not in f.parts and "results" not in f.parts})
     por_regra, por_conf = Counter(), Counter()
@@ -36,7 +40,7 @@ def main() -> int:
     for f in arquivos:
         texto = f.read_text(encoding="utf-8", errors="ignore")
         palavras += len(texto.split())
-        r = ptc_check.verificar(texto, a.perfil)
+        r = ptc_check.verificar(texto, a.perfil, siglas, vocab, camadas, lem)
         blocos += r["blocos_verificados"]
         for ach in r["achados"]:
             por_regra[ach["regra"]] += 1

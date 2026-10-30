@@ -2,6 +2,39 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
 
+## [plugin 0.3.0 · spec 0.3.0] — 2026-10-30
+
+### Camadas de vocabulário do time (novo)
+
+- `--vocabulario camada.yaml` (ou `.json`, pode repetir): o time muda verbetes do vocabulário geral (`sobrepor`), acrescenta verbetes próprios (`verbetes`) e declara siglas (`siglas`). A última camada vence.
+- `exemplos/camada-time.yaml`: modelo de camada.
+- `ptc_vocab.py`: flexão, regex e camadas em um módulo da skill (só biblioteca padrão). O compilador passa a usar o mesmo módulo.
+
+### Decisões de vocabulário
+
+- *conferir* e *rodar*: sinônimos aceitos de *verificar* e *executar* (campo novo `sinonimo_de`). A escolha final fica com a camada de cada time.
+- *solicitar*: aprovado.
+- *parametrizar*: aprovado, com sentido próprio (definir parâmetros de consulta, função ou modelo).
+
+### Vocabulário: 68 → 164 verbetes
+
+- `formal.yaml` (novo): 73 verbetes de registro formal e burocrático: verbos (*ensejar*, *possuir*, *prosseguir*), conectivos (*outrossim*, *mediante*, *uma vez que*), padrões (introdução vazia, mesóclise), adjetivos, advérbios e substantivos (*supracitado*, *primeiramente*, *metodologia*).
+- `polissemia.yaml` (novo): 23 palavras com mais de um sentido técnico, com foco em software e finanças (*taxa*, *título*, *transação*, *homologação*, *padrão*, *modelo*).
+- Flexão de adjetivos (gênero e número) e plural de *-vel* (*imprescindíveis*).
+- Correção: *se encontrar* (condição com o verbo *encontrar*) deixa de ser marcado como *encontrar-se*.
+- O compilador mostra o arquivo e a linha quando o YAML é inválido.
+
+### Lematização (opcional)
+
+- `--lematizar` usa `simplemma`, se estiver instalado, para achar formas que a flexão não gera (*utilizaremos*, *efetuássemos*). Verbetes com `formas` ou `padrao` explícitos ficam fora, para evitar ambiguidade.
+- `tools/medir_corpus.py` aceita `--lematizar` e `--vocabulario`.
+
+### Qualidade
+
+- 80 testes unitários (eram 66). Os 4 testes de lematização são pulados sem `simplemma`.
+- Os 4 casos de `claude plugin eval` passaram (nota 1.00 cada).
+- Licença MIT.
+
 ## [plugin 0.2.0 · spec 0.2.0] — 2026-10-30
 
 ### Vocabulário controlado (novo)

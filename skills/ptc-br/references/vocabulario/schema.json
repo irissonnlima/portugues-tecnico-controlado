@@ -14,6 +14,7 @@
     "preferir": {"type": "array", "items": {"type": "string"}, "minItems": 1,
                  "description": "Obrigatório para nao_preferido, proibido e em_analise."},
     "preferida_em_instrucoes": {"type": "string"},
+    "sinonimo_de": {"type": "string", "description": "Lema do termo principal quando este é um sinônimo aceito (status aprovado). Uma camada de time pode escolher um dos dois."},
     "formas": {"type": "array", "items": {"type": "string"}, "minItems": 1,
                "description": "Substitui a flexão automática (verbos irregulares, pronominais)."},
     "padrao": {"type": "string", "description": "Expressão regular (Python, sem flags). Substitui lema e formas na detecção."},

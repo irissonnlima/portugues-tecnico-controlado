@@ -20,12 +20,49 @@ import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-SPEC_VERSION = "0.2.0"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ptc_vocab  # noqa: E402
+
+SPEC_VERSION = "0.3.0"
 LEXICO = json.loads((Path(__file__).with_name("lexico.json")).read_text(encoding="utf-8"))
 _VOCAB_ARQ = Path(__file__).with_name("vocabulario.json")
-VOCABULARIO = json.loads(_VOCAB_ARQ.read_text(encoding="utf-8"))["verbetes"] if _VOCAB_ARQ.exists() else []
-for _v in VOCABULARIO:
-    _v["_re"] = re.compile(_v["regex"], re.I)
+
+
+def preparar_vocabulario(verbetes: list[dict]) -> list[dict]:
+    """Compila a regex de cada verbete (a camada do time pode ter mudado ou acrescentado verbetes)."""
+    saida = []
+    for v in verbetes:
+        v = dict(v)
+        v["_re"] = re.compile(v.get("regex") or ptc_vocab.regex_do_verbete(v), re.I)
+        saida.append(v)
+    return saida
+
+
+def criar_lematizador():
+    """Devolve uma função palavra → lema usando simplemma, ou levanta ImportError."""
+    from functools import lru_cache
+
+    import simplemma
+
+    @lru_cache(maxsize=20000)
+    def lematizar(palavra: str) -> str:
+        return simplemma.lemmatize(palavra, lang="pt").lower()
+    return lematizar
+
+
+VOCABULARIO_GERAL = json.loads(_VOCAB_ARQ.read_text(encoding="utf-8"))["verbetes"] if _VOCAB_ARQ.exists() else []
+VOCABULARIO = preparar_vocabulario(VOCABULARIO_GERAL)
+
+
+def carregar_camadas(caminhos: list[str]) -> tuple[list[dict], set[str], list[str]]:
+    """Aplica as camadas na ordem dada (a última vence). Devolve verbetes, siglas e nomes das camadas."""
+    verbetes, siglas, nomes = VOCABULARIO_GERAL, set(), []
+    for c in caminhos:
+        camada = ptc_vocab.carregar_camada(c)
+        verbetes, s = ptc_vocab.aplicar_camada(verbetes, camada)
+        siglas |= s
+        nomes.append(camada["nome"])
+    return preparar_vocabulario(verbetes), siglas, nomes
 
 # Nível de cada regra por perfil (seção 3.1 da spec). Ausente = não se aplica.
 MATRIZ = {
@@ -299,12 +336,16 @@ NAO_SIGLAS = {"OU", "NO", "NA", "DE", "DO", "DA", "EM", "SE", "UM", "OS", "AS", 
 RE_SIGLA = re.compile(r"(?<![\wÀ-ÿ])([A-Z][A-Z0-9]{1,5})(s?)(?![\wÀ-ÿ])")
 
 
-def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = None) -> dict:
+def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = None,
+              vocabulario: list[dict] | None = None, camadas: list[str] | None = None,
+              lematizar=None) -> dict:
     perfil = perfil.upper()
     niveis = MATRIZ[perfil]
     blocos, siglas_decl, achados = ler_blocos(texto)
     excecoes_aplicadas = []
     conhecidas = set(LEXICO["siglas_conhecidas"]) | siglas_decl | (siglas_extra or set())
+    vocab = VOCABULARIO if vocabulario is None else vocabulario
+    por_lema = {v["lema"].lower(): v for v in vocab if v.get("lematizavel")} if lematizar else {}
     siglas_vistas: dict[str, bool] = {}
 
     polissemicos: dict[str, dict] = {}
@@ -379,24 +420,32 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
                     "Se o agente for conhecido, use a voz ativa: “O sistema valida o arquivo.”")
 
             # PTC-25 (e regras dos padrões) — vocabulário controlado
-            for v in VOCABULARIO:
-                for vm in v["_re"].finditer(f):
-                    if v.get("sentidos"):
-                        reg = polissemicos.setdefault(v["id"], {"id": v["id"], "lema": v["lema"], "ocorrencias": 0,
-                                                                "linhas": [], "sentidos": v["sentidos"]})
-                        reg["ocorrencias"] += 1
-                        if b.linha not in reg["linhas"]:
-                            reg["linhas"].append(b.linha)
-                        continue
-                    if v["status"] == "aprovado":
-                        continue
-                    conf = {"proibido": "alta", "nao_preferido": "media"}.get(v["status"], "baixa")
-                    rotulo = {"proibido": "Termo proibido", "em_analise": "Termo em análise"}.get(v["status"], "Termo não preferido")
-                    if v["classe"] == "padrao":
-                        rotulo = "Construção não preferida"
-                    add(v["regra"], conf, b, f, f"{rotulo}: “{vm.group(0)}” ({v['id']}).",
-                        f"Prefira: {', '.join(v['preferir'])}." + (f" {v['motivo']}" if v.get("motivo") else ""),
-                        nivel="O" if v["status"] == "proibido" else None)
+            ocorrencias = [(v, vm.group(0), "") for v in vocab for vm in v["_re"].finditer(f)]
+            if lematizar:   # formas que a flexão automática não gera (fez, dispõe, utilizaremos)
+                ja = {(v["id"], t.lower()) for v, t, _ in ocorrencias}
+                for tok in re.findall(r"[\wÀ-ÿ]+", f):
+                    v = por_lema.get(lematizar(tok.lower()))
+                    if v and (v["id"], tok.lower()) not in ja:
+                        ocorrencias.append((v, tok, " — por lema"))
+                        ja.add((v["id"], tok.lower()))
+            for v, encontrado, via in ocorrencias:
+                if v.get("sentidos"):
+                    reg = polissemicos.setdefault(v["id"], {"id": v["id"], "lema": v["lema"], "ocorrencias": 0,
+                                                            "linhas": [], "sentidos": v["sentidos"]})
+                    reg["ocorrencias"] += 1
+                    if b.linha not in reg["linhas"]:
+                        reg["linhas"].append(b.linha)
+                    continue
+                if v["status"] == "aprovado":
+                    continue
+                conf = {"proibido": "alta", "nao_preferido": "media"}.get(v["status"], "baixa")
+                rotulo = {"proibido": "Termo proibido", "em_analise": "Termo em análise"}.get(v["status"], "Termo não preferido")
+                if v["classe"] == "padrao":
+                    rotulo = "Construção não preferida"
+                origem = f"{v['id']}, camada {v['camada']}" if v.get("camada") else v["id"]
+                add(v.get("regra", "PTC-25"), conf, b, f, f"{rotulo}: “{encontrado}” ({origem}){via}.",
+                    f"Prefira: {', '.join(v['preferir'])}." + (f" {v['motivo']}" if v.get("motivo") else ""),
+                    nivel="O" if v["status"] == "proibido" else None)
 
             pal = palavras(f)
             sub = sum(1 for p in pal if p in LEXICO["subordinadores"])
@@ -444,6 +493,8 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
     return {
         "spec_version": SPEC_VERSION,
         "perfil": f"PTC-{perfil}",
+        "camadas": camadas or [],
+        "lematizacao": bool(lematizar),
         "blocos_verificados": len(blocos),
         "achados": [asdict(a) for a in achados],
         "excecoes_aplicadas": excecoes_aplicadas,
@@ -468,7 +519,8 @@ def filtrar(resultado: dict, min_conf: str) -> dict:
 
 def imprimir(res: dict) -> None:
     r = res["resumo"]
-    print(f"PTC-BR {res['spec_version']} · perfil {res['perfil']} · {res['blocos_verificados']} blocos")
+    camadas = f" · camadas: {', '.join(res['camadas'])}" if res.get("camadas") else ""
+    print(f"PTC-BR {res['spec_version']} · perfil {res['perfil']} · {res['blocos_verificados']} blocos{camadas}")
     print(f"Achados: {r['total']} · obrigatórias: {r['obrigatorias']} "
           f"(alta confiança: {r['obrigatorias_alta_confianca']}) · {r['classificacao_preliminar']}\n")
     for a in res["achados"]:
@@ -493,6 +545,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--perfil", default="T", choices=["L", "T", "C", "l", "t", "c"])
     ap.add_argument("--json", action="store_true", help="Saída em JSON")
     ap.add_argument("--min-confianca", default="baixa", choices=list(CONFIANCA))
+    ap.add_argument("--vocabulario", action="append", default=[], metavar="CAMADA",
+                    help="Camada de vocabulário do time (.yaml ou .json). Pode repetir; a última vence.")
+    ap.add_argument("--lematizar", action="store_true",
+                    help="Usa lematização (requer simplemma: pip install simplemma) para achar formas irregulares")
     ap.add_argument("--siglas", default="",
                     help="Siglas conhecidas do público: lista separada por vírgula ou caminho de arquivo (uma por linha)")
     args = ap.parse_args(argv)
@@ -513,7 +569,22 @@ def main(argv: list[str] | None = None) -> int:
         fonte = Path(args.siglas)
         bruto = fonte.read_text(encoding="utf-8") if fonte.is_file() else args.siglas
         siglas = {s.strip() for s in re.split(r"[,\n]", bruto) if s.strip() and not s.strip().startswith("#")}
-    res = filtrar(verificar(texto, args.perfil, siglas), args.min_confianca)
+    vocab, camadas = None, []
+    if args.vocabulario:
+        try:
+            vocab, siglas_camada, camadas = carregar_camadas(args.vocabulario)
+        except (OSError, ValueError) as e:
+            print(f"erro: {e}", file=sys.stderr)
+            return 2
+        siglas |= siglas_camada
+    lem = None
+    if args.lematizar:
+        try:
+            lem = criar_lematizador()
+        except ImportError:
+            print("erro: --lematizar requer simplemma (pip install simplemma)", file=sys.stderr)
+            return 2
+    res = filtrar(verificar(texto, args.perfil, siglas, vocab, camadas, lem), args.min_confianca)
     if args.json:
         json.dump(res, sys.stdout, ensure_ascii=False, indent=2)
         print()

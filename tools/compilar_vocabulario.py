@@ -27,88 +27,11 @@ SKILL = RAIZ / "skills" / "ptc-br"
 FONTES = sorted((SKILL / "references" / "vocabulario").glob("*.yaml"))
 SCHEMA = SKILL / "references" / "vocabulario" / "schema.json"
 SAIDA = SKILL / "scripts" / "vocabulario.json"
-SPEC_VERSION = "0.2.0"
+SPEC_VERSION = "0.3.0"
 
-LIMITE = r"[\wÀ-ÿ-]"
-
-
-# ---------------------------------------------------------------- flexão
-
-def _radical_subjuntivo(radical: str, terminacao: str) -> str:
-    """Ajustes ortográficos: verifiCar → verifiQUe, cheGar → cheGUe, começar → comeCe, conheCer → conheÇa."""
-    if terminacao == "ar":
-        if radical.endswith("c"):
-            return radical[:-1] + "qu"
-        if radical.endswith("g"):
-            return radical + "u"
-        if radical.endswith("ç"):
-            return radical[:-1] + "c"
-    if terminacao == "er":
-        if radical.endswith("c"):
-            return radical[:-1] + "ç"
-        if radical.endswith("g"):
-            return radical[:-1] + "j"
-    return radical
-
-
-def flexionar_verbo(lema: str) -> list[str]:
-    radical, term = lema[:-2], lema[-2:]
-    if term not in ("ar", "er", "ir"):
-        return [lema]
-    sub = _radical_subjuntivo(radical, term)
-    if term == "ar":
-        formas = ["ar", "a", "am", "ou", "aram", "ado", "ada", "ados", "adas", "ando", "ará", "arão", "ava", "avam",
-                  "asse", "assem", "ar-se", "a-se", "am-se"]
-        subj = ["e", "em", "e-se"]
-    elif term == "er":
-        formas = ["er", "e", "em", "eu", "eram", "ido", "ida", "idos", "idas", "endo", "erá", "erão", "ia", "iam"]
-        subj = ["a", "am"]
-    else:
-        formas = ["ir", "e", "em", "iu", "iram", "ido", "ida", "idos", "idas", "indo", "irá", "irão", "ia", "iam"]
-        subj = ["a", "am"]
-    return [radical + f for f in formas] + [sub + f for f in subj]
-
-
-def flexionar_nome(lema: str) -> list[str]:
-    if lema.endswith("ão"):
-        plural = lema[:-2] + "ões"
-    elif lema.endswith(("r", "z")):
-        plural = lema + "es"
-    elif lema.endswith("al") or lema.endswith("ol") or lema.endswith("ul"):
-        plural = lema[:-1] + "is"
-    elif lema.endswith("el"):
-        plural = lema[:-2] + "éis"
-    elif lema.endswith("il"):
-        plural = lema[:-1] + "s"
-    elif lema.endswith("m"):
-        plural = lema[:-1] + "ns"
-    elif lema.endswith("s"):
-        plural = lema
-    else:
-        plural = lema + "s"
-    return sorted({lema, plural})
-
-
-def formas_do_verbete(v: dict) -> list[str]:
-    if v.get("formas"):
-        return v["formas"]
-    lema = v["lema"]
-    if v.get("flexao") == "nenhuma" or v["classe"] in ("conectivo", "padrao"):
-        return [lema]
-    if v["classe"] == "verbo":
-        return flexionar_verbo(lema)
-    if v["classe"] == "locucao_verbal":
-        verbo, _, resto = lema.partition(" ")
-        return [f"{f} {resto}".strip() for f in flexionar_verbo(verbo)]
-    return flexionar_nome(lema)
-
-
-def regex_do_verbete(v: dict) -> str:
-    if v.get("padrao"):
-        return v["padrao"]
-    formas = sorted(set(formas_do_verbete(v)), key=lambda f: (-len(f), f))
-    alt = "|".join(re.escape(f).replace(r"\ ", r"\s+") for f in formas)
-    return rf"(?<!{LIMITE})(?:{alt})(?!{LIMITE})"
+sys.path.insert(0, str(SKILL / "scripts"))
+from ptc_vocab import (flexionar_adjetivo, flexionar_nome, flexionar_verbo,  # noqa: E402,F401
+                       formas_do_verbete, lematizavel, regex_do_verbete, validar_verbete)
 
 
 # ---------------------------------------------------------------- validação
@@ -127,6 +50,7 @@ def validar(verbetes: list[dict]) -> list[str]:
 
     vistos = {}
     for v in verbetes:
+        erros += [e for e in validar_verbete(v) if e not in erros]
         vid = v.get("id")
         if vid in vistos:
             erros.append(f"{vid}: ID duplicado (também em '{vistos[vid]}')")
@@ -145,7 +69,10 @@ def validar(verbetes: list[dict]) -> list[str]:
 def compilar() -> dict:
     verbetes = []
     for fonte in FONTES:
-        dados = yaml.safe_load(fonte.read_text(encoding="utf-8")) or []
+        try:
+            dados = yaml.safe_load(fonte.read_text(encoding="utf-8")) or []
+        except yaml.YAMLError as e:
+            raise SystemExit(f"YAML inválido em {fonte.name}: {e}") from None
         for v in dados:
             v["_fonte"] = fonte.name
         verbetes += dados
@@ -156,12 +83,14 @@ def compilar() -> dict:
     saida = []
     for v in sorted(verbetes, key=lambda x: x["id"]):
         item = {k: v[k] for k in ("id", "lema", "classe", "status", "significado_aprovado") if k in v}
-        for k in ("preferir", "preferida_em_instrucoes", "sentidos", "motivo", "exemplo_correto", "exemplo_incorreto"):
+        for k in ("preferir", "preferida_em_instrucoes", "sinonimo_de", "sentidos", "motivo", "exemplo_correto",
+                  "exemplo_incorreto"):
             if k in v:
                 item[k] = v[k]
         item["regra"] = v.get("regra", "PTC-25")
         item["fonte"] = v["_fonte"]
         item["regex"] = regex_do_verbete(v)
+        item["lematizavel"] = lematizavel(v)
         saida.append(item)
     return {
         "spec_version": SPEC_VERSION,

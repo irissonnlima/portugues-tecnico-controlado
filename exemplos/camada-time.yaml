@@ -1,0 +1,34 @@
+# Exemplo de camada de vocabulário de um time (PTC-BR 0.3.0).
+# Uso: python3 skills/ptc-br/scripts/ptc_check.py doc.md --vocabulario exemplos/camada-time.yaml
+#
+# A camada muda verbetes do vocabulário geral (sobrepor) e acrescenta verbetes próprios (verbetes).
+# Use um prefixo de ID próprio para os verbetes novos (aqui, T-).
+
+nome: time-exemplo
+descricao: Escolhas de vocabulário de um time de engenharia de dados.
+
+# Siglas que o público do time conhece; somam com --siglas e com <!-- ptc-siglas -->.
+siglas: [ETL, DW, SLA, HML, PRD]
+
+sobrepor:
+  # O vocabulário geral aceita verificar e conferir como sinônimos. Este time padroniza em "conferir".
+  - id: V-0001          # verificar
+    status: nao_preferido
+    preferir: [conferir]
+    motivo: Padrão do time.
+  # O vocabulário geral aceita executar e rodar. Este time padroniza em "rodar".
+  - id: V-0005          # executar
+    status: nao_preferido
+    preferir: [rodar]
+    motivo: Padrão do time.
+
+verbetes:
+  - id: T-0001
+    lema: dashboard
+    classe: substantivo
+    status: nao_preferido
+    preferir: [painel]
+    significado_aprovado: tela com indicadores
+    exemplo_correto: Abra o painel de vendas.
+    exemplo_incorreto: Abra o dashboard de vendas.
+    versao_inclusao: 0.3.0

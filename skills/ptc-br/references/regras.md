@@ -1,6 +1,6 @@
 # PTC-BR — Português Técnico Controlado
 
-**Especificação experimental — versão 0.2.0**
+**Especificação experimental — versão 0.3.0**
 **Status:** rascunho para discussão
 **Idioma:** português brasileiro (pt-BR)
 **Referências conceituais:** princípios de linguagem simples da ABNT NBR ISO 24495-1 e abordagem de linguagem controlada do ASD-STE100.
@@ -168,7 +168,7 @@ Um vocabulário de produção exige validação linguística, análise de corpus
 
 ### 7.1. Arquivos e status
 
-O vocabulário fica em `references/vocabulario/*.yaml`, um verbete por entrada, validado por `references/vocabulario/schema.json`. O verificador usa a versão compilada (`scripts/vocabulario.json`), gerada por `tools/compilar_vocabulario.py`.
+O vocabulário fica em `references/vocabulario/*.yaml` (`geral.yaml`, `formal.yaml`, `polissemia.yaml`), um verbete por entrada, validado por `references/vocabulario/schema.json`. O verificador usa a versão compilada (`scripts/vocabulario.json`), gerada por `tools/compilar_vocabulario.py`.
 
 | Status | Efeito no verificador |
 |---|---|
@@ -177,11 +177,31 @@ O vocabulário fica em `references/vocabulario/*.yaml`, um verbete por entrada, 
 | `proibido` | Alerta PTC-25 obrigatório, confiança alta, em qualquer perfil. |
 | `em_analise` | Alerta PTC-25, confiança baixa. Indica uma decisão pendente do time. |
 
+Um verbete **aprovado com `sinonimo_de`** é um sinônimo aceito: *verificar* e *conferir*, *executar* e *rodar*. O vocabulário geral aceita os dois; a camada do time escolhe um (seção 7.3).
+
 Um verbete **aprovado com `sentidos`** descreve uma palavra com mais de um sentido técnico (*subir*, *base*, *chave*). Ela não gera alerta; aparece no relatório `vocabulario_polissemico` para a revisão da PTC-08.
 
-**Flexão:** o verbete guarda o lema. O compilador gera as formas de verbos regulares em *-ar*, *-er* e *-ir* e o plural de substantivos. Verbos irregulares e pronominais declaram `formas`; construções declaram `padrao` (expressão regular).
+**Flexão:** o verbete guarda o lema. O compilador gera as formas de verbos regulares em *-ar*, *-er* e *-ir*, o gênero e o número de adjetivos e o plural de substantivos. Verbos irregulares, pronominais e palavras ambíguas declaram `formas`; construções declaram `padrao` (expressão regular).
 
-### 7.2. Amostra
+### 7.3. Camadas de vocabulário do time
+
+Um time adapta o vocabulário sem alterar o PTC-BR. A camada é um arquivo YAML ou JSON com três partes opcionais:
+
+- `sobrepor`: muda o status, `preferir` ou `motivo` de verbetes existentes, por `id` ou `lema`;
+- `verbetes`: acrescenta verbetes com o mesmo schema, com um prefixo de ID próprio (ex.: `T-0001`);
+- `siglas`: siglas conhecidas do público do time.
+
+```bash
+ptc_check.py doc.md --vocabulario camada-do-time.yaml
+```
+
+**Precedência:** a última camada passada vence; qualquer camada vence o vocabulário geral. Exemplo completo: `exemplos/camada-time.yaml`.
+
+### 7.4. Lematização (opcional)
+
+Com `--lematizar` e a biblioteca `simplemma` instalada, o verificador também acha formas que a flexão automática não gera (*utilizaremos*, *efetuássemos*). Verbetes com `formas` ou `padrao` explícitos não usam lematização: nesses casos o autor restringiu as formas para evitar ambiguidade (*auxiliar* como adjetivo).
+
+### 7.5. Amostra
 
 | Prefira | Evite quando desnecessário | Observação |
 |---|---|---|
@@ -303,12 +323,12 @@ Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam
 
 ## 11. Próximas versões
 
-- **0.2.0 (atual):** vocabulário controlado com 68 verbetes, schema validado e flexão automática; regra PTC-25; PTC-23 com concordância negativa; precisão do verificador medida em corpus real.
-- **0.3.0:** decidir os verbetes `em_analise`; ampliar o vocabulário para cerca de 150 verbetes a partir de corpus; lematização opcional no verificador.
+- **0.2.0:** vocabulário controlado com 68 verbetes, schema validado e flexão automática; regra PTC-25; PTC-23 com concordância negativa; precisão do verificador medida em corpus real.
+- **0.3.0 (atual):** camadas de vocabulário do time; sinônimos aceitos; 164 verbetes; lematização opcional.
 - **0.4.0:** glossários de domínio (software e dados); política de anglicismos; casos de teste de ambiguidade.
 - **0.5.0–0.9.0:** uso real; taxa de aceitação por regra; ajustes.
 - **1.0.0:** IDs estáveis; teste de compreensão com leitores; licença e governança definidas.
 
 ---
 
-**Licenciamento e governança:** ainda não definidos. Este protótipo é material de trabalho para debate e revisão.
+**Licença:** MIT (arquivo `LICENSE` na raiz do repositório). **Governança:** ainda não definida. Este protótipo é material de trabalho para debate e revisão.

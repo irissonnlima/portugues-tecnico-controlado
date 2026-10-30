@@ -1,7 +1,7 @@
 {
- "spec_version": "0.2.0",
+ "spec_version": "0.3.0",
  "aviso": "Arquivo gerado por tools/compilar_vocabulario.py. Edite os .yaml em references/vocabulario/.",
- "total": 68,
+ "total": 164,
  "verbetes": [
   {
    "id": "V-0001",
@@ -14,7 +14,8 @@
    "exemplo_incorreto": "Realize a verificação da versão do certificado.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:verificam\\-se|verificar\\-se|verificassem|verifique\\-se|verifica\\-se|verificadas|verificados|verificando|verificaram|verificarão|verificasse|verificavam|verificada|verificado|verificará|verificava|verifiquem|verificam|verificar|verificou|verifique|verifica)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:verificam\\-se|verificar\\-se|verificassem|verifique\\-se|verifica\\-se|verificadas|verificados|verificando|verificaram|verificarão|verificasse|verificavam|verificada|verificado|verificará|verificava|verifiquem|verificam|verificar|verificou|verifique|verifica)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0002",
@@ -26,7 +27,8 @@
    "exemplo_correto": "O sistema valida o CPF antes de gravar o cadastro.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:validam\\-se|validar\\-se|validassem|valida\\-se|validadas|validados|validando|validaram|validarão|validasse|validavam|valide\\-se|validada|validado|validará|validava|validam|validar|validem|validou|valida|valide)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:validam\\-se|validar\\-se|validassem|valida\\-se|validadas|validados|validando|validaram|validarão|validasse|validavam|valide\\-se|validada|validado|validará|validava|validam|validar|validem|validou|valida|valide)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0003",
@@ -37,7 +39,8 @@
    "preferida_em_instrucoes": "confirme",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:confirmam\\-se|confirmar\\-se|confirmassem|confirma\\-se|confirmadas|confirmados|confirmando|confirmaram|confirmarão|confirmasse|confirmavam|confirme\\-se|confirmada|confirmado|confirmará|confirmava|confirmam|confirmar|confirmem|confirmou|confirma|confirme)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:confirmam\\-se|confirmar\\-se|confirmassem|confirma\\-se|confirmadas|confirmados|confirmando|confirmaram|confirmarão|confirmasse|confirmavam|confirme\\-se|confirmada|confirmado|confirmará|confirmava|confirmam|confirmar|confirmem|confirmou|confirma|confirme)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0004",
@@ -48,7 +51,8 @@
    "preferida_em_instrucoes": "selecione",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:selecionam\\-se|selecionar\\-se|selecionassem|seleciona\\-se|selecionadas|selecionados|selecionando|selecionaram|selecionarão|selecionasse|selecionavam|selecione\\-se|selecionada|selecionado|selecionará|selecionava|selecionam|selecionar|selecionem|selecionou|seleciona|selecione)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:selecionam\\-se|selecionar\\-se|selecionassem|seleciona\\-se|selecionadas|selecionados|selecionando|selecionaram|selecionarão|selecionasse|selecionavam|selecione\\-se|selecionada|selecionado|selecionará|selecionava|selecionam|selecionar|selecionem|selecionou|seleciona|selecione)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0005",
@@ -59,7 +63,8 @@
    "preferida_em_instrucoes": "execute",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:executam\\-se|executar\\-se|executassem|executa\\-se|executadas|executados|executando|executaram|executarão|executasse|executavam|execute\\-se|executada|executado|executará|executava|executam|executar|executem|executou|executa|execute)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:executam\\-se|executar\\-se|executassem|executa\\-se|executadas|executados|executando|executaram|executarão|executasse|executavam|execute\\-se|executada|executado|executará|executava|executam|executar|executem|executou|executa|execute)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0006",
@@ -70,7 +75,8 @@
    "preferida_em_instrucoes": "inicie",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:iniciam\\-se|iniciar\\-se|iniciassem|inicia\\-se|iniciadas|iniciados|iniciando|iniciaram|iniciarão|iniciasse|iniciavam|inicie\\-se|iniciada|iniciado|iniciará|iniciava|iniciam|iniciar|iniciem|iniciou|inicia|inicie)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:iniciam\\-se|iniciar\\-se|iniciassem|inicia\\-se|iniciadas|iniciados|iniciando|iniciaram|iniciarão|iniciasse|iniciavam|inicie\\-se|iniciada|iniciado|iniciará|iniciava|iniciam|iniciar|iniciem|iniciou|inicia|inicie)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0007",
@@ -81,7 +87,8 @@
    "motivo": "Para um processo interrompido de propósito, use parar ou encerrar.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:terminam\\-se|terminar\\-se|terminassem|termina\\-se|terminadas|terminados|terminando|terminaram|terminarão|terminasse|terminavam|termine\\-se|terminada|terminado|terminará|terminava|terminam|terminar|terminem|terminou|termina|termine)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:terminam\\-se|terminar\\-se|terminassem|termina\\-se|terminadas|terminados|terminando|terminaram|terminarão|terminasse|terminavam|termine\\-se|terminada|terminado|terminará|terminava|terminam|terminar|terminem|terminou|termina|termine)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0008",
@@ -92,7 +99,8 @@
    "preferida_em_instrucoes": "use",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:usam\\-se|usar\\-se|usassem|usa\\-se|usadas|usados|usando|usaram|usarão|usasse|usavam|use\\-se|usada|usado|usará|usava|usam|usar|usem|usou|usa|use)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:usam\\-se|usar\\-se|usassem|usa\\-se|usadas|usados|usando|usaram|usarão|usasse|usavam|use\\-se|usada|usado|usará|usava|usam|usar|usem|usou|usa|use)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0100",
@@ -108,7 +116,8 @@
    "exemplo_incorreto": "Utilize o certificado A1.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:utilizam\\-se|utilizar\\-se|utilizassem|utiliza\\-se|utilizadas|utilizados|utilizando|utilizaram|utilizarão|utilizasse|utilizavam|utilize\\-se|utilizada|utilizado|utilizará|utilizava|utilizam|utilizar|utilizem|utilizou|utiliza|utilize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:utilizam\\-se|utilizar\\-se|utilizassem|utiliza\\-se|utilizadas|utilizados|utilizando|utilizaram|utilizarão|utilizasse|utilizavam|utilize\\-se|utilizada|utilizado|utilizará|utilizava|utilizam|utilizar|utilizem|utilizou|utiliza|utilize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0101",
@@ -124,7 +133,8 @@
    "exemplo_incorreto": "Efetue o pagamento da fatura.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:efetuam\\-se|efetuar\\-se|efetuassem|efetua\\-se|efetuadas|efetuados|efetuando|efetuaram|efetuarão|efetuasse|efetuavam|efetue\\-se|efetuada|efetuado|efetuará|efetuava|efetuam|efetuar|efetuem|efetuou|efetua|efetue)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:efetuam\\-se|efetuar\\-se|efetuassem|efetua\\-se|efetuadas|efetuados|efetuando|efetuaram|efetuarão|efetuasse|efetuavam|efetue\\-se|efetuada|efetuado|efetuará|efetuava|efetuam|efetuar|efetuem|efetuou|efetua|efetue)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0102",
@@ -138,7 +148,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:finalizam\\-se|finalizar\\-se|finalizassem|finaliza\\-se|finalizadas|finalizados|finalizando|finalizaram|finalizarão|finalizasse|finalizavam|finalize\\-se|finalizada|finalizado|finalizará|finalizava|finalizam|finalizar|finalizem|finalizou|finaliza|finalize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:finalizam\\-se|finalizar\\-se|finalizassem|finaliza\\-se|finalizadas|finalizados|finalizando|finalizaram|finalizarão|finalizasse|finalizavam|finalize\\-se|finalizada|finalizado|finalizará|finalizava|finalizam|finalizar|finalizem|finalizou|finaliza|finalize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0103",
@@ -153,7 +164,8 @@
    "exemplo_incorreto": "O token possibilita o acesso.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:possibilitam\\-se|possibilitar\\-se|possibilitassem|possibilita\\-se|possibilitadas|possibilitados|possibilitando|possibilitaram|possibilitarão|possibilitasse|possibilitavam|possibilite\\-se|possibilitada|possibilitado|possibilitará|possibilitava|possibilitam|possibilitar|possibilitem|possibilitou|possibilita|possibilite)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:possibilitam\\-se|possibilitar\\-se|possibilitassem|possibilita\\-se|possibilitadas|possibilitados|possibilitando|possibilitaram|possibilitarão|possibilitasse|possibilitavam|possibilite\\-se|possibilitada|possibilitado|possibilitará|possibilitava|possibilitam|possibilitar|possibilitem|possibilitou|possibilita|possibilite)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0104",
@@ -166,7 +178,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:viabilizam\\-se|viabilizar\\-se|viabilizassem|viabiliza\\-se|viabilizadas|viabilizados|viabilizando|viabilizaram|viabilizarão|viabilizasse|viabilizavam|viabilize\\-se|viabilizada|viabilizado|viabilizará|viabilizava|viabilizam|viabilizar|viabilizem|viabilizou|viabiliza|viabilize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:viabilizam\\-se|viabilizar\\-se|viabilizassem|viabiliza\\-se|viabilizadas|viabilizados|viabilizando|viabilizaram|viabilizarão|viabilizasse|viabilizavam|viabilize\\-se|viabilizada|viabilizado|viabilizará|viabilizava|viabilizam|viabilizar|viabilizem|viabilizou|viabiliza|viabilize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0105",
@@ -183,7 +196,8 @@
    "exemplo_incorreto": "Visualize o relatório.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:visualizam\\-se|visualizar\\-se|visualizassem|visualiza\\-se|visualizadas|visualizados|visualizando|visualizaram|visualizarão|visualizasse|visualizavam|visualize\\-se|visualizada|visualizado|visualizará|visualizava|visualizam|visualizar|visualizem|visualizou|visualiza|visualize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:visualizam\\-se|visualizar\\-se|visualizassem|visualiza\\-se|visualizadas|visualizados|visualizando|visualizaram|visualizarão|visualizasse|visualizavam|visualize\\-se|visualizada|visualizado|visualizará|visualizava|visualizam|visualizar|visualizem|visualizou|visualiza|visualize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0106",
@@ -199,7 +213,8 @@
    "motivo": "Diga a ação real. Publicar uma versão, liberar um acesso, oferecer uma função.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:disponibilizam\\-se|disponibilizar\\-se|disponibilizassem|disponibiliza\\-se|disponibilizadas|disponibilizados|disponibilizando|disponibilizaram|disponibilizarão|disponibilizasse|disponibilizavam|disponibilize\\-se|disponibilizada|disponibilizado|disponibilizará|disponibilizava|disponibilizam|disponibilizar|disponibilizem|disponibilizou|disponibiliza|disponibilize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:disponibilizam\\-se|disponibilizar\\-se|disponibilizassem|disponibiliza\\-se|disponibilizadas|disponibilizados|disponibilizando|disponibilizaram|disponibilizarão|disponibilizasse|disponibilizavam|disponibilize\\-se|disponibilizada|disponibilizado|disponibilizará|disponibilizava|disponibilizam|disponibilizar|disponibilizem|disponibilizou|disponibiliza|disponibilize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0107",
@@ -212,7 +227,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:necessitam\\-se|necessitar\\-se|necessitassem|necessita\\-se|necessitadas|necessitados|necessitando|necessitaram|necessitarão|necessitasse|necessitavam|necessite\\-se|necessitada|necessitado|necessitará|necessitava|necessitam|necessitar|necessitem|necessitou|necessita|necessite)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:necessitam\\-se|necessitar\\-se|necessitassem|necessita\\-se|necessitadas|necessitados|necessitando|necessitaram|necessitarão|necessitasse|necessitavam|necessite\\-se|necessitada|necessitado|necessitará|necessitava|necessitam|necessitar|necessitem|necessitou|necessita|necessite)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0108",
@@ -226,7 +242,8 @@
    "motivo": "O adjetivo auxiliar (tabela auxiliar) é aceito. O verbete vale só para o verbo.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:auxiliando|auxiliará|auxiliam|auxiliem|auxiliou|auxilie)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:auxiliando|auxiliará|auxiliam|auxiliem|auxiliou|auxilie)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0109",
@@ -239,7 +256,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:ocasionam\\-se|ocasionar\\-se|ocasionassem|ocasiona\\-se|ocasionadas|ocasionados|ocasionando|ocasionaram|ocasionarão|ocasionasse|ocasionavam|ocasione\\-se|ocasionada|ocasionado|ocasionará|ocasionava|ocasionam|ocasionar|ocasionem|ocasionou|ocasiona|ocasione)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:ocasionam\\-se|ocasionar\\-se|ocasionassem|ocasiona\\-se|ocasionadas|ocasionados|ocasionando|ocasionaram|ocasionarão|ocasionasse|ocasionavam|ocasione\\-se|ocasionada|ocasionado|ocasionará|ocasionava|ocasionam|ocasionar|ocasionem|ocasionou|ocasiona|ocasione)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0110",
@@ -252,7 +270,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:acarretam\\-se|acarretar\\-se|acarretassem|acarreta\\-se|acarretadas|acarretados|acarretando|acarretaram|acarretarão|acarretasse|acarretavam|acarrete\\-se|acarretada|acarretado|acarretará|acarretava|acarretam|acarretar|acarretem|acarretou|acarreta|acarrete)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:acarretam\\-se|acarretar\\-se|acarretassem|acarreta\\-se|acarretadas|acarretados|acarretando|acarretaram|acarretarão|acarretasse|acarretavam|acarrete\\-se|acarretada|acarretado|acarretará|acarretava|acarretam|acarretar|acarretem|acarretou|acarreta|acarrete)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0111",
@@ -265,7 +284,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:elucidam\\-se|elucidar\\-se|elucidassem|elucida\\-se|elucidadas|elucidados|elucidando|elucidaram|elucidarão|elucidasse|elucidavam|elucide\\-se|elucidada|elucidado|elucidará|elucidava|elucidam|elucidar|elucidem|elucidou|elucida|elucide)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:elucidam\\-se|elucidar\\-se|elucidassem|elucida\\-se|elucidadas|elucidados|elucidando|elucidaram|elucidarão|elucidasse|elucidavam|elucide\\-se|elucidada|elucidado|elucidará|elucidava|elucidam|elucidar|elucidem|elucidou|elucida|elucide)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0112",
@@ -278,7 +298,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:averiguando|averiguada|averiguado|averiguará|averiguam|averiguar|averiguem|averiguou|averigua|averigue)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:averiguando|averiguada|averiguado|averiguará|averiguam|averiguar|averiguem|averiguou|averigua|averigue)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0113",
@@ -292,21 +313,21 @@
    "motivo": "Um termo por conceito (PTC-08). O vocabulário adota verificar.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:checam\\-se|checar\\-se|checassem|cheque\\-se|checa\\-se|checadas|checados|checando|checaram|checarão|checasse|checavam|checada|checado|checará|checava|chequem|checam|checar|checou|cheque|checa)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:checam\\-se|checar\\-se|checassem|cheque\\-se|checa\\-se|checadas|checados|checando|checaram|checarão|checasse|checavam|checada|checado|checará|checava|chequem|checam|checar|checou|cheque|checa)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0114",
    "lema": "conferir",
    "classe": "verbo",
-   "status": "em_analise",
-   "significado_aprovado": "examinar um estado",
-   "preferir": [
-    "verificar"
-   ],
-   "motivo": "Uso muito frequente no corpus do time. Decidir se vira sinônimo aceito ou se padroniza em verificar.",
+   "status": "aprovado",
+   "significado_aprovado": "examinar um estado ou comparar um resultado com uma referência",
+   "sinonimo_de": "verificar",
+   "motivo": "Sinônimo aceito de verificar no vocabulário geral (decisão 0.3.0). Cada time escolhe um dos dois na sua camada de vocabulário.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:conferindo|conferida|conferido|conferirá|conferem|conferir|conferiu|confiram|confere|confira)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:conferindo|conferida|conferido|conferirá|conferem|conferir|conferiu|confiram|confere|confira)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0115",
@@ -322,7 +343,8 @@
    "exemplo_incorreto": "Reinicie o serviço para que a alteração possa ser efetivada.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:efetivam\\-se|efetivar\\-se|efetivassem|efetiva\\-se|efetivadas|efetivados|efetivando|efetivaram|efetivarão|efetivasse|efetivavam|efetive\\-se|efetivada|efetivado|efetivará|efetivava|efetivam|efetivar|efetivem|efetivou|efetiva|efetive)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:efetivam\\-se|efetivar\\-se|efetivassem|efetiva\\-se|efetivadas|efetivados|efetivando|efetivaram|efetivarão|efetivasse|efetivavam|efetive\\-se|efetivada|efetivado|efetivará|efetivava|efetivam|efetivar|efetivem|efetivou|efetiva|efetive)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0116",
@@ -338,7 +360,8 @@
    "motivo": "Jargão corporativo sem sentido técnico preciso.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:alavancam\\-se|alavancar\\-se|alavancassem|alavanque\\-se|alavanca\\-se|alavancadas|alavancados|alavancando|alavancaram|alavancarão|alavancasse|alavancavam|alavancada|alavancado|alavancará|alavancava|alavanquem|alavancam|alavancar|alavancou|alavanque|alavanca)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:alavancam\\-se|alavancar\\-se|alavancassem|alavanque\\-se|alavanca\\-se|alavancadas|alavancados|alavancando|alavancaram|alavancarão|alavancasse|alavancavam|alavancada|alavancado|alavancará|alavancava|alavanquem|alavancam|alavancar|alavancou|alavanque|alavanca)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0117",
@@ -354,7 +377,8 @@
    "exemplo_incorreto": "O valor consta no relatório.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:constam\\-se|constar\\-se|constassem|consta\\-se|constadas|constados|constando|constaram|constarão|constasse|constavam|conste\\-se|constada|constado|constará|constava|constam|constar|constem|constou|consta|conste)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:constam\\-se|constar\\-se|constassem|consta\\-se|constadas|constados|constando|constaram|constarão|constasse|constavam|conste\\-se|constada|constado|constará|constava|constam|constar|constem|constou|consta|conste)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0118",
@@ -365,11 +389,13 @@
    "preferir": [
     "estar"
    ],
+   "motivo": "\"Se encontrar o arquivo\" (condição com o verbo encontrar) não é marcado.",
    "exemplo_correto": "Se o certificado estiver vencido…",
    "exemplo_incorreto": "Quando o certificado encontrar-se vencido…",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:encontrava\\-se|se\\s+encontrava|encontram\\-se|encontrar\\-se|se\\s+encontram|se\\s+encontrar|se\\s+encontrem|encontra\\-se|se\\s+encontra|se\\s+encontre)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:encontrava\\-se|se\\s+encontrava|encontram\\-se|encontrar\\-se|se\\s+encontram|encontra\\-se|se\\s+encontra)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0119",
@@ -384,7 +410,8 @@
    "exemplo_incorreto": "Trata-se de um erro de permissão.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:tratava\\-se\\s+de|se\\s+tratam\\s+de|tratam\\-se\\s+de|tratar\\-se\\s+de|se\\s+trata\\s+de|trata\\-se\\s+de)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:tratava\\-se\\s+de|se\\s+tratam\\s+de|tratam\\-se\\s+de|tratar\\-se\\s+de|se\\s+trata\\s+de|trata\\-se\\s+de)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0120",
@@ -397,7 +424,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:disponham\\s+de|disponha\\s+de|dispunha\\s+de|dispõem\\s+da|dispõem\\s+de|dispõem\\s+do|dispor\\s+de|dispõe\\s+da|dispõe\\s+de|dispõe\\s+do)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:disponham\\s+de|disponha\\s+de|dispunha\\s+de|dispõem\\s+da|dispõem\\s+de|dispõem\\s+do|dispor\\s+de|dispõe\\s+da|dispõe\\s+de|dispõe\\s+do)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0121",
@@ -412,49 +440,509 @@
    "exemplo_incorreto": "Proceda com a instalação do pacote.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "\\b(?:proceder|procede|procedem|proceda|procedam|procedeu|procedendo)\\s+(?:a|à|ao|às|aos|com)\\b"
+   "regex": "\\b(?:proceder|procede|procedem|proceda|procedam|procedeu|procedendo)\\s+(?:a|à|ao|às|aos|com)\\b",
+   "lematizavel": false
   },
   {
    "id": "V-0122",
    "lema": "solicitar",
    "classe": "verbo",
-   "status": "em_analise",
-   "significado_aprovado": "pedir formalmente",
-   "preferir": [
-    "pedir"
-   ],
-   "motivo": "Aceito em formulários e telas (Solicitar acesso). Decidir se o vocabulário restringe ao contexto de interface.",
+   "status": "aprovado",
+   "significado_aprovado": "pedir formalmente, em especial por meio de um sistema ou formulário",
+   "motivo": "Termo-padrão em interfaces e textos formais (Solicitar acesso). Aprovado na 0.3.0.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:solicitam\\-se|solicitar\\-se|solicitassem|solicita\\-se|solicitadas|solicitados|solicitando|solicitaram|solicitarão|solicitasse|solicitavam|solicite\\-se|solicitada|solicitado|solicitará|solicitava|solicitam|solicitar|solicitem|solicitou|solicita|solicite)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:solicitam\\-se|solicitar\\-se|solicitassem|solicita\\-se|solicitadas|solicitados|solicitando|solicitaram|solicitarão|solicitasse|solicitavam|solicite\\-se|solicitada|solicitado|solicitará|solicitava|solicitam|solicitar|solicitem|solicitou|solicita|solicite)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0123",
    "lema": "parametrizar",
    "classe": "verbo",
-   "status": "em_analise",
-   "significado_aprovado": "definir parâmetros",
-   "preferir": [
-    "configurar"
-   ],
-   "motivo": "Tem sentido técnico próprio (parametrizar uma consulta). Avaliar se é sinônimo de configurar no domínio.",
+   "status": "aprovado",
+   "significado_aprovado": "definir os parâmetros de uma consulta, função, relatório ou modelo",
+   "motivo": "Sentido próprio, diferente de configurar (ajustar um sistema ou ambiente). Aprovado na 0.3.0.",
+   "exemplo_correto": "Parametrize a consulta com a data de corte.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:parametrizam\\-se|parametrizar\\-se|parametrizassem|parametriza\\-se|parametrizadas|parametrizados|parametrizando|parametrizaram|parametrizarão|parametrizasse|parametrizavam|parametrize\\-se|parametrizada|parametrizado|parametrizará|parametrizava|parametrizam|parametrizar|parametrizem|parametrizou|parametriza|parametrize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:parametrizam\\-se|parametrizar\\-se|parametrizassem|parametriza\\-se|parametrizadas|parametrizados|parametrizando|parametrizaram|parametrizarão|parametrizasse|parametrizavam|parametrize\\-se|parametrizada|parametrizado|parametrizará|parametrizava|parametrizam|parametrizar|parametrizem|parametrizou|parametriza|parametrize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0124",
    "lema": "rodar",
    "classe": "verbo",
-   "status": "em_analise",
-   "significado_aprovado": "executar um programa ou comando",
-   "preferir": [
-    "executar"
-   ],
-   "motivo": "Registro informal muito usado no time (rode o teste). Decidir entre aceitar no PTC-L e no PTC-T ou padronizar em executar.",
+   "status": "aprovado",
+   "significado_aprovado": "executar um programa, comando ou teste",
+   "sinonimo_de": "executar",
+   "motivo": "Sinônimo aceito de executar no vocabulário geral (decisão 0.3.0). Cada time escolhe um dos dois na sua camada de vocabulário.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:rodam\\-se|rodar\\-se|rodassem|roda\\-se|rodadas|rodados|rodando|rodaram|rodarão|rodasse|rodavam|rode\\-se|rodada|rodado|rodará|rodava|rodam|rodar|rodem|rodou|roda|rode)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:rodam\\-se|rodar\\-se|rodassem|roda\\-se|rodadas|rodados|rodando|rodaram|rodarão|rodasse|rodavam|rode\\-se|rodada|rodado|rodará|rodava|rodam|rodar|rodem|rodou|roda|rode)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0125",
+   "lema": "ensejar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "dar ocasião a",
+   "preferir": [
+    "causar",
+    "permitir"
+   ],
+   "exemplo_correto": "A falha causou a parada do lote.",
+   "exemplo_incorreto": "A falha ensejou a parada do lote.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ensejam\\-se|ensejar\\-se|ensejassem|enseja\\-se|ensejadas|ensejados|ensejando|ensejaram|ensejarão|ensejasse|ensejavam|enseje\\-se|ensejada|ensejado|ensejará|ensejava|ensejam|ensejar|ensejem|ensejou|enseja|enseje)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0126",
+   "lema": "consubstanciar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "dar forma concreta a",
+   "preferir": [
+    "registrar",
+    "basear",
+    "reunir"
+   ],
+   "exemplo_correto": "O relatório registra a análise.",
+   "exemplo_incorreto": "O relatório consubstancia a análise.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:consubstanciam\\-se|consubstanciar\\-se|consubstanciassem|consubstancia\\-se|consubstanciadas|consubstanciados|consubstanciando|consubstanciaram|consubstanciarão|consubstanciasse|consubstanciavam|consubstancie\\-se|consubstanciada|consubstanciado|consubstanciará|consubstanciava|consubstanciam|consubstanciar|consubstanciem|consubstanciou|consubstancia|consubstancie)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0127",
+   "lema": "objetivar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ter como objetivo",
+   "preferir": [
+    "verbo direto",
+    "servir para"
+   ],
+   "motivo": "O adjetivo objetivo/objetiva (resposta objetiva) não é marcado.",
+   "exemplo_correto": "Este estudo compara três métodos.",
+   "exemplo_incorreto": "Este estudo objetiva comparar três métodos.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "\\b(?:objetivar|objetivando|objetivou|objetivam|objetiva|objetivava|objetivavam)\\s+(?:a\\s+|o\\s+)?[a-zà-ÿ]+(?:ar|er|ir)\\b",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0128",
+   "lema": "adentrar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "entrar",
+   "preferir": [
+    "entrar"
+   ],
+   "exemplo_correto": "Entre na pasta de configuração.",
+   "exemplo_incorreto": "Adentre a pasta de configuração.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:adentram\\-se|adentrar\\-se|adentrassem|adentra\\-se|adentradas|adentrados|adentrando|adentraram|adentrarão|adentrasse|adentravam|adentre\\-se|adentrada|adentrado|adentrará|adentrava|adentram|adentrar|adentrem|adentrou|adentra|adentre)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0129",
+   "lema": "aludir",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "fazer referência",
+   "preferir": [
+    "citar",
+    "referir-se a"
+   ],
+   "exemplo_correto": "O item 3 cita a norma.",
+   "exemplo_incorreto": "O item 3 alude à norma.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:aludidas|aludidos|aludindo|aludiram|aludirão|aludiam|aludida|aludido|aludirá|aludam|aludem|aludia|aludir|aludiu|aluda|alude)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0130",
+   "lema": "indagar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "perguntar",
+   "preferir": [
+    "perguntar"
+   ],
+   "exemplo_correto": "Pergunte ao responsável pelo dado.",
+   "exemplo_incorreto": "Indague o responsável pelo dado.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:indagam\\-se|indagar\\-se|indagassem|indague\\-se|indaga\\-se|indagadas|indagados|indagando|indagaram|indagarão|indagasse|indagavam|indagada|indagado|indagará|indagava|indaguem|indagam|indagar|indagou|indague|indaga)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0131",
+   "lema": "remeter",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "enviar",
+   "preferir": [
+    "enviar"
+   ],
+   "motivo": "Remeter no sentido de \"fazer referência\" (o item remete à seção 2) também é substituível por citar.",
+   "exemplo_correto": "Envie o arquivo ao suporte.",
+   "exemplo_incorreto": "Remeta o arquivo ao suporte.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:remetendo|remeteram|remeterão|remetidas|remetidos|remeterá|remetiam|remetida|remetido|remetam|remetem|remeter|remeteu|remetia|remeta|remete)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0132",
+   "lema": "lograr",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "conseguir",
+   "preferir": [
+    "conseguir"
+   ],
+   "exemplo_correto": "O serviço não conseguiu conectar.",
+   "exemplo_incorreto": "O serviço não logrou conectar.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:logram\\-se|lograr\\-se|lograssem|logra\\-se|logradas|logrados|logrando|lograram|lograrão|lograsse|logravam|logre\\-se|lograda|logrado|logrará|lograva|logram|lograr|logrem|logrou|logra|logre)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0133",
+   "lema": "prosseguir",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "continuar",
+   "preferir": [
+    "continuar"
+   ],
+   "exemplo_correto": "Continue com o passo 4.",
+   "exemplo_incorreto": "Prossiga com o passo 4.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:prosseguindo|prosseguido|prosseguirá|prosseguem|prosseguir|prosseguiu|prossegue|prossigam|prossiga)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0134",
+   "lema": "retificar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "corrigir",
+   "preferir": [
+    "corrigir"
+   ],
+   "exemplo_correto": "Corrija o valor da parcela.",
+   "exemplo_incorreto": "Retifique o valor da parcela.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:retificam\\-se|retificar\\-se|retificassem|retifique\\-se|retifica\\-se|retificadas|retificados|retificando|retificaram|retificarão|retificasse|retificavam|retificada|retificado|retificará|retificava|retifiquem|retificam|retificar|retificou|retifique|retifica)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0135",
+   "lema": "ratificar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "confirmar",
+   "preferir": [
+    "confirmar"
+   ],
+   "exemplo_correto": "O gestor confirma a aprovação.",
+   "exemplo_incorreto": "O gestor ratifica a aprovação.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ratificam\\-se|ratificar\\-se|ratificassem|ratifique\\-se|ratifica\\-se|ratificadas|ratificados|ratificando|ratificaram|ratificarão|ratificasse|ratificavam|ratificada|ratificado|ratificará|ratificava|ratifiquem|ratificam|ratificar|ratificou|ratifique|ratifica)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0136",
+   "lema": "ultimar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "concluir",
+   "preferir": [
+    "concluir",
+    "terminar"
+   ],
+   "exemplo_correto": "Conclua a configuração antes do deploy.",
+   "exemplo_incorreto": "Ultime a configuração antes do deploy.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ultimam\\-se|ultimar\\-se|ultimassem|ultima\\-se|ultimadas|ultimados|ultimando|ultimaram|ultimarão|ultimasse|ultimavam|ultime\\-se|ultimada|ultimado|ultimará|ultimava|ultimam|ultimar|ultimem|ultimou|ultima|ultime)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0137",
+   "lema": "findar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "terminar",
+   "preferir": [
+    "terminar"
+   ],
+   "exemplo_correto": "Quando o prazo terminar, bloqueie o acesso.",
+   "exemplo_incorreto": "Quando o prazo findar, bloqueie o acesso.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:findam\\-se|findar\\-se|findassem|finda\\-se|findadas|findados|findando|findaram|findarão|findasse|findavam|finde\\-se|findada|findado|findará|findava|findam|findar|findem|findou|finda|finde)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0138",
+   "lema": "cessar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "parar",
+   "preferir": [
+    "parar"
+   ],
+   "exemplo_correto": "Se o alarme parar, registre o horário.",
+   "exemplo_incorreto": "Se o alarme cessar, registre o horário.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:cessam\\-se|cessar\\-se|cessassem|cessa\\-se|cessadas|cessados|cessando|cessaram|cessarão|cessasse|cessavam|cesse\\-se|cessada|cessado|cessará|cessava|cessam|cessar|cessem|cessou|cessa|cesse)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0139",
+   "lema": "suprimir",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "remover",
+   "preferir": [
+    "remover",
+    "excluir"
+   ],
+   "exemplo_correto": "Remova a coluna duplicada.",
+   "exemplo_incorreto": "Suprima a coluna duplicada.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:suprimidas|suprimidos|suprimindo|suprimiram|suprimirão|suprimiam|suprimida|suprimido|suprimirá|suprimam|suprimem|suprimia|suprimir|suprimiu|suprima|suprime)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0140",
+   "lema": "acrescer",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "acrescentar",
+   "preferir": [
+    "acrescentar",
+    "somar",
+    "aumentar"
+   ],
+   "exemplo_correto": "Some a tarifa ao valor.",
+   "exemplo_incorreto": "Acresça a tarifa ao valor.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:acrescendo|acresceram|acrescerão|acrescidas|acrescidos|acrescerá|acresciam|acrescida|acrescido|acrescem|acrescer|acresceu|acrescia|acresçam|acresce|acresça)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0141",
+   "lema": "majorar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "aumentar",
+   "preferir": [
+    "aumentar"
+   ],
+   "exemplo_correto": "O sistema aumenta o limite em 10 %.",
+   "exemplo_incorreto": "O sistema majora o limite em 10 %.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:majoram\\-se|majorar\\-se|majorassem|majora\\-se|majoradas|majorados|majorando|majoraram|majorarão|majorasse|majoravam|majore\\-se|majorada|majorado|majorará|majorava|majoram|majorar|majorem|majorou|majora|majore)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0142",
+   "lema": "minorar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "reduzir",
+   "preferir": [
+    "reduzir"
+   ],
+   "exemplo_correto": "O ajuste reduz a perda.",
+   "exemplo_incorreto": "O ajuste minora a perda.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:minoram\\-se|minorar\\-se|minorassem|minora\\-se|minoradas|minorados|minorando|minoraram|minorarão|minorasse|minoravam|minore\\-se|minorada|minorado|minorará|minorava|minoram|minorar|minorem|minorou|minora|minore)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0143",
+   "lema": "providenciar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tomar as medidas para obter algo",
+   "preferir": [
+    "verbo direto"
+   ],
+   "motivo": "Diga a ação: gere, peça, envie, prepare.",
+   "exemplo_correto": "Gere o certificado antes da instalação.",
+   "exemplo_incorreto": "Providencie o certificado antes da instalação.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:providenciam\\-se|providenciar\\-se|providenciassem|providencia\\-se|providenciadas|providenciados|providenciando|providenciaram|providenciarão|providenciasse|providenciavam|providencie\\-se|providenciada|providenciado|providenciará|providenciava|providenciam|providenciar|providenciem|providenciou|providencia|providencie)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0144",
+   "lema": "oportunizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "dar oportunidade",
+   "preferir": [
+    "permitir"
+   ],
+   "exemplo_correto": "O piloto permite testar o fluxo.",
+   "exemplo_incorreto": "O piloto oportuniza testar o fluxo.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:oportunizam\\-se|oportunizar\\-se|oportunizassem|oportuniza\\-se|oportunizadas|oportunizados|oportunizando|oportunizaram|oportunizarão|oportunizasse|oportunizavam|oportunize\\-se|oportunizada|oportunizado|oportunizará|oportunizava|oportunizam|oportunizar|oportunizem|oportunizou|oportuniza|oportunize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0145",
+   "lema": "inviabilizar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar impossível",
+   "preferir": [
+    "impedir"
+   ],
+   "exemplo_correto": "O bloqueio impede o deploy.",
+   "exemplo_incorreto": "O bloqueio inviabiliza o deploy.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:inviabilizam\\-se|inviabilizar\\-se|inviabilizassem|inviabiliza\\-se|inviabilizadas|inviabilizados|inviabilizando|inviabilizaram|inviabilizarão|inviabilizasse|inviabilizavam|inviabilize\\-se|inviabilizada|inviabilizado|inviabilizará|inviabilizava|inviabilizam|inviabilizar|inviabilizem|inviabilizou|inviabiliza|inviabilize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0146",
+   "lema": "impossibilitar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "tornar impossível",
+   "preferir": [
+    "impedir"
+   ],
+   "exemplo_correto": "A falta de rede impede a sincronização.",
+   "exemplo_incorreto": "A falta de rede impossibilita a sincronização.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:impossibilitam\\-se|impossibilitar\\-se|impossibilitassem|impossibilita\\-se|impossibilitadas|impossibilitados|impossibilitando|impossibilitaram|impossibilitarão|impossibilitasse|impossibilitavam|impossibilite\\-se|impossibilitada|impossibilitado|impossibilitará|impossibilitava|impossibilitam|impossibilitar|impossibilitem|impossibilitou|impossibilita|impossibilite)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0147",
+   "lema": "possuir",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ter",
+   "preferir": [
+    "ter"
+   ],
+   "motivo": "Comum em texto técnico (a tabela possui 3 colunas); ter é mais direto.",
+   "exemplo_correto": "A tabela tem três colunas.",
+   "exemplo_incorreto": "A tabela possui três colunas.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:possuindo|possuirá|possuíam|possuam|possuem|possuir|possuiu|possuía|possua|possui)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0148",
+   "lema": "perfazer",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "completar um total",
+   "preferir": [
+    "somar",
+    "totalizar"
+   ],
+   "exemplo_correto": "As parcelas somam R$ 900.",
+   "exemplo_incorreto": "As parcelas perfazem R$ 900.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:perfazendo|perfizeram|perfazem|perfazer|perfará|perfaz|perfez)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0149",
+   "lema": "evidenciar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "mostrar",
+   "preferir": [
+    "mostrar"
+   ],
+   "exemplo_correto": "O log mostra o erro de permissão.",
+   "exemplo_incorreto": "O log evidencia o erro de permissão.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:evidenciam\\-se|evidenciar\\-se|evidenciassem|evidencia\\-se|evidenciadas|evidenciados|evidenciando|evidenciaram|evidenciarão|evidenciasse|evidenciavam|evidencie\\-se|evidenciada|evidenciado|evidenciará|evidenciava|evidenciam|evidenciar|evidenciem|evidenciou|evidencia|evidencie)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0150",
+   "lema": "elencar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "listar",
+   "preferir": [
+    "listar"
+   ],
+   "exemplo_correto": "Liste as dependências do serviço.",
+   "exemplo_incorreto": "Elenque as dependências do serviço.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:elencam\\-se|elencar\\-se|elencassem|elenque\\-se|elenca\\-se|elencadas|elencados|elencando|elencaram|elencarão|elencasse|elencavam|elencada|elencado|elencará|elencava|elenquem|elencam|elencar|elencou|elenque|elenca)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0151",
+   "lema": "mensurar",
+   "classe": "verbo",
+   "status": "nao_preferido",
+   "significado_aprovado": "medir",
+   "preferir": [
+    "medir"
+   ],
+   "exemplo_correto": "Meça o tempo de resposta.",
+   "exemplo_incorreto": "Mensure o tempo de resposta.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:mensuram\\-se|mensurar\\-se|mensurassem|mensura\\-se|mensuradas|mensurados|mensurando|mensuraram|mensurarão|mensurasse|mensuravam|mensure\\-se|mensurada|mensurado|mensurará|mensurava|mensuram|mensurar|mensurem|mensurou|mensura|mensure)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0152",
+   "lema": "fazer-se necessário",
+   "classe": "locucao_verbal",
+   "status": "nao_preferido",
+   "significado_aprovado": "ser necessário",
+   "preferir": [
+    "é preciso",
+    "imperativo"
+   ],
+   "exemplo_correto": "Reinicie o serviço.",
+   "exemplo_incorreto": "Faz-se necessário reiniciar o serviço.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:fazem\\-se\\s+necessárias|fazem\\-se\\s+necessários|se\\s+fazem\\s+necessárias|se\\s+fazem\\s+necessários|far\\-se\\-á\\s+necessário|faz\\-se\\s+necessária|faz\\-se\\s+necessário|se\\s+faz\\s+necessária|se\\s+faz\\s+necessário)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0200",
@@ -467,7 +955,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:tendo\\s+em\\s+vista\\s+que)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:tendo\\s+em\\s+vista\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0201",
@@ -480,7 +969,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:devido\\s+ao\\s+fato\\s+de\\s+que)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:devido\\s+ao\\s+fato\\s+de\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0202",
@@ -494,7 +984,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+virtude\\s+de)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+virtude\\s+de)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0203",
@@ -507,7 +998,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:haja\\s+vista)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:haja\\s+vista)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0204",
@@ -520,7 +1012,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:previamente\\s+aos|previamente\\s+ao|previamente\\s+às|previamente\\s+a|previamente\\s+à)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:previamente\\s+aos|previamente\\s+ao|previamente\\s+às|previamente\\s+a|previamente\\s+à)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0205",
@@ -533,7 +1026,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:subsequentemente\\s+ao|posteriormente\\s+aos|subsequentemente\\s+a|subsequentemente\\s+à|posteriormente\\s+ao|posteriormente\\s+às|posteriormente\\s+a|posteriormente\\s+à)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:subsequentemente\\s+ao|posteriormente\\s+aos|subsequentemente\\s+a|subsequentemente\\s+à|posteriormente\\s+ao|posteriormente\\s+às|posteriormente\\s+a|posteriormente\\s+à)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0206",
@@ -547,7 +1041,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:na\\s+hipótese\\s+de\\s+que|na\\s+hipótese\\s+de)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:na\\s+hipótese\\s+de\\s+que|na\\s+hipótese\\s+de)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0207",
@@ -560,7 +1055,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:com\\s+a\\s+finalidade\\s+de|com\\s+o\\s+objetivo\\s+de|com\\s+o\\s+intuito\\s+de|no\\s+intuito\\s+de|com\\s+vistas\\s+a)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:com\\s+a\\s+finalidade\\s+de|com\\s+o\\s+objetivo\\s+de|com\\s+o\\s+intuito\\s+de|no\\s+intuito\\s+de|com\\s+vistas\\s+a)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0208",
@@ -574,7 +1070,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:no\\s+que\\s+diz\\s+respeito\\s+ao|no\\s+que\\s+diz\\s+respeito\\s+a|no\\s+que\\s+diz\\s+respeito\\s+à|no\\s+que\\s+tange\\s+ao|no\\s+que\\s+tange\\s+a|no\\s+que\\s+tange\\s+à|no\\s+tocante\\s+ao|no\\s+tocante\\s+a|no\\s+tocante\\s+à)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:no\\s+que\\s+diz\\s+respeito\\s+ao|no\\s+que\\s+diz\\s+respeito\\s+a|no\\s+que\\s+diz\\s+respeito\\s+à|no\\s+que\\s+tange\\s+ao|no\\s+que\\s+tange\\s+a|no\\s+que\\s+tange\\s+à|no\\s+tocante\\s+ao|no\\s+tocante\\s+a|no\\s+tocante\\s+à)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0209",
@@ -588,7 +1085,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+partir\\s+do\\s+momento\\s+em\\s+que|a\\s+partir\\s+do\\s+momento\\s+que)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+partir\\s+do\\s+momento\\s+em\\s+que|a\\s+partir\\s+do\\s+momento\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0210",
@@ -606,7 +1104,8 @@
    "exemplo_incorreto": "A nível de servidor, o limite é 10 conexões.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+nível\\s+de)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+nível\\s+de)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0211",
@@ -621,7 +1120,452 @@
    "motivo": "\"Sendo que\" costuma juntar frases que deveriam ser separadas.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:sendo\\s+assim|sendo\\s+que)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:sendo\\s+assim|sendo\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0212",
+   "lema": "mediante",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "por meio de, em troca de",
+   "preferir": [
+    "por",
+    "com",
+    "após"
+   ],
+   "motivo": "Diga a relação real. \"Mediante aprovação\" significa \"depois da aprovação\"?",
+   "exemplo_correto": "O acesso é liberado após a aprovação.",
+   "exemplo_incorreto": "O acesso é liberado mediante aprovação.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:mediante)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0213",
+   "lema": "outrossim",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "também",
+   "preferir": [
+    "também",
+    "além disso"
+   ],
+   "exemplo_correto": "Além disso, atualize o certificado.",
+   "exemplo_incorreto": "Outrossim, atualize o certificado.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:outrossim)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0214",
+   "lema": "destarte",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "assim",
+   "preferir": [
+    "assim",
+    "por isso"
+   ],
+   "exemplo_correto": "Por isso, o lote para.",
+   "exemplo_incorreto": "Destarte, o lote para.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:destarte)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0215",
+   "lema": "doravante",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "daqui em diante",
+   "preferir": [
+    "a partir de agora",
+    "a partir de <data>"
+   ],
+   "exemplo_correto": "A partir de 1º de março, use a versão 2.",
+   "exemplo_incorreto": "Doravante, use a versão 2.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:doravante)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0216",
+   "lema": "porquanto",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "porque",
+   "preferir": [
+    "porque"
+   ],
+   "exemplo_correto": "O teste falhou porque o banco estava fora.",
+   "exemplo_incorreto": "O teste falhou, porquanto o banco estava fora.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:porquanto)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0217",
+   "lema": "conquanto",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "embora",
+   "preferir": [
+    "embora"
+   ],
+   "exemplo_correto": "Embora o teste passe, revise o log.",
+   "exemplo_incorreto": "Conquanto o teste passe, revise o log.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:conquanto)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0218",
+   "lema": "não obstante",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "apesar de",
+   "preferir": [
+    "apesar de",
+    "mas"
+   ],
+   "exemplo_correto": "Apesar do aviso, o deploy continuou.",
+   "exemplo_incorreto": "Não obstante o aviso, o deploy continuou.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:não\\s+obstante)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0219",
+   "lema": "todavia",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "mas",
+   "preferir": [
+    "mas",
+    "porém"
+   ],
+   "exemplo_correto": "O teste passou, mas o lint falhou.",
+   "exemplo_incorreto": "O teste passou, todavia o lint falhou.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:todavia)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0220",
+   "lema": "ademais",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "além disso",
+   "preferir": [
+    "além disso"
+   ],
+   "exemplo_correto": "Além disso, o token expira em 1 h.",
+   "exemplo_incorreto": "Ademais, o token expira em 1 h.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ademais)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0221",
+   "lema": "bem como",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "e também",
+   "preferir": [
+    "e",
+    "e também"
+   ],
+   "exemplo_correto": "Exporte o CSV e o PDF.",
+   "exemplo_incorreto": "Exporte o CSV, bem como o PDF.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:bem\\s+como)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0222",
+   "lema": "tão somente",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "somente",
+   "preferir": [
+    "só",
+    "somente"
+   ],
+   "motivo": "Mantenha a restrição (PTC-22); troque só a forma.",
+   "exemplo_correto": "O perfil vê somente os próprios pedidos.",
+   "exemplo_incorreto": "O perfil vê tão somente os próprios pedidos.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:tão\\s+somente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0223",
+   "lema": "em conformidade com",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "de acordo com",
+   "preferir": [
+    "conforme",
+    "de acordo com"
+   ],
+   "exemplo_correto": "Preencha o campo conforme a tabela 2.",
+   "exemplo_incorreto": "Preencha o campo em conformidade com a tabela 2.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+conformidade\\s+com|em\\s+consonância\\s+com|consoante)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0224",
+   "lema": "no âmbito de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "dentro de",
+   "preferir": [
+    "em",
+    "no",
+    "na"
+   ],
+   "exemplo_correto": "No projeto, o time usa Python.",
+   "exemplo_incorreto": "No âmbito do projeto, o time usa Python.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:no\\s+âmbito\\s+das|no\\s+âmbito\\s+dos|no\\s+âmbito\\s+da|no\\s+âmbito\\s+de|no\\s+âmbito\\s+do)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0225",
+   "lema": "em face de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "diante de",
+   "preferir": [
+    "por causa de",
+    "diante de"
+   ],
+   "exemplo_correto": "Por causa da falha, o lote foi cancelado.",
+   "exemplo_incorreto": "Em face da falha, o lote foi cancelado.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+face\\s+das|em\\s+face\\s+dos|em\\s+face\\s+da|em\\s+face\\s+de|em\\s+face\\s+do|face\\s+aos|face\\s+ao|face\\s+às|face\\s+a|face\\s+à)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0226",
+   "lema": "por intermédio de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "por meio de",
+   "preferir": [
+    "por",
+    "com",
+    "pelo"
+   ],
+   "exemplo_correto": "Envie o pedido pelo portal.",
+   "exemplo_incorreto": "Envie o pedido por intermédio do portal.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:por\\s+intermédio\\s+das|por\\s+intermédio\\s+dos|por\\s+intermédio\\s+da|por\\s+intermédio\\s+de|por\\s+intermédio\\s+do)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0227",
+   "lema": "a título de",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "como",
+   "preferir": [
+    "como"
+   ],
+   "exemplo_correto": "Como exemplo, use o arquivo 2.",
+   "exemplo_incorreto": "A título de exemplo, use o arquivo 2.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+título\\s+de)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0228",
+   "lema": "via de regra",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "em geral",
+   "preferir": [
+    "em geral",
+    "critério explícito"
+   ],
+   "motivo": "Expressão vaga (PTC-12). Se houver exceções, liste-as.",
+   "exemplo_correto": "Em geral, o lote termina às 6h.",
+   "exemplo_incorreto": "Via de regra, o lote termina às 6h.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:via\\s+de\\s+regra)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0229",
+   "lema": "a fim de que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "finalidade",
+   "preferir": [
+    "para que"
+   ],
+   "exemplo_correto": "Reinicie o serviço para que a mudança valha.",
+   "exemplo_incorreto": "Reinicie o serviço a fim de que a mudança valha.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:a\\s+fim\\s+de\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0230",
+   "lema": "uma vez que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "causa ou tempo",
+   "preferir": [
+    "porque",
+    "depois que"
+   ],
+   "motivo": "Ambíguo. Pode indicar causa (porque) ou tempo (depois que). Escolha o conectivo do sentido real.",
+   "exemplo_correto": "O teste falhou porque o banco estava fora.",
+   "exemplo_incorreto": "O teste falhou, uma vez que o banco estava fora.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:uma\\s+vez\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0231",
+   "lema": "visto que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "porque",
+   "preferir": [
+    "porque"
+   ],
+   "motivo": "\"Posto que\" também é usado como \"embora\": ambíguo.",
+   "exemplo_correto": "O acesso falhou porque o token expirou.",
+   "exemplo_incorreto": "O acesso falhou, visto que o token expirou.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:posto\\s+que|visto\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0232",
+   "lema": "ao passo que",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "oposição ou simultaneidade",
+   "preferir": [
+    "enquanto",
+    "mas"
+   ],
+   "exemplo_correto": "O ambiente A usa Python, mas o B usa Go.",
+   "exemplo_incorreto": "O ambiente A usa Python, ao passo que o B usa Go.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:ao\\s+passo\\s+que)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0233",
+   "lema": "em que pese",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "apesar de",
+   "preferir": [
+    "apesar de",
+    "embora"
+   ],
+   "exemplo_correto": "Apesar do custo, o time escolheu a opção 2.",
+   "exemplo_incorreto": "Em que pese o custo, o time escolheu a opção 2.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+que\\s+pesem|em\\s+que\\s+pese)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0234",
+   "lema": "no presente momento",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "agora",
+   "preferir": [
+    "agora",
+    "hoje",
+    "data explícita"
+   ],
+   "exemplo_correto": "Agora, o serviço está fora.",
+   "exemplo_incorreto": "No presente momento, o serviço está fora.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:no\\s+momento\\s+presente|no\\s+presente\\s+momento)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0235",
+   "lema": "em tempo hábil",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "no prazo",
+   "preferir": [
+    "até <data ou prazo>"
+   ],
+   "motivo": "Prazo vago (PTC-12). Diga a data ou o prazo.",
+   "exemplo_correto": "Envie o arquivo até as 18h.",
+   "exemplo_incorreto": "Envie o arquivo em tempo hábil.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:em\\s+tempo\\s+hábil)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0236",
+   "lema": "com a maior brevidade possível",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "o mais cedo possível",
+   "preferir": [
+    "até <data ou prazo>"
+   ],
+   "motivo": "Prazo vago (PTC-12).",
+   "exemplo_correto": "Corrija o erro até amanhã às 10h.",
+   "exemplo_incorreto": "Corrija o erro com a maior brevidade possível.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:com\\s+a\\s+maior\\s+brevidade\\s+possível|com\\s+a\\s+máxima\\s+brevidade|com\\s+brevidade)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0237",
+   "lema": "de forma a",
+   "classe": "conectivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "finalidade",
+   "preferir": [
+    "para"
+   ],
+   "exemplo_correto": "Ajuste o índice para reduzir o tempo de consulta.",
+   "exemplo_incorreto": "Ajuste o índice de forma a reduzir o tempo de consulta.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:de\\s+maneira\\s+a|de\\s+forma\\s+a|de\\s+modo\\s+a)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0300",
@@ -639,7 +1583,8 @@
    "exemplo_incorreto": "Abra o arquivo e salve o mesmo.",
    "regra": "PTC-07",
    "fonte": "geral.yaml",
-   "regex": "(?<!é )(?<!são )(?<!era )(?<!eram )(?<!seja )(?<!sejam )(?<!sempre )(?<!fica )(?<!ficam )(?<!continua )(?<!permanece )\\b(?:o|a|os|as|do|da|dos|das|no|na|nos|nas|ao|à|aos|às|pelo|pela|pelos|pelas)\\s+mesm[oa]s?(?=\\s*[.,;:)!?]|\\s*$)"
+   "regex": "(?<!é )(?<!são )(?<!era )(?<!eram )(?<!seja )(?<!sejam )(?<!sempre )(?<!fica )(?<!ficam )(?<!continua )(?<!permanece )\\b(?:o|a|os|as|do|da|dos|das|no|na|nos|nas|ao|à|aos|às|pelo|pela|pelos|pelas)\\s+mesm[oa]s?(?=\\s*[.,;:)!?]|\\s*$)",
+   "lematizavel": false
   },
   {
    "id": "V-0301",
@@ -656,7 +1601,58 @@
    "exemplo_incorreto": "Vamos estar enviando o arquivo amanhã.",
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "\\b(?:vou|vai|vamos|vão|irei|irá|iremos|irão)\\s+estar\\s+[a-zà-ÿ]+ndo\\b"
+   "regex": "\\b(?:vou|vai|vamos|vão|irei|irá|iremos|irão)\\s+estar\\s+[a-zà-ÿ]+ndo\\b",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0302",
+   "lema": "introdução vazia",
+   "classe": "padrao",
+   "status": "nao_preferido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "diga o fato diretamente"
+   ],
+   "exemplo_correto": "O token expira em 1 h.",
+   "exemplo_incorreto": "Cabe ressaltar que o token expira em 1 h.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "\\b(?:(?:cabe|cumpre|vale|convém)\\s+(?:ressaltar|salientar|destacar|informar|lembrar|mencionar|esclarecer|registrar)|é\\s+(?:importante|válido|interessante|oportuno)\\s+(?:ressaltar|salientar|destacar|lembrar|mencionar|informar)|(?:informamos|esclarecemos|comunicamos|ressaltamos|gostaríamos\\s+de\\s+informar))\\s+que\\b",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0303",
+   "lema": "mesóclise",
+   "classe": "padrao",
+   "status": "nao_preferido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "imperativo",
+    "voz ativa"
+   ],
+   "exemplo_correto": "Reinicie o serviço depois da alteração.",
+   "exemplo_incorreto": "Reiniciar-se-á o serviço depois da alteração.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "\\b[a-zà-ÿ]+-(?:se|lo|la|los|las|lhe|lhes|me|nos)-(?:á|ão|ia|iam|emos|ei|íamos)\\b",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0304",
+   "lema": "a problemática",
+   "classe": "padrao",
+   "status": "nao_preferido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "o problema"
+   ],
+   "motivo": "O adjetivo (situação problemática) não é marcado.",
+   "exemplo_correto": "O problema do lote é a falta de índice.",
+   "exemplo_incorreto": "A problemática do lote é a falta de índice.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "\\b(?:a|da|na|esta|essa|desta|dessa|nesta|nessa)\\s+problemática\\b(?!\\s+(?:é|foi|era)\\b)",
+   "lematizavel": false
   },
   {
    "id": "V-0400",
@@ -692,7 +1688,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:subindo|subiram|subido|subirá|sobem|subam|subir|subiu|sobe|suba)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:subindo|subiram|subido|subirá|sobem|subam|subir|subiu|sobe|suba)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
   },
   {
    "id": "V-0401",
@@ -719,7 +1716,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:baixam\\-se|baixar\\-se|baixassem|baixa\\-se|baixadas|baixados|baixando|baixaram|baixarão|baixasse|baixavam|baixe\\-se|baixada|baixado|baixará|baixava|baixam|baixar|baixem|baixou|baixa|baixe)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:baixam\\-se|baixar\\-se|baixassem|baixa\\-se|baixadas|baixados|baixando|baixaram|baixarão|baixasse|baixavam|baixe\\-se|baixada|baixado|baixará|baixava|baixam|baixar|baixem|baixou|baixa|baixe)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0402",
@@ -750,7 +1748,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:bases|base)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:bases|base)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0403",
@@ -776,7 +1775,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:ambientes|ambiente)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:ambientes|ambiente)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0404",
@@ -813,7 +1813,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:chaves|chave)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:chaves|chave)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0405",
@@ -834,7 +1835,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:clientes|cliente)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:clientes|cliente)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0406",
@@ -864,7 +1866,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:serviços|serviço)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:serviços|serviço)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0407",
@@ -886,7 +1889,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:servidores|servidor)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:servidores|servidor)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0408",
@@ -913,7 +1917,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:registros|registro)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:registros|registro)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0409",
@@ -944,7 +1949,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:índices|índice)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:índices|índice)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0410",
@@ -966,7 +1972,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:limites|limite)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:limites|limite)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0411",
@@ -993,7 +2000,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:contas|conta)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:contas|conta)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0412",
@@ -1018,7 +2026,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:operações|operação)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:operações|operação)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0413",
@@ -1039,7 +2048,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:usuários|usuário)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:usuários|usuário)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0414",
@@ -1060,7 +2070,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:processos|processo)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:processos|processo)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0415",
@@ -1086,7 +2097,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:cargas|carga)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:cargas|carga)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0416",
@@ -1107,7 +2119,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:lotes|lote)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:lotes|lote)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0417",
@@ -1133,7 +2146,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:liberam\\-se|liberar\\-se|liberassem|libera\\-se|liberadas|liberados|liberando|liberaram|liberarão|liberasse|liberavam|libere\\-se|liberada|liberado|liberará|liberava|liberam|liberar|liberem|liberou|libera|libere)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:liberam\\-se|liberar\\-se|liberassem|libera\\-se|liberadas|liberados|liberando|liberaram|liberarão|liberasse|liberavam|libere\\-se|liberada|liberado|liberará|liberava|liberam|liberar|liberem|liberou|libera|libere)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0418",
@@ -1159,7 +2173,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:atualizam\\-se|atualizar\\-se|atualizassem|atualiza\\-se|atualizadas|atualizados|atualizando|atualizaram|atualizarão|atualizasse|atualizavam|atualize\\-se|atualizada|atualizado|atualizará|atualizava|atualizam|atualizar|atualizem|atualizou|atualiza|atualize)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:atualizam\\-se|atualizar\\-se|atualizassem|atualiza\\-se|atualizadas|atualizados|atualizando|atualizaram|atualizarão|atualizasse|atualizavam|atualize\\-se|atualizada|atualizado|atualizará|atualizava|atualizam|atualizar|atualizem|atualizou|atualiza|atualize)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0419",
@@ -1180,7 +2195,8 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:endereçam\\-se|endereçar\\-se|endereçassem|enderece\\-se|endereça\\-se|endereçadas|endereçados|endereçando|endereçaram|endereçarão|endereçasse|endereçavam|endereçada|endereçado|endereçará|endereçava|enderecem|endereçam|endereçar|endereçou|enderece|endereça)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:endereçam\\-se|endereçar\\-se|endereçassem|enderece\\-se|endereça\\-se|endereçadas|endereçados|endereçando|endereçaram|endereçarão|endereçasse|endereçavam|endereçada|endereçado|endereçará|endereçava|enderecem|endereçam|endereçar|endereçou|enderece|endereça)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   },
   {
    "id": "V-0420",
@@ -1202,7 +2218,859 @@
    ],
    "regra": "PTC-25",
    "fonte": "geral.yaml",
-   "regex": "(?<![\\wÀ-ÿ-])(?:riscos|risco)(?![\\wÀ-ÿ-])"
+   "regex": "(?<![\\wÀ-ÿ-])(?:riscos|risco)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0421",
+   "lema": "padrão",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "valor assumido quando nada é informado (default)",
+     "dominio": "software",
+     "preferir": "valor padrão"
+    },
+    {
+     "sentido": "norma técnica (standard)",
+     "dominio": "geral",
+     "preferir": "norma"
+    },
+    {
+     "sentido": "solução recorrente de projeto (design pattern)",
+     "dominio": "software",
+     "preferir": "padrão de projeto"
+    },
+    {
+     "sentido": "expressão de busca em texto (regex)",
+     "dominio": "software",
+     "preferir": "expressão regular"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:padrões|padrão)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0422",
+   "lema": "modelo",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "estrutura de dados (modelo de dados, ORM)",
+     "dominio": "dados",
+     "preferir": "modelo de dados"
+    },
+    {
+     "sentido": "modelo estatístico ou de aprendizado de máquina",
+     "dominio": "dados",
+     "preferir": "modelo preditivo"
+    },
+    {
+     "sentido": "arquivo-base para gerar documentos (template)",
+     "dominio": "geral",
+     "preferir": "template"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:modelos|modelo)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0423",
+   "lema": "transação",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "unidade atômica de operações no banco de dados",
+     "dominio": "dados",
+     "preferir": "transação de banco"
+    },
+    {
+     "sentido": "movimentação financeira (compra, pagamento, transferência)",
+     "dominio": "negócio",
+     "preferir": "transação financeira"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:transações|transação)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0424",
+   "lema": "estado",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "situação de um objeto ou processo (status)",
+     "dominio": "software",
+     "preferir": "status, situação"
+    },
+    {
+     "sentido": "unidade da federação",
+     "dominio": "geral",
+     "preferir": "UF"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:estados|estado)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0425",
+   "lema": "campo",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "coluna de uma tabela ou atributo de um registro",
+     "dominio": "dados",
+     "preferir": "coluna"
+    },
+    {
+     "sentido": "elemento de entrada em um formulário",
+     "dominio": "software",
+     "preferir": "campo do formulário"
+    },
+    {
+     "sentido": "área de conhecimento",
+     "dominio": "geral",
+     "preferir": "área"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:campos|campo)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0426",
+   "lema": "tabela",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "tabela de banco de dados",
+     "dominio": "dados"
+    },
+    {
+     "sentido": "tabela de um documento",
+     "dominio": "geral"
+    },
+    {
+     "sentido": "tabela de preços ou tarifas",
+     "dominio": "negócio",
+     "preferir": "tabela de tarifas"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:tabelas|tabela)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0427",
+   "lema": "valor",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "conteúdo de uma variável ou campo",
+     "dominio": "software"
+    },
+    {
+     "sentido": "quantia em dinheiro",
+     "dominio": "negócio",
+     "preferir": "valor em reais, quantia"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:valores|valor)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0428",
+   "lema": "título",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "cabeçalho de uma seção ou documento",
+     "dominio": "geral"
+    },
+    {
+     "sentido": "título de crédito ou de cobrança (boleto, duplicata)",
+     "dominio": "negócio",
+     "preferir": "título de cobrança"
+    },
+    {
+     "sentido": "cargo",
+     "dominio": "geral",
+     "preferir": "cargo"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:títulos|título)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0429",
+   "lema": "parcela",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "prestação de um parcelamento",
+     "dominio": "negócio",
+     "preferir": "prestação"
+    },
+    {
+     "sentido": "parte de um todo",
+     "dominio": "geral",
+     "preferir": "parte"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:parcelas|parcela)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0430",
+   "lema": "taxa",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "percentual (taxa de juros, taxa de erro)",
+     "dominio": "geral",
+     "preferir": "taxa de juros, percentual"
+    },
+    {
+     "sentido": "valor cobrado por um serviço",
+     "dominio": "negócio",
+     "preferir": "tarifa"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:taxas|taxa)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0431",
+   "lema": "nota",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "documento fiscal",
+     "dominio": "negócio",
+     "preferir": "nota fiscal"
+    },
+    {
+     "sentido": "pontuação ou avaliação",
+     "dominio": "geral",
+     "preferir": "pontuação"
+    },
+    {
+     "sentido": "observação no texto",
+     "dominio": "geral",
+     "preferir": "observação"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:notas|nota)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0432",
+   "lema": "carteira",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "conjunto de clientes ou contratos (carteira de crédito)",
+     "dominio": "risco",
+     "preferir": "carteira de crédito"
+    },
+    {
+     "sentido": "carteira digital (wallet)",
+     "dominio": "software",
+     "preferir": "carteira digital"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:carteiras|carteira)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0433",
+   "lema": "política",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "conjunto de regras de negócio (política de crédito)",
+     "dominio": "negócio",
+     "preferir": "política de crédito"
+    },
+    {
+     "sentido": "regra de permissão de acesso (IAM, RLS)",
+     "dominio": "segurança",
+     "preferir": "política de acesso"
+    },
+    {
+     "sentido": "regra de retenção, retry ou cache",
+     "dominio": "software"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:políticas|política)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0434",
+   "lema": "contrato",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "acordo jurídico com um cliente",
+     "dominio": "negócio"
+    },
+    {
+     "sentido": "especificação de entrada e saída de uma API ou integração",
+     "dominio": "software",
+     "preferir": "contrato da API"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:contratos|contrato)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0435",
+   "lema": "interface",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "tela com que o usuário interage",
+     "dominio": "software",
+     "preferir": "interface do usuário, tela"
+    },
+    {
+     "sentido": "ponto de integração entre sistemas",
+     "dominio": "software",
+     "preferir": "API"
+    },
+    {
+     "sentido": "tipo abstrato em linguagens de programação",
+     "dominio": "software"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:interfaces|interface)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0436",
+   "lema": "agente",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "agente de IA",
+     "dominio": "software",
+     "preferir": "agente de IA"
+    },
+    {
+     "sentido": "processo que coleta dados em uma máquina (agente de monitoramento)",
+     "dominio": "infraestrutura"
+    },
+    {
+     "sentido": "pessoa ou empresa que representa outra (correspondente)",
+     "dominio": "negócio",
+     "preferir": "correspondente"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:agentes|agente)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0437",
+   "lema": "rotina",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "processamento agendado (job, cron)",
+     "dominio": "software",
+     "preferir": "job agendado"
+    },
+    {
+     "sentido": "trecho de código (sub-rotina)",
+     "dominio": "software",
+     "preferir": "função"
+    },
+    {
+     "sentido": "atividade repetida do dia a dia",
+     "dominio": "geral"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:rotinas|rotina)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0438",
+   "lema": "produção",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "ambiente de produção",
+     "dominio": "software",
+     "preferir": "ambiente de produção"
+    },
+    {
+     "sentido": "fabricação ou geração de algo",
+     "dominio": "geral"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:produções|produção)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0439",
+   "lema": "homologação",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "ambiente de testes antes da produção",
+     "dominio": "software",
+     "preferir": "ambiente de homologação"
+    },
+    {
+     "sentido": "aprovação formal por uma autoridade ou cliente",
+     "dominio": "negócio",
+     "preferir": "aprovação formal"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:homologações|homologação)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0440",
+   "lema": "pacote",
+   "classe": "substantivo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "pacote de software (pip, npm, apt)",
+     "dominio": "software"
+    },
+    {
+     "sentido": "pacote de rede",
+     "dominio": "infraestrutura"
+    },
+    {
+     "sentido": "conjunto de produtos ou serviços vendido junto",
+     "dominio": "negócio",
+     "preferir": "combo, plano"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:pacotes|pacote)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0441",
+   "lema": "discriminar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "detalhar item por item",
+     "dominio": "geral",
+     "preferir": "detalhar, listar"
+    },
+    {
+     "sentido": "tratar de forma desigual",
+     "dominio": "geral"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:discriminam\\-se|discriminar\\-se|discriminassem|discrimina\\-se|discriminadas|discriminados|discriminando|discriminaram|discriminarão|discriminasse|discriminavam|discrimine\\-se|discriminada|discriminado|discriminará|discriminava|discriminam|discriminar|discriminem|discriminou|discrimina|discrimine)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0442",
+   "lema": "aferir",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "comparar um instrumento com um padrão (metrologia)",
+     "dominio": "engenharia",
+     "preferir": "calibrar"
+    },
+    {
+     "sentido": "medir ou avaliar",
+     "dominio": "geral",
+     "preferir": "medir"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:aferindo|aferida|aferido|aferirá|aferem|aferir|aferiu|afiram|afere|afira)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0443",
+   "lema": "migrar",
+   "classe": "verbo",
+   "status": "aprovado",
+   "significado_aprovado": "ver sentidos",
+   "sentidos": [
+    {
+     "sentido": "mover dados de um sistema para outro",
+     "dominio": "dados",
+     "preferir": "migrar os dados"
+    },
+    {
+     "sentido": "aplicar alterações de schema (migration)",
+     "dominio": "dados",
+     "preferir": "aplicar a migration"
+    },
+    {
+     "sentido": "trocar um sistema ou versão por outro",
+     "dominio": "software",
+     "preferir": "substituir"
+    }
+   ],
+   "regra": "PTC-25",
+   "fonte": "polissemia.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:migram\\-se|migrar\\-se|migrassem|migra\\-se|migradas|migrados|migrando|migraram|migrarão|migrasse|migravam|migre\\-se|migrada|migrado|migrará|migrava|migram|migrar|migrem|migrou|migra|migre)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0500",
+   "lema": "supracitado",
+   "classe": "adjetivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "citado antes",
+   "preferir": [
+    "repita o substantivo",
+    "citado na seção N"
+   ],
+   "motivo": "Obriga o leitor a procurar o referente.",
+   "exemplo_correto": "Abra o arquivo config.yaml.",
+   "exemplo_incorreto": "Abra o arquivo supracitado.",
+   "regra": "PTC-07",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:acima\\s+mencionadas|acima\\s+mencionados|acima\\s+mencionada|acima\\s+mencionado|supramencionadas|supramencionados|supramencionada|supramencionado|acima\\s+citadas|acima\\s+citados|acima\\s+citada|acima\\s+citado|retrocitadas|retrocitados|supracitadas|supracitados|retrocitada|retrocitado|supracitada|supracitado)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0501",
+   "lema": "precípuo",
+   "classe": "adjetivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "principal",
+   "preferir": [
+    "principal"
+   ],
+   "exemplo_correto": "O objetivo principal é reduzir a perda.",
+   "exemplo_incorreto": "O objetivo precípuo é reduzir a perda.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:precípuas|precípuos|precípua|precípuo)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0502",
+   "lema": "primordial",
+   "classe": "adjetivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "principal",
+   "preferir": [
+    "principal",
+    "obrigatório"
+   ],
+   "exemplo_correto": "O backup é obrigatório antes da migração.",
+   "exemplo_incorreto": "O backup é primordial antes da migração.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:primordiais|primordial)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0503",
+   "lema": "imprescindível",
+   "classe": "adjetivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "necessário",
+   "preferir": [
+    "obrigatório",
+    "necessário"
+   ],
+   "motivo": "Se for requisito, diga obrigatório (PTC-19).",
+   "exemplo_correto": "O token é obrigatório.",
+   "exemplo_incorreto": "O token é imprescindível.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:imprescindíveis|imprescindível|indispensáveis|indispensável)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0504",
+   "lema": "primeiramente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "primeiro",
+   "preferir": [
+    "primeiro"
+   ],
+   "exemplo_correto": "Primeiro, pare o serviço.",
+   "exemplo_incorreto": "Primeiramente, pare o serviço.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:primeiramente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0505",
+   "lema": "anteriormente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "antes",
+   "preferir": [
+    "antes"
+   ],
+   "exemplo_correto": "Antes, o lote rodava às 2h.",
+   "exemplo_incorreto": "Anteriormente, o lote rodava às 2h.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:anteriormente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0506",
+   "lema": "concomitantemente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "ao mesmo tempo",
+   "preferir": [
+    "ao mesmo tempo"
+   ],
+   "exemplo_correto": "Os dois lotes rodam ao mesmo tempo.",
+   "exemplo_incorreto": "Os dois lotes rodam concomitantemente.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:concomitantemente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0507",
+   "lema": "conjuntamente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "junto",
+   "preferir": [
+    "junto",
+    "juntos"
+   ],
+   "exemplo_correto": "Publique os dois serviços juntos.",
+   "exemplo_incorreto": "Publique os dois serviços conjuntamente.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:conjuntamente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0508",
+   "lema": "integralmente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "por completo",
+   "preferir": [
+    "todo",
+    "inteiro",
+    "por completo"
+   ],
+   "exemplo_correto": "Copie o arquivo inteiro.",
+   "exemplo_incorreto": "Copie integralmente o arquivo.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:integralmente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0509",
+   "lema": "basicamente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "—",
+   "preferir": [
+    "remova"
+   ],
+   "motivo": "Palavra de preenchimento. Remova ou diga o que é essencial.",
+   "exemplo_correto": "O serviço lê a fila e grava no banco.",
+   "exemplo_incorreto": "O serviço basicamente lê a fila e grava no banco.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:basicamente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0510",
+   "lema": "hodiernamente",
+   "classe": "adverbio",
+   "status": "nao_preferido",
+   "significado_aprovado": "hoje",
+   "preferir": [
+    "hoje",
+    "atualmente"
+   ],
+   "exemplo_correto": "Hoje, o time usa a versão 3.",
+   "exemplo_incorreto": "Hodiernamente, o time usa a versão 3.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:hodiernamente)(?![\\wÀ-ÿ-])",
+   "lematizavel": false
+  },
+  {
+   "id": "V-0600",
+   "lema": "metodologia",
+   "classe": "substantivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "estudo dos métodos",
+   "preferir": [
+    "método"
+   ],
+   "motivo": "Metodologia é o estudo dos métodos. Para \"o modo de fazer\", use método.",
+   "exemplo_correto": "O método de cálculo usa a média móvel.",
+   "exemplo_incorreto": "A metodologia de cálculo usa a média móvel.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:metodologias|metodologia)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0601",
+   "lema": "utilização",
+   "classe": "substantivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "uso",
+   "preferir": [
+    "uso"
+   ],
+   "exemplo_correto": "O uso do cache reduz o tempo.",
+   "exemplo_incorreto": "A utilização do cache reduz o tempo.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:utilizações|utilização)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0602",
+   "lema": "finalização",
+   "classe": "substantivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "fim",
+   "preferir": [
+    "fim",
+    "término"
+   ],
+   "exemplo_correto": "No fim do lote, o sistema envia o relatório.",
+   "exemplo_incorreto": "Na finalização do lote, o sistema envia o relatório.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:finalizações|finalização)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0603",
+   "lema": "efetivação",
+   "classe": "substantivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "conclusão",
+   "preferir": [
+    "conclusão",
+    "aplicação"
+   ],
+   "exemplo_correto": "Depois da aplicação da mudança, reinicie o serviço.",
+   "exemplo_incorreto": "Depois da efetivação da mudança, reinicie o serviço.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:efetivações|efetivação)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
+  },
+  {
+   "id": "V-0604",
+   "lema": "disponibilização",
+   "classe": "substantivo",
+   "status": "nao_preferido",
+   "significado_aprovado": "ato de tornar disponível",
+   "preferir": [
+    "publicação",
+    "liberação"
+   ],
+   "exemplo_correto": "A publicação da versão 2 está prevista para março.",
+   "exemplo_incorreto": "A disponibilização da versão 2 está prevista para março.",
+   "regra": "PTC-25",
+   "fonte": "formal.yaml",
+   "regex": "(?<![\\wÀ-ÿ-])(?:disponibilizações|disponibilização)(?![\\wÀ-ÿ-])",
+   "lematizavel": true
   }
  ]
 }

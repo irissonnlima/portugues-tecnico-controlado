@@ -1,0 +1,354 @@
+# Vocabulário controlado PTC-BR — palavras com mais de um sentido técnico (spec 0.3.0)
+#
+# Estes verbetes não geram alerta. Eles aparecem no relatório vocabulario_polissemico,
+# para a revisão da PTC-08: o documento deve usar cada palavra em um só sentido.
+# Faixa de ID: V-0421..0499 (continua geral.yaml).
+
+- id: V-0421
+  lema: padrão
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "valor assumido quando nada é informado (default)"
+      dominio: "software"
+      preferir: "valor padrão"
+    - sentido: "norma técnica (standard)"
+      dominio: "geral"
+      preferir: "norma"
+    - sentido: "solução recorrente de projeto (design pattern)"
+      dominio: "software"
+      preferir: "padrão de projeto"
+    - sentido: "expressão de busca em texto (regex)"
+      dominio: "software"
+      preferir: "expressão regular"
+  versao_inclusao: 0.3.0
+
+- id: V-0422
+  lema: modelo
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "estrutura de dados (modelo de dados, ORM)"
+      dominio: "dados"
+      preferir: "modelo de dados"
+    - sentido: "modelo estatístico ou de aprendizado de máquina"
+      dominio: "dados"
+      preferir: "modelo preditivo"
+    - sentido: "arquivo-base para gerar documentos (template)"
+      dominio: "geral"
+      preferir: "template"
+  versao_inclusao: 0.3.0
+
+- id: V-0423
+  lema: transação
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "unidade atômica de operações no banco de dados"
+      dominio: "dados"
+      preferir: "transação de banco"
+    - sentido: "movimentação financeira (compra, pagamento, transferência)"
+      dominio: "negócio"
+      preferir: "transação financeira"
+  versao_inclusao: 0.3.0
+
+- id: V-0424
+  lema: estado
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "situação de um objeto ou processo (status)"
+      dominio: "software"
+      preferir: "status, situação"
+    - sentido: "unidade da federação"
+      dominio: "geral"
+      preferir: "UF"
+  versao_inclusao: 0.3.0
+
+- id: V-0425
+  lema: campo
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "coluna de uma tabela ou atributo de um registro"
+      dominio: "dados"
+      preferir: "coluna"
+    - sentido: "elemento de entrada em um formulário"
+      dominio: "software"
+      preferir: "campo do formulário"
+    - sentido: "área de conhecimento"
+      dominio: "geral"
+      preferir: "área"
+  versao_inclusao: 0.3.0
+
+- id: V-0426
+  lema: tabela
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "tabela de banco de dados"
+      dominio: "dados"
+    - sentido: "tabela de um documento"
+      dominio: "geral"
+    - sentido: "tabela de preços ou tarifas"
+      dominio: "negócio"
+      preferir: "tabela de tarifas"
+  versao_inclusao: 0.3.0
+
+- id: V-0427
+  lema: valor
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "conteúdo de uma variável ou campo"
+      dominio: "software"
+    - sentido: "quantia em dinheiro"
+      dominio: "negócio"
+      preferir: "valor em reais, quantia"
+  versao_inclusao: 0.3.0
+
+- id: V-0428
+  lema: título
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "cabeçalho de uma seção ou documento"
+      dominio: "geral"
+    - sentido: "título de crédito ou de cobrança (boleto, duplicata)"
+      dominio: "negócio"
+      preferir: "título de cobrança"
+    - sentido: "cargo"
+      dominio: "geral"
+      preferir: "cargo"
+  versao_inclusao: 0.3.0
+
+- id: V-0429
+  lema: parcela
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "prestação de um parcelamento"
+      dominio: "negócio"
+      preferir: "prestação"
+    - sentido: "parte de um todo"
+      dominio: "geral"
+      preferir: "parte"
+  versao_inclusao: 0.3.0
+
+- id: V-0430
+  lema: taxa
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "percentual (taxa de juros, taxa de erro)"
+      dominio: "geral"
+      preferir: "taxa de juros, percentual"
+    - sentido: "valor cobrado por um serviço"
+      dominio: "negócio"
+      preferir: "tarifa"
+  versao_inclusao: 0.3.0
+
+- id: V-0431
+  lema: nota
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "documento fiscal"
+      dominio: "negócio"
+      preferir: "nota fiscal"
+    - sentido: "pontuação ou avaliação"
+      dominio: "geral"
+      preferir: "pontuação"
+    - sentido: "observação no texto"
+      dominio: "geral"
+      preferir: "observação"
+  versao_inclusao: 0.3.0
+
+- id: V-0432
+  lema: carteira
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "conjunto de clientes ou contratos (carteira de crédito)"
+      dominio: "risco"
+      preferir: "carteira de crédito"
+    - sentido: "carteira digital (wallet)"
+      dominio: "software"
+      preferir: "carteira digital"
+  versao_inclusao: 0.3.0
+
+- id: V-0433
+  lema: política
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "conjunto de regras de negócio (política de crédito)"
+      dominio: "negócio"
+      preferir: "política de crédito"
+    - sentido: "regra de permissão de acesso (IAM, RLS)"
+      dominio: "segurança"
+      preferir: "política de acesso"
+    - sentido: "regra de retenção, retry ou cache"
+      dominio: "software"
+  versao_inclusao: 0.3.0
+
+- id: V-0434
+  lema: contrato
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "acordo jurídico com um cliente"
+      dominio: "negócio"
+    - sentido: "especificação de entrada e saída de uma API ou integração"
+      dominio: "software"
+      preferir: "contrato da API"
+  versao_inclusao: 0.3.0
+
+- id: V-0435
+  lema: interface
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "tela com que o usuário interage"
+      dominio: "software"
+      preferir: "interface do usuário, tela"
+    - sentido: "ponto de integração entre sistemas"
+      dominio: "software"
+      preferir: "API"
+    - sentido: "tipo abstrato em linguagens de programação"
+      dominio: "software"
+  versao_inclusao: 0.3.0
+
+- id: V-0436
+  lema: agente
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "agente de IA"
+      dominio: "software"
+      preferir: "agente de IA"
+    - sentido: "processo que coleta dados em uma máquina (agente de monitoramento)"
+      dominio: "infraestrutura"
+    - sentido: "pessoa ou empresa que representa outra (correspondente)"
+      dominio: "negócio"
+      preferir: "correspondente"
+  versao_inclusao: 0.3.0
+
+- id: V-0437
+  lema: rotina
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "processamento agendado (job, cron)"
+      dominio: "software"
+      preferir: "job agendado"
+    - sentido: "trecho de código (sub-rotina)"
+      dominio: "software"
+      preferir: "função"
+    - sentido: "atividade repetida do dia a dia"
+      dominio: "geral"
+  versao_inclusao: 0.3.0
+
+- id: V-0438
+  lema: produção
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "ambiente de produção"
+      dominio: "software"
+      preferir: "ambiente de produção"
+    - sentido: "fabricação ou geração de algo"
+      dominio: "geral"
+  versao_inclusao: 0.3.0
+
+- id: V-0439
+  lema: homologação
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "ambiente de testes antes da produção"
+      dominio: "software"
+      preferir: "ambiente de homologação"
+    - sentido: "aprovação formal por uma autoridade ou cliente"
+      dominio: "negócio"
+      preferir: "aprovação formal"
+  versao_inclusao: 0.3.0
+
+- id: V-0440
+  lema: pacote
+  classe: substantivo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "pacote de software (pip, npm, apt)"
+      dominio: "software"
+    - sentido: "pacote de rede"
+      dominio: "infraestrutura"
+    - sentido: "conjunto de produtos ou serviços vendido junto"
+      dominio: "negócio"
+      preferir: "combo, plano"
+  versao_inclusao: 0.3.0
+
+- id: V-0441
+  lema: discriminar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "detalhar item por item"
+      dominio: "geral"
+      preferir: "detalhar, listar"
+    - sentido: "tratar de forma desigual"
+      dominio: "geral"
+  versao_inclusao: 0.3.0
+
+- id: V-0442
+  lema: aferir
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  formas: [aferir, afere, aferem, afira, afiram, aferiu, aferido, aferida, aferindo, aferirá]
+  sentidos:
+    - sentido: "comparar um instrumento com um padrão (metrologia)"
+      dominio: "engenharia"
+      preferir: "calibrar"
+    - sentido: "medir ou avaliar"
+      dominio: "geral"
+      preferir: "medir"
+  versao_inclusao: 0.3.0
+
+- id: V-0443
+  lema: migrar
+  classe: verbo
+  status: aprovado
+  significado_aprovado: ver sentidos
+  sentidos:
+    - sentido: "mover dados de um sistema para outro"
+      dominio: "dados"
+      preferir: "migrar os dados"
+    - sentido: "aplicar alterações de schema (migration)"
+      dominio: "dados"
+      preferir: "aplicar a migration"
+    - sentido: "trocar um sistema ou versão por outro"
+      dominio: "software"
+      preferir: "substituir"
+  versao_inclusao: 0.3.0

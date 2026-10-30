@@ -1,0 +1,791 @@
+# Vocabulário controlado PTC-BR — registro formal e burocrático (spec 0.3.0)
+#
+# Palavras e construções corretas na norma culta, mas que tornam o texto técnico
+# mais difícil sem acrescentar precisão. Faixas de ID: ver o cabeçalho de geral.yaml.
+#   V-0125..0199  verbos
+#   V-0212..0299  conectivos
+#   V-0302..0399  padrões
+#   V-0500..0599  adjetivos e advérbios
+#   V-0600..0699  substantivos
+
+# ------------------------------------------------------------ verbos
+
+- id: V-0125
+  lema: ensejar
+  classe: verbo
+  status: nao_preferido
+  preferir: [causar, permitir]
+  significado_aprovado: dar ocasião a
+  exemplo_correto: A falha causou a parada do lote.
+  exemplo_incorreto: A falha ensejou a parada do lote.
+  versao_inclusao: 0.3.0
+
+- id: V-0126
+  lema: consubstanciar
+  classe: verbo
+  status: nao_preferido
+  preferir: [registrar, basear, reunir]
+  significado_aprovado: dar forma concreta a
+  exemplo_correto: O relatório registra a análise.
+  exemplo_incorreto: O relatório consubstancia a análise.
+  versao_inclusao: 0.3.0
+
+- id: V-0127
+  lema: objetivar
+  classe: verbo
+  status: nao_preferido
+  preferir: [verbo direto, servir para]
+  significado_aprovado: ter como objetivo
+  padrao: "\\b(?:objetivar|objetivando|objetivou|objetivam|objetiva|objetivava|objetivavam)\\s+(?:a\\s+|o\\s+)?[a-zà-ÿ]+(?:ar|er|ir)\\b"
+  motivo: O adjetivo objetivo/objetiva (resposta objetiva) não é marcado.
+  exemplo_correto: Este estudo compara três métodos.
+  exemplo_incorreto: Este estudo objetiva comparar três métodos.
+  versao_inclusao: 0.3.0
+
+- id: V-0128
+  lema: adentrar
+  classe: verbo
+  status: nao_preferido
+  preferir: [entrar]
+  significado_aprovado: entrar
+  exemplo_correto: Entre na pasta de configuração.
+  exemplo_incorreto: Adentre a pasta de configuração.
+  versao_inclusao: 0.3.0
+
+- id: V-0129
+  lema: aludir
+  classe: verbo
+  status: nao_preferido
+  preferir: [citar, referir-se a]
+  significado_aprovado: fazer referência
+  exemplo_correto: O item 3 cita a norma.
+  exemplo_incorreto: O item 3 alude à norma.
+  versao_inclusao: 0.3.0
+
+- id: V-0130
+  lema: indagar
+  classe: verbo
+  status: nao_preferido
+  preferir: [perguntar]
+  significado_aprovado: perguntar
+  exemplo_correto: Pergunte ao responsável pelo dado.
+  exemplo_incorreto: Indague o responsável pelo dado.
+  versao_inclusao: 0.3.0
+
+- id: V-0131
+  lema: remeter
+  classe: verbo
+  status: nao_preferido
+  preferir: [enviar]
+  significado_aprovado: enviar
+  motivo: Remeter no sentido de "fazer referência" (o item remete à seção 2) também é substituível por citar.
+  exemplo_correto: Envie o arquivo ao suporte.
+  exemplo_incorreto: Remeta o arquivo ao suporte.
+  versao_inclusao: 0.3.0
+
+- id: V-0132
+  lema: lograr
+  classe: verbo
+  status: nao_preferido
+  preferir: [conseguir]
+  significado_aprovado: conseguir
+  exemplo_correto: O serviço não conseguiu conectar.
+  exemplo_incorreto: O serviço não logrou conectar.
+  versao_inclusao: 0.3.0
+
+- id: V-0133
+  lema: prosseguir
+  classe: verbo
+  status: nao_preferido
+  preferir: [continuar]
+  significado_aprovado: continuar
+  formas: [prosseguir, prossegue, prosseguem, prossiga, prossigam, prosseguiu, prosseguindo, prosseguirá, prosseguido]
+  exemplo_correto: Continue com o passo 4.
+  exemplo_incorreto: Prossiga com o passo 4.
+  versao_inclusao: 0.3.0
+
+- id: V-0134
+  lema: retificar
+  classe: verbo
+  status: nao_preferido
+  preferir: [corrigir]
+  significado_aprovado: corrigir
+  exemplo_correto: Corrija o valor da parcela.
+  exemplo_incorreto: Retifique o valor da parcela.
+  versao_inclusao: 0.3.0
+
+- id: V-0135
+  lema: ratificar
+  classe: verbo
+  status: nao_preferido
+  preferir: [confirmar]
+  significado_aprovado: confirmar
+  exemplo_correto: O gestor confirma a aprovação.
+  exemplo_incorreto: O gestor ratifica a aprovação.
+  versao_inclusao: 0.3.0
+
+- id: V-0136
+  lema: ultimar
+  classe: verbo
+  status: nao_preferido
+  preferir: [concluir, terminar]
+  significado_aprovado: concluir
+  exemplo_correto: Conclua a configuração antes do deploy.
+  exemplo_incorreto: Ultime a configuração antes do deploy.
+  versao_inclusao: 0.3.0
+
+- id: V-0137
+  lema: findar
+  classe: verbo
+  status: nao_preferido
+  preferir: [terminar]
+  significado_aprovado: terminar
+  exemplo_correto: Quando o prazo terminar, bloqueie o acesso.
+  exemplo_incorreto: Quando o prazo findar, bloqueie o acesso.
+  versao_inclusao: 0.3.0
+
+- id: V-0138
+  lema: cessar
+  classe: verbo
+  status: nao_preferido
+  preferir: [parar]
+  significado_aprovado: parar
+  exemplo_correto: Se o alarme parar, registre o horário.
+  exemplo_incorreto: Se o alarme cessar, registre o horário.
+  versao_inclusao: 0.3.0
+
+- id: V-0139
+  lema: suprimir
+  classe: verbo
+  status: nao_preferido
+  preferir: [remover, excluir]
+  significado_aprovado: remover
+  exemplo_correto: Remova a coluna duplicada.
+  exemplo_incorreto: Suprima a coluna duplicada.
+  versao_inclusao: 0.3.0
+
+- id: V-0140
+  lema: acrescer
+  classe: verbo
+  status: nao_preferido
+  preferir: [acrescentar, somar, aumentar]
+  significado_aprovado: acrescentar
+  exemplo_correto: Some a tarifa ao valor.
+  exemplo_incorreto: Acresça a tarifa ao valor.
+  versao_inclusao: 0.3.0
+
+- id: V-0141
+  lema: majorar
+  classe: verbo
+  status: nao_preferido
+  preferir: [aumentar]
+  significado_aprovado: aumentar
+  exemplo_correto: O sistema aumenta o limite em 10 %.
+  exemplo_incorreto: O sistema majora o limite em 10 %.
+  versao_inclusao: 0.3.0
+
+- id: V-0142
+  lema: minorar
+  classe: verbo
+  status: nao_preferido
+  preferir: [reduzir]
+  significado_aprovado: reduzir
+  exemplo_correto: O ajuste reduz a perda.
+  exemplo_incorreto: O ajuste minora a perda.
+  versao_inclusao: 0.3.0
+
+- id: V-0143
+  lema: providenciar
+  classe: verbo
+  status: nao_preferido
+  preferir: [verbo direto]
+  significado_aprovado: tomar as medidas para obter algo
+  motivo: 'Diga a ação: gere, peça, envie, prepare.'
+  exemplo_correto: Gere o certificado antes da instalação.
+  exemplo_incorreto: Providencie o certificado antes da instalação.
+  versao_inclusao: 0.3.0
+
+- id: V-0144
+  lema: oportunizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [permitir]
+  significado_aprovado: dar oportunidade
+  exemplo_correto: O piloto permite testar o fluxo.
+  exemplo_incorreto: O piloto oportuniza testar o fluxo.
+  versao_inclusao: 0.3.0
+
+- id: V-0145
+  lema: inviabilizar
+  classe: verbo
+  status: nao_preferido
+  preferir: [impedir]
+  significado_aprovado: tornar impossível
+  exemplo_correto: O bloqueio impede o deploy.
+  exemplo_incorreto: O bloqueio inviabiliza o deploy.
+  versao_inclusao: 0.3.0
+
+- id: V-0146
+  lema: impossibilitar
+  classe: verbo
+  status: nao_preferido
+  preferir: [impedir]
+  significado_aprovado: tornar impossível
+  exemplo_correto: A falta de rede impede a sincronização.
+  exemplo_incorreto: A falta de rede impossibilita a sincronização.
+  versao_inclusao: 0.3.0
+
+- id: V-0147
+  lema: possuir
+  classe: verbo
+  status: nao_preferido
+  preferir: [ter]
+  significado_aprovado: ter
+  formas: [possuir, possui, possuem, possua, possuam, possuiu, possuíam, possuía, possuindo, possuirá]
+  motivo: Comum em texto técnico (a tabela possui 3 colunas); ter é mais direto.
+  exemplo_correto: A tabela tem três colunas.
+  exemplo_incorreto: A tabela possui três colunas.
+  versao_inclusao: 0.3.0
+
+- id: V-0148
+  lema: perfazer
+  classe: verbo
+  status: nao_preferido
+  preferir: [somar, totalizar]
+  significado_aprovado: completar um total
+  formas: [perfazer, perfaz, perfazem, perfez, perfizeram, perfazendo, perfará]
+  exemplo_correto: As parcelas somam R$ 900.
+  exemplo_incorreto: As parcelas perfazem R$ 900.
+  versao_inclusao: 0.3.0
+
+- id: V-0149
+  lema: evidenciar
+  classe: verbo
+  status: nao_preferido
+  preferir: [mostrar]
+  significado_aprovado: mostrar
+  exemplo_correto: O log mostra o erro de permissão.
+  exemplo_incorreto: O log evidencia o erro de permissão.
+  versao_inclusao: 0.3.0
+
+- id: V-0150
+  lema: elencar
+  classe: verbo
+  status: nao_preferido
+  preferir: [listar]
+  significado_aprovado: listar
+  exemplo_correto: Liste as dependências do serviço.
+  exemplo_incorreto: Elenque as dependências do serviço.
+  versao_inclusao: 0.3.0
+
+- id: V-0151
+  lema: mensurar
+  classe: verbo
+  status: nao_preferido
+  preferir: [medir]
+  significado_aprovado: medir
+  exemplo_correto: Meça o tempo de resposta.
+  exemplo_incorreto: Mensure o tempo de resposta.
+  versao_inclusao: 0.3.0
+
+- id: V-0152
+  lema: fazer-se necessário
+  classe: locucao_verbal
+  status: nao_preferido
+  preferir: [é preciso, imperativo]
+  significado_aprovado: ser necessário
+  formas: [faz-se necessário, faz-se necessária, fazem-se necessários, fazem-se necessárias, se faz necessário, se faz necessária, se fazem necessários, se fazem necessárias, far-se-á necessário]
+  exemplo_correto: Reinicie o serviço.
+  exemplo_incorreto: Faz-se necessário reiniciar o serviço.
+  versao_inclusao: 0.3.0
+
+# ------------------------------------------------------------ conectivos
+
+- id: V-0212
+  lema: mediante
+  classe: conectivo
+  status: nao_preferido
+  preferir: [por, com, após]
+  significado_aprovado: por meio de, em troca de
+  motivo: Diga a relação real. "Mediante aprovação" significa "depois da aprovação"?
+  exemplo_correto: O acesso é liberado após a aprovação.
+  exemplo_incorreto: O acesso é liberado mediante aprovação.
+  versao_inclusao: 0.3.0
+
+- id: V-0213
+  lema: outrossim
+  classe: conectivo
+  status: nao_preferido
+  preferir: [também, além disso]
+  significado_aprovado: também
+  exemplo_correto: Além disso, atualize o certificado.
+  exemplo_incorreto: Outrossim, atualize o certificado.
+  versao_inclusao: 0.3.0
+
+- id: V-0214
+  lema: destarte
+  classe: conectivo
+  status: nao_preferido
+  preferir: [assim, por isso]
+  significado_aprovado: assim
+  exemplo_correto: Por isso, o lote para.
+  exemplo_incorreto: Destarte, o lote para.
+  versao_inclusao: 0.3.0
+
+- id: V-0215
+  lema: doravante
+  classe: conectivo
+  status: nao_preferido
+  preferir: [a partir de agora, a partir de <data>]
+  significado_aprovado: daqui em diante
+  exemplo_correto: A partir de 1º de março, use a versão 2.
+  exemplo_incorreto: Doravante, use a versão 2.
+  versao_inclusao: 0.3.0
+
+- id: V-0216
+  lema: porquanto
+  classe: conectivo
+  status: nao_preferido
+  preferir: [porque]
+  significado_aprovado: porque
+  exemplo_correto: O teste falhou porque o banco estava fora.
+  exemplo_incorreto: O teste falhou, porquanto o banco estava fora.
+  versao_inclusao: 0.3.0
+
+- id: V-0217
+  lema: conquanto
+  classe: conectivo
+  status: nao_preferido
+  preferir: [embora]
+  significado_aprovado: embora
+  exemplo_correto: Embora o teste passe, revise o log.
+  exemplo_incorreto: Conquanto o teste passe, revise o log.
+  versao_inclusao: 0.3.0
+
+- id: V-0218
+  lema: não obstante
+  classe: conectivo
+  status: nao_preferido
+  preferir: [apesar de, mas]
+  significado_aprovado: apesar de
+  exemplo_correto: Apesar do aviso, o deploy continuou.
+  exemplo_incorreto: Não obstante o aviso, o deploy continuou.
+  versao_inclusao: 0.3.0
+
+- id: V-0219
+  lema: todavia
+  classe: conectivo
+  status: nao_preferido
+  preferir: [mas, porém]
+  significado_aprovado: mas
+  exemplo_correto: O teste passou, mas o lint falhou.
+  exemplo_incorreto: O teste passou, todavia o lint falhou.
+  versao_inclusao: 0.3.0
+
+- id: V-0220
+  lema: ademais
+  classe: conectivo
+  status: nao_preferido
+  preferir: [além disso]
+  significado_aprovado: além disso
+  exemplo_correto: Além disso, o token expira em 1 h.
+  exemplo_incorreto: Ademais, o token expira em 1 h.
+  versao_inclusao: 0.3.0
+
+- id: V-0221
+  lema: bem como
+  classe: conectivo
+  status: nao_preferido
+  preferir: [e, e também]
+  significado_aprovado: e também
+  exemplo_correto: Exporte o CSV e o PDF.
+  exemplo_incorreto: Exporte o CSV, bem como o PDF.
+  versao_inclusao: 0.3.0
+
+- id: V-0222
+  lema: tão somente
+  classe: conectivo
+  status: nao_preferido
+  preferir: [só, somente]
+  significado_aprovado: somente
+  motivo: Mantenha a restrição (PTC-22); troque só a forma.
+  exemplo_correto: O perfil vê somente os próprios pedidos.
+  exemplo_incorreto: O perfil vê tão somente os próprios pedidos.
+  versao_inclusao: 0.3.0
+
+- id: V-0223
+  lema: em conformidade com
+  classe: conectivo
+  status: nao_preferido
+  preferir: [conforme, de acordo com]
+  significado_aprovado: de acordo com
+  formas: [em conformidade com, em consonância com, consoante]
+  exemplo_correto: Preencha o campo conforme a tabela 2.
+  exemplo_incorreto: Preencha o campo em conformidade com a tabela 2.
+  versao_inclusao: 0.3.0
+
+- id: V-0224
+  lema: no âmbito de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [em, "no", na]
+  significado_aprovado: dentro de
+  formas: [no âmbito de, no âmbito do, no âmbito da, no âmbito dos, no âmbito das]
+  exemplo_correto: No projeto, o time usa Python.
+  exemplo_incorreto: No âmbito do projeto, o time usa Python.
+  versao_inclusao: 0.3.0
+
+- id: V-0225
+  lema: em face de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [por causa de, diante de]
+  significado_aprovado: diante de
+  formas: [em face de, em face do, em face da, em face dos, em face das, face a, face ao, face à, face aos, face às]
+  exemplo_correto: Por causa da falha, o lote foi cancelado.
+  exemplo_incorreto: Em face da falha, o lote foi cancelado.
+  versao_inclusao: 0.3.0
+
+- id: V-0226
+  lema: por intermédio de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [por, com, pelo]
+  significado_aprovado: por meio de
+  formas: [por intermédio de, por intermédio do, por intermédio da, por intermédio dos, por intermédio das]
+  exemplo_correto: Envie o pedido pelo portal.
+  exemplo_incorreto: Envie o pedido por intermédio do portal.
+  versao_inclusao: 0.3.0
+
+- id: V-0227
+  lema: a título de
+  classe: conectivo
+  status: nao_preferido
+  preferir: [como]
+  significado_aprovado: como
+  flexao: nenhuma
+  exemplo_correto: Como exemplo, use o arquivo 2.
+  exemplo_incorreto: A título de exemplo, use o arquivo 2.
+  versao_inclusao: 0.3.0
+
+- id: V-0228
+  lema: via de regra
+  classe: conectivo
+  status: nao_preferido
+  preferir: [em geral, critério explícito]
+  significado_aprovado: em geral
+  motivo: Expressão vaga (PTC-12). Se houver exceções, liste-as.
+  flexao: nenhuma
+  exemplo_correto: Em geral, o lote termina às 6h.
+  exemplo_incorreto: Via de regra, o lote termina às 6h.
+  versao_inclusao: 0.3.0
+
+- id: V-0229
+  lema: a fim de que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [para que]
+  significado_aprovado: finalidade
+  flexao: nenhuma
+  exemplo_correto: Reinicie o serviço para que a mudança valha.
+  exemplo_incorreto: Reinicie o serviço a fim de que a mudança valha.
+  versao_inclusao: 0.3.0
+
+- id: V-0230
+  lema: uma vez que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [porque, depois que]
+  significado_aprovado: causa ou tempo
+  motivo: Ambíguo. Pode indicar causa (porque) ou tempo (depois que). Escolha o conectivo do sentido real.
+  flexao: nenhuma
+  exemplo_correto: O teste falhou porque o banco estava fora.
+  exemplo_incorreto: O teste falhou, uma vez que o banco estava fora.
+  versao_inclusao: 0.3.0
+
+- id: V-0231
+  lema: visto que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [porque]
+  significado_aprovado: porque
+  formas: [visto que, posto que]
+  motivo: '"Posto que" também é usado como "embora": ambíguo.'
+  exemplo_correto: O acesso falhou porque o token expirou.
+  exemplo_incorreto: O acesso falhou, visto que o token expirou.
+  versao_inclusao: 0.3.0
+
+- id: V-0232
+  lema: ao passo que
+  classe: conectivo
+  status: nao_preferido
+  preferir: [enquanto, mas]
+  significado_aprovado: oposição ou simultaneidade
+  flexao: nenhuma
+  exemplo_correto: O ambiente A usa Python, mas o B usa Go.
+  exemplo_incorreto: O ambiente A usa Python, ao passo que o B usa Go.
+  versao_inclusao: 0.3.0
+
+- id: V-0233
+  lema: em que pese
+  classe: conectivo
+  status: nao_preferido
+  preferir: [apesar de, embora]
+  significado_aprovado: apesar de
+  formas: [em que pese, em que pesem]
+  exemplo_correto: Apesar do custo, o time escolheu a opção 2.
+  exemplo_incorreto: Em que pese o custo, o time escolheu a opção 2.
+  versao_inclusao: 0.3.0
+
+- id: V-0234
+  lema: no presente momento
+  classe: conectivo
+  status: nao_preferido
+  preferir: [agora, hoje, data explícita]
+  significado_aprovado: agora
+  formas: [no presente momento, no momento presente]
+  exemplo_correto: Agora, o serviço está fora.
+  exemplo_incorreto: No presente momento, o serviço está fora.
+  versao_inclusao: 0.3.0
+
+- id: V-0235
+  lema: em tempo hábil
+  classe: conectivo
+  status: nao_preferido
+  preferir: [até <data ou prazo>]
+  significado_aprovado: no prazo
+  motivo: Prazo vago (PTC-12). Diga a data ou o prazo.
+  flexao: nenhuma
+  exemplo_correto: Envie o arquivo até as 18h.
+  exemplo_incorreto: Envie o arquivo em tempo hábil.
+  versao_inclusao: 0.3.0
+
+- id: V-0236
+  lema: com a maior brevidade possível
+  classe: conectivo
+  status: nao_preferido
+  preferir: [até <data ou prazo>]
+  significado_aprovado: o mais cedo possível
+  motivo: Prazo vago (PTC-12).
+  formas: [com a maior brevidade possível, com a máxima brevidade, com brevidade]
+  exemplo_correto: Corrija o erro até amanhã às 10h.
+  exemplo_incorreto: Corrija o erro com a maior brevidade possível.
+  versao_inclusao: 0.3.0
+
+- id: V-0237
+  lema: de forma a
+  classe: conectivo
+  status: nao_preferido
+  preferir: [para]
+  significado_aprovado: finalidade
+  formas: [de forma a, de modo a, de maneira a]
+  exemplo_correto: Ajuste o índice para reduzir o tempo de consulta.
+  exemplo_incorreto: Ajuste o índice de forma a reduzir o tempo de consulta.
+  versao_inclusao: 0.3.0
+
+# ------------------------------------------------------------ padrões
+
+- id: V-0302
+  lema: introdução vazia
+  classe: padrao
+  status: nao_preferido
+  preferir: [diga o fato diretamente]
+  significado_aprovado: —
+  padrao: "\\b(?:(?:cabe|cumpre|vale|convém)\\s+(?:ressaltar|salientar|destacar|informar|lembrar|mencionar|esclarecer|registrar)|é\\s+(?:importante|válido|interessante|oportuno)\\s+(?:ressaltar|salientar|destacar|lembrar|mencionar|informar)|(?:informamos|esclarecemos|comunicamos|ressaltamos|gostaríamos\\s+de\\s+informar))\\s+que\\b"
+  exemplo_correto: O token expira em 1 h.
+  exemplo_incorreto: Cabe ressaltar que o token expira em 1 h.
+  versao_inclusao: 0.3.0
+
+- id: V-0303
+  lema: mesóclise
+  classe: padrao
+  status: nao_preferido
+  preferir: [imperativo, voz ativa]
+  significado_aprovado: —
+  padrao: "\\b[a-zà-ÿ]+-(?:se|lo|la|los|las|lhe|lhes|me|nos)-(?:á|ão|ia|iam|emos|ei|íamos)\\b"
+  exemplo_correto: Reinicie o serviço depois da alteração.
+  exemplo_incorreto: Reiniciar-se-á o serviço depois da alteração.
+  versao_inclusao: 0.3.0
+
+- id: V-0304
+  lema: a problemática
+  classe: padrao
+  status: nao_preferido
+  preferir: [o problema]
+  significado_aprovado: —
+  padrao: "\\b(?:a|da|na|esta|essa|desta|dessa|nesta|nessa)\\s+problemática\\b(?!\\s+(?:é|foi|era)\\b)"
+  motivo: O adjetivo (situação problemática) não é marcado.
+  exemplo_correto: O problema do lote é a falta de índice.
+  exemplo_incorreto: A problemática do lote é a falta de índice.
+  versao_inclusao: 0.3.0
+
+# ------------------------------------------------------------ adjetivos e advérbios
+
+- id: V-0500
+  lema: supracitado
+  classe: adjetivo
+  status: nao_preferido
+  regra: PTC-07
+  preferir: [repita o substantivo, citado na seção N]
+  significado_aprovado: citado antes
+  formas: [supracitado, supracitada, supracitados, supracitadas, supramencionado, supramencionada, supramencionados, supramencionadas, retrocitado, retrocitada, retrocitados, retrocitadas, acima citado, acima citada, acima citados, acima citadas, acima mencionado, acima mencionada, acima mencionados, acima mencionadas]
+  motivo: Obriga o leitor a procurar o referente.
+  exemplo_correto: Abra o arquivo config.yaml.
+  exemplo_incorreto: Abra o arquivo supracitado.
+  versao_inclusao: 0.3.0
+
+- id: V-0501
+  lema: precípuo
+  classe: adjetivo
+  status: nao_preferido
+  preferir: [principal]
+  significado_aprovado: principal
+  exemplo_correto: O objetivo principal é reduzir a perda.
+  exemplo_incorreto: O objetivo precípuo é reduzir a perda.
+  versao_inclusao: 0.3.0
+
+- id: V-0502
+  lema: primordial
+  classe: adjetivo
+  status: nao_preferido
+  preferir: [principal, obrigatório]
+  significado_aprovado: principal
+  exemplo_correto: O backup é obrigatório antes da migração.
+  exemplo_incorreto: O backup é primordial antes da migração.
+  versao_inclusao: 0.3.0
+
+- id: V-0503
+  lema: imprescindível
+  classe: adjetivo
+  status: nao_preferido
+  preferir: [obrigatório, necessário]
+  significado_aprovado: necessário
+  motivo: Se for requisito, diga obrigatório (PTC-19).
+  formas: [imprescindível, imprescindíveis, indispensável, indispensáveis]
+  exemplo_correto: O token é obrigatório.
+  exemplo_incorreto: O token é imprescindível.
+  versao_inclusao: 0.3.0
+
+- id: V-0504
+  lema: primeiramente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [primeiro]
+  significado_aprovado: primeiro
+  exemplo_correto: Primeiro, pare o serviço.
+  exemplo_incorreto: Primeiramente, pare o serviço.
+  versao_inclusao: 0.3.0
+
+- id: V-0505
+  lema: anteriormente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [antes]
+  significado_aprovado: antes
+  exemplo_correto: Antes, o lote rodava às 2h.
+  exemplo_incorreto: Anteriormente, o lote rodava às 2h.
+  versao_inclusao: 0.3.0
+
+- id: V-0506
+  lema: concomitantemente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [ao mesmo tempo]
+  significado_aprovado: ao mesmo tempo
+  exemplo_correto: Os dois lotes rodam ao mesmo tempo.
+  exemplo_incorreto: Os dois lotes rodam concomitantemente.
+  versao_inclusao: 0.3.0
+
+- id: V-0507
+  lema: conjuntamente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [junto, juntos]
+  significado_aprovado: junto
+  exemplo_correto: Publique os dois serviços juntos.
+  exemplo_incorreto: Publique os dois serviços conjuntamente.
+  versao_inclusao: 0.3.0
+
+- id: V-0508
+  lema: integralmente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [todo, inteiro, por completo]
+  significado_aprovado: por completo
+  exemplo_correto: Copie o arquivo inteiro.
+  exemplo_incorreto: Copie integralmente o arquivo.
+  versao_inclusao: 0.3.0
+
+- id: V-0509
+  lema: basicamente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [remova]
+  significado_aprovado: —
+  motivo: Palavra de preenchimento. Remova ou diga o que é essencial.
+  exemplo_correto: O serviço lê a fila e grava no banco.
+  exemplo_incorreto: O serviço basicamente lê a fila e grava no banco.
+  versao_inclusao: 0.3.0
+
+- id: V-0510
+  lema: hodiernamente
+  classe: adverbio
+  status: nao_preferido
+  preferir: [hoje, atualmente]
+  significado_aprovado: hoje
+  exemplo_correto: Hoje, o time usa a versão 3.
+  exemplo_incorreto: Hodiernamente, o time usa a versão 3.
+  versao_inclusao: 0.3.0
+
+# ------------------------------------------------------------ substantivos
+
+- id: V-0600
+  lema: metodologia
+  classe: substantivo
+  status: nao_preferido
+  preferir: [método]
+  significado_aprovado: estudo dos métodos
+  motivo: Metodologia é o estudo dos métodos. Para "o modo de fazer", use método.
+  exemplo_correto: O método de cálculo usa a média móvel.
+  exemplo_incorreto: A metodologia de cálculo usa a média móvel.
+  versao_inclusao: 0.3.0
+
+- id: V-0601
+  lema: utilização
+  classe: substantivo
+  status: nao_preferido
+  preferir: [uso]
+  significado_aprovado: uso
+  exemplo_correto: O uso do cache reduz o tempo.
+  exemplo_incorreto: A utilização do cache reduz o tempo.
+  versao_inclusao: 0.3.0
+
+- id: V-0602
+  lema: finalização
+  classe: substantivo
+  status: nao_preferido
+  preferir: [fim, término]
+  significado_aprovado: fim
+  exemplo_correto: No fim do lote, o sistema envia o relatório.
+  exemplo_incorreto: Na finalização do lote, o sistema envia o relatório.
+  versao_inclusao: 0.3.0
+
+- id: V-0603
+  lema: efetivação
+  classe: substantivo
+  status: nao_preferido
+  preferir: [conclusão, aplicação]
+  significado_aprovado: conclusão
+  exemplo_correto: Depois da aplicação da mudança, reinicie o serviço.
+  exemplo_incorreto: Depois da efetivação da mudança, reinicie o serviço.
+  versao_inclusao: 0.3.0
+
+- id: V-0604
+  lema: disponibilização
+  classe: substantivo
+  status: nao_preferido
+  preferir: [publicação, liberação]
+  significado_aprovado: ato de tornar disponível
+  exemplo_correto: A publicação da versão 2 está prevista para março.
+  exemplo_incorreto: A disponibilização da versão 2 está prevista para março.
+  versao_inclusao: 0.3.0

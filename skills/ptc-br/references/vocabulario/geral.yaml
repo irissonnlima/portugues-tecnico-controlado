@@ -11,7 +11,8 @@
 #   V-0300..0399  padrões (construções)
 #   V-0400..0499  palavras com mais de um sentido técnico
 #
-# Status em_analise = decisão pendente do time; gera alerta de confiança baixa.
+# Status em_analise = decisão pendente; gera alerta de confiança baixa.
+# sinonimo_de = sinônimo aceito no vocabulário geral; a camada do time escolhe um dos dois.
 
 # ------------------------------------------------------------ verbos de instrução aprovados
 
@@ -213,10 +214,10 @@
 - id: V-0114
   lema: conferir
   classe: verbo
-  status: em_analise
-  preferir: [verificar]
-  significado_aprovado: examinar um estado
-  motivo: Uso muito frequente no corpus do time. Decidir se vira sinônimo aceito ou se padroniza em verificar.
+  status: aprovado
+  sinonimo_de: verificar
+  significado_aprovado: examinar um estado ou comparar um resultado com uma referência
+  motivo: Sinônimo aceito de verificar no vocabulário geral (decisão 0.3.0). Cada time escolhe um dos dois na sua camada de vocabulário.
   formas: [conferir, confere, conferem, confira, confiram, conferiu, conferido, conferida, conferindo, conferirá]
   versao_inclusao: 0.2.0
 
@@ -255,7 +256,8 @@
   status: nao_preferido
   preferir: [estar]
   significado_aprovado: estar em um estado
-  formas: [encontrar-se, encontra-se, encontram-se, se encontra, se encontram, se encontrar, encontrava-se, se encontrava, se encontre, se encontrem]
+  formas: [encontrar-se, encontra-se, encontram-se, se encontra, se encontram, encontrava-se, se encontrava]
+  motivo: '"Se encontrar o arquivo" (condição com o verbo encontrar) não é marcado.'
   exemplo_correto: Se o certificado estiver vencido…
   exemplo_incorreto: Quando o certificado encontrar-se vencido…
   versao_inclusao: 0.2.0
@@ -294,28 +296,27 @@
 - id: V-0122
   lema: solicitar
   classe: verbo
-  status: em_analise
-  preferir: [pedir]
-  significado_aprovado: pedir formalmente
-  motivo: Aceito em formulários e telas (Solicitar acesso). Decidir se o vocabulário restringe ao contexto de interface.
+  status: aprovado
+  significado_aprovado: pedir formalmente, em especial por meio de um sistema ou formulário
+  motivo: Termo-padrão em interfaces e textos formais (Solicitar acesso). Aprovado na 0.3.0.
   versao_inclusao: 0.2.0
 
 - id: V-0123
   lema: parametrizar
   classe: verbo
-  status: em_analise
-  preferir: [configurar]
-  significado_aprovado: definir parâmetros
-  motivo: Tem sentido técnico próprio (parametrizar uma consulta). Avaliar se é sinônimo de configurar no domínio.
+  status: aprovado
+  significado_aprovado: definir os parâmetros de uma consulta, função, relatório ou modelo
+  motivo: Sentido próprio, diferente de configurar (ajustar um sistema ou ambiente). Aprovado na 0.3.0.
+  exemplo_correto: Parametrize a consulta com a data de corte.
   versao_inclusao: 0.2.0
 
 - id: V-0124
   lema: rodar
   classe: verbo
-  status: em_analise
-  preferir: [executar]
-  significado_aprovado: executar um programa ou comando
-  motivo: Registro informal muito usado no time (rode o teste). Decidir entre aceitar no PTC-L e no PTC-T ou padronizar em executar.
+  status: aprovado
+  sinonimo_de: executar
+  significado_aprovado: executar um programa, comando ou teste
+  motivo: Sinônimo aceito de executar no vocabulário geral (decisão 0.3.0). Cada time escolhe um dos dois na sua camada de vocabulário.
   versao_inclusao: 0.2.0
 
 # ------------------------------------------------------------ conectivos não preferidos
