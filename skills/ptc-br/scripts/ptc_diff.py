@@ -25,6 +25,25 @@ from pathlib import Path
 
 LEXICO = json.loads((Path(__file__).with_name("lexico.json")).read_text(encoding="utf-8"))
 UNIDADES = set(LEXICO["unidades"])
+_VOCAB = Path(__file__).with_name("vocabulario.json")
+_VERBETES = json.loads(_VOCAB.read_text(encoding="utf-8"))["verbetes"] if _VOCAB.exists() else []
+ESCALA = [(v["lema"], re.compile(v["regex"], re.I)) for v in _VERBETES if v.get("probabilidade")]
+VAGOS = [re.compile(v["regex"], re.I) for v in _VERBETES if v.get("regra") == "PTC-26" and not v.get("probabilidade")]
+RE_PCT_PARENTESE = re.compile(r"\s*\(\s*(?:~|≈|cerca de\s+)?\d+(?:[.,]\d+)?\s*%?\s*(?:(?:–|—|-|a)\s*\d+(?:[.,]\d+)?\s*)?%\s*\)")
+
+
+def graus_de_certeza(texto: str) -> Counter:
+    """Termos da escala de probabilidade (PTC-26) no texto. Um termo dentro de outro maior não conta."""
+    achados = [(m.start(), m.end(), lema) for lema, rx in ESCALA for m in rx.finditer(texto)]
+    achados = [a for a in achados if not any(b[0] <= a[0] and a[1] <= b[1] and b[1] - b[0] > a[1] - a[0] for b in achados)]
+    return Counter(a[2] for a in achados)
+
+
+def sem_percentual_da_escala(texto: str) -> str:
+    """Remove o "(55–80%)" que acompanha um termo da escala: ele explica o termo, não é um dado novo."""
+    for _, rx in ESCALA:
+        texto = re.sub(rf"({rx.pattern}){RE_PCT_PARENTESE.pattern}", r"\1", texto, flags=re.I)
+    return texto
 
 NUM_PALAVRAS = {
     "dois": 2, "duas": 2, "três": 3, "quatro": 4, "cinco": 5, "seis": 6, "sete": 7, "oito": 8, "nove": 9,
@@ -121,7 +140,7 @@ def comparar(original: str, reescrita: str) -> dict:
     o, r = normalizar(original), normalizar(reescrita)
     alertas = []
 
-    no, nr = numeros(original), numeros(reescrita)
+    no, nr = numeros(sem_percentual_da_escala(original)), numeros(sem_percentual_da_escala(reescrita))
     perdidos, novos = no - nr, nr - no
     if perdidos:
         alertas.append({"classe": "numero", "severidade": "alta", "tipo": "perda",
@@ -138,6 +157,18 @@ def comparar(original: str, reescrita: str) -> dict:
         elif cr > co:
             alertas.append({"classe": classe, "severidade": SEVERIDADE[classe][1], "tipo": "adicao",
                             "detalhe": f"{classe}: {co} no original, {cr} na reescrita"})
+
+    go, gr = graus_de_certeza(original), graus_de_certeza(reescrita)
+    vago_original = any(rx.search(original) for rx in VAGOS)
+    if go - gr:
+        alertas.append({"classe": "probabilidade", "severidade": "alta", "tipo": "perda",
+                        "detalhe": f"Grau de certeza removido ou alterado: {sorted((go - gr).elements())} → "
+                                   f"{sorted((gr - go).elements()) or 'nenhum'}"})
+    elif gr - go:
+        sev, motivo = ("media", "o original usa expressão vaga; confirme o nível com o autor") if vago_original \
+            else ("alta", "o original não informa grau de certeza")
+        alertas.append({"classe": "probabilidade", "severidade": sev, "tipo": "adicao",
+                        "detalhe": f"Grau de certeza acrescentado: {sorted((gr - go).elements())} ({motivo})"})
 
     ro, rr = raizes(original), raizes(reescrita)
     termos_novos = sorted(rr[k] for k in rr.keys() - ro.keys())

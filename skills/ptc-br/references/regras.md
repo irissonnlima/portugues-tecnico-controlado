@@ -1,17 +1,19 @@
 # PTC-BR — Português Técnico Controlado
 
-**Especificação experimental — versão 0.3.0**
-**Status:** rascunho para discussão
-**Idioma:** português brasileiro (pt-BR)
-**Referências conceituais:** princípios de linguagem simples da ABNT NBR ISO 24495-1 e abordagem de linguagem controlada do ASD-STE100.
+<!-- ptc-mencoes: italico -->
 
-> **Aviso:** este documento é uma proposta independente. Não é uma norma da ABNT, não é uma tradução do ASD-STE100 e não estabelece conformidade com nenhum desses documentos. Os limites numéricos e as listas de palavras abaixo são decisões experimentais deste projeto.
+- **Versão:** 0.4.0 (especificação experimental)
+- **Status:** rascunho para discussão
+- **Idioma:** português brasileiro (pt-BR)
+- **Referências conceituais:** a linguagem simples da ABNT NBR ISO 24495-1 e a linguagem controlada ASD-STE100 (Simplified Technical English)
+
+> **Natureza deste documento:** proposta independente. Ela não é norma da ABNT nem tradução do ASD-STE100, e não declara conformidade com esses documentos. Os limites numéricos e as listas de palavras são decisões experimentais deste projeto.
 
 ## 1. Objetivo
 
 O PTC-BR define regras para escrever textos técnicos claros, consistentes e sem ambiguidade desnecessária. O público-alvo são instruções, especificações de software, manuais, relatórios e comunicações de engenharia.
 
-**Princípio central:** cada frase transmite uma informação identificável. O leitor não precisa deduzir quem executa uma ação, a que objeto uma palavra se refere ou qual condição precisa ser atendida.
+**Princípio central:** cada frase transmite uma informação identificável. O leitor sabe quem executa cada ação, a que objeto cada palavra se refere e qual condição vale para cada ação.
 
 ## 2. Como ler as regras
 
@@ -19,7 +21,7 @@ Cada regra tem um **ID**, um **nível** e um **tipo de verificação**.
 
 **Nível** (no perfil padrão PTC-T):
 
-- **[OBRIGATÓRIA]** — uma violação sem exceção registrada torna o texto *Não conforme*.
+- **[OBRIGATÓRIA]** — uma violação torna o texto *Não conforme*, salvo exceção registrada (seção 6).
 - **[RECOMENDADA]** — uma violação gera sugestão, não reprova o texto.
 
 **Tipo de verificação:**
@@ -70,6 +72,7 @@ O nível de cada regra muda conforme o perfil. **O** = obrigatória, **R** = rec
 | PTC-23 Sem subordinação excessiva | R | R | O |
 | PTC-24 Exceção registrada | — | O | O |
 | PTC-25 Vocabulário controlado | R | R | O |
+| PTC-26 Probabilidade com percentual | R | O | O |
 
 ## 4. Regras de escrita
 
@@ -108,10 +111,29 @@ O nível de cada regra muda conforme o perfil. **O** = obrigatória, **R** = rec
 
 ### 4.5. Qualidade e revisão
 
-- **PTC-22 [OBRIGATÓRIA] (P)** — Ao reescrever, preserve números, operadores, negações, restrições (*só*, *exceto*), condições e relações de causa e efeito. **Não acrescente** informação que o original não contém.
-- **PTC-23 [RECOMENDADA] (P)** — Reescreva frases com três ou mais orações subordinadas ou com negações encadeadas na mesma oração: *Não é possível não validar*; *Nunca entregue X sem Y*. A concordância negativa (*não há X nem Y*, *não precisa de nada*) conta como **uma** negação. Orações coordenadas (*não resolve e não tem rota*) são avaliadas separadamente.
+- **PTC-22 [OBRIGATÓRIA] (P)** — Ao reescrever, preserve números, operadores, negações, restrições (*só*, *exceto*), condições e relações de causa e efeito. Use **só** a informação que o original contém.
+- **PTC-23 [RECOMENDADA] (P)** — Reescreva frases com três ou mais orações subordinadas. Reescreva também negações encadeadas na mesma oração: *Não é possível não validar*; *Nunca entregue X sem Y*.
+  - A concordância negativa (*não há X nem Y*, *não precisa de nada*) conta como **uma** negação.
+  - O verificador avalia cada oração coordenada em separado (*não resolve e não tem rota*).
 - **PTC-24 [OBRIGATÓRIA] (A)** — Registre exceções justificadas às regras obrigatórias (seção 6), em vez de alterar o sentido em silêncio.
 - **PTC-25 [RECOMENDADA] (A)** — Use o termo preferido do vocabulário controlado (seção 7). Um termo com status *proibido* é violação obrigatória em qualquer perfil.
+
+### 4.6. Probabilidade e certeza
+
+- **PTC-26 [OBRIGATÓRIA] (A)** — Expresse probabilidade só com os termos da escala abaixo. Escreva a faixa percentual entre parênteses logo depois do termo, em toda ocorrência: *A causa provável (55–80%) é o certificado.* O número informado precisa caber na faixa do termo.
+
+| Termo | Faixa | Termo | Faixa |
+|---|---|---|---|
+| quase impossível | 1–5% | provável | 55–80% |
+| muito improvável | 5–20% | muito provável | 80–95% |
+| improvável | 20–45% | quase certo | 95–99% |
+| chance equilibrada | 45–55% | | |
+
+- A escala segue a Intelligence Community Directive 203 (ICD 203), padrão de 2015 da comunidade de inteligência dos EUA. Esse padrão atualiza a tabela *Words of Estimative Probability*, de Sherman Kent (CIA, 1964).
+- Formas derivadas seguem a faixa do termo: *provavelmente* (55–80%), *quase certamente* (95–99%), *provavelmente não* (20–45%).
+- Expressões vagas (*talvez*, *possivelmente*, *é possível que*, *certamente*, *dificilmente*, *grande chance*) não têm faixa. Troque por um termo da escala.
+- Para um fato determinístico (regra do sistema, limite configurado), afirme o fato, sem termo de probabilidade: *O token expira em 1 h.*
+- O percentual serve de checagem cruzada: o verificador aponta o termo sem percentual e o número fora da faixa (*muito provável (60%)*).
 
 ## 5. Regras de contagem
 
@@ -135,11 +157,13 @@ Estas regras valem para PTC-03, PTC-04 e PTC-15.
 - abreviações: *ex.*, *p. ex.*, *Sr.*, *Sra.*, *Dr.*, *nº*, *art.*, *fig.*, *pág.*, *aprox.*, *máx.*, *mín.*, *obs.*, *etc.* no meio da frase, *e.g.*, *i.e.*;
 - números decimais e versões: *1.5*, *v2.1.0*.
 
-**Item de lista:** cada item conta como uma frase. Um item de **lista numerada** é tratado como **instrução** (limite da PTC-03). Os demais blocos são tratados como **descrição** (limite da PTC-04).
+**Item de lista:** cada item conta como uma frase. O verificador trata um item de **lista numerada** como **instrução** (limite da PTC-03) e os demais blocos como **descrição** (limite da PTC-04).
+
+**Menção:** com a diretiva `ptc-mencoes` (seção 6), cada trecho citado conta como uma palavra.
 
 **Fora da contagem:** títulos, blocos de código, tabelas e comentários HTML.
 
-## 6. Exceções e siglas conhecidas
+## 6. Exceções, siglas e diretivas
 
 Registre uma exceção com um comentário HTML **na linha anterior** ao bloco afetado:
 
@@ -154,7 +178,21 @@ Declare siglas conhecidas do público, uma vez por documento:
 <!-- ptc-siglas: API, SQL, HTTP -->
 ```
 
-Para um time ou domínio inteiro, passe a lista ao verificador: `ptc_check.py arquivo.md --siglas siglas.txt` (uma sigla por linha) ou `--siglas "DDL,HML"`.
+Para um time ou domínio inteiro, passe a lista ao verificador: `ptc_check.py arquivo.md --siglas siglas.txt` (uma sigla por linha) ou `--siglas "DDL,HML"`. Um título também define a sigla: `# PTC-BR — Português Técnico Controlado`.
+
+### 6.1. Diretivas de bloco
+
+| Diretiva | Efeito |
+|---|---|
+| `<!-- ptc-ignorar: motivo -->` | O bloco seguinte fica fora da verificação. Use para exemplos incorretos de propósito. |
+| `<!-- ptc-ignorar-inicio: motivo -->` … `<!-- ptc-ignorar-fim -->` | A região inteira fica fora da verificação. |
+| `<!-- ptc-idioma: en -->` | O bloco seguinte está em outro idioma e fica fora da verificação. |
+| `<!-- ptc-idioma-inicio: en -->` … `<!-- ptc-idioma-fim -->` | A região inteira está em outro idioma. |
+| `<!-- ptc-mencoes: italico, aspas -->` | Vale para o documento. Trechos em itálico ou entre aspas são **menções** a um termo, não uso. A menção não gera alerta de vocabulário e conta como uma palavra. |
+
+O verificador também **detecta blocos em inglês** pelas palavras funcionais (*the*, *of*, *is*) e os deixa fora da verificação. Termos técnicos em inglês dentro de uma frase em português não mudam o idioma do bloco. A opção `--sem-deteccao-idioma` desliga a detecção.
+
+Todo bloco fora da verificação aparece em `blocos_ignorados`, com a linha e o motivo.
 
 ## 7. Vocabulário controlado
 
@@ -201,7 +239,18 @@ ptc_check.py doc.md --vocabulario camada-do-time.yaml
 
 Com `--lematizar` e a biblioteca `simplemma` instalada, o verificador também acha formas que a flexão automática não gera (*utilizaremos*, *efetuássemos*). Verbetes com `formas` ou `padrao` explícitos não usam lematização: nesses casos o autor restringiu as formas para evitar ambiguidade (*auxiliar* como adjetivo).
 
-### 7.5. Amostra
+### 7.5. Anglicismos
+
+- **Substantivos técnicos consolidados** (*commit*, *branch*, *pipeline*, *query*) são aprovados nos glossários de domínio. Escreva-os **sem itálico**: eles são vocabulário da área, não palavras estrangeiras ocasionais.
+- O glossário registra o **gênero** de cada termo (*o commit*, *a branch*, *o pipeline*, *a query*). O verificador aponta o gênero oposto (PTC-08).
+- **Verbos aportuguesados** (*commitar*, *deployar*, *setar*, *startar*) são não preferidos. Use o verbo em português ou *fazer + substantivo*: *faça commit*, *publique*, *defina*, *inicie*.
+- Um time que prefira o termo em português (*implantação* em vez de *deploy*) registra a escolha na camada dele (seção 7.3).
+
+### 7.6. Glossários de domínio
+
+Os glossários ficam em `references/glossarios/`: `software.yaml`, `dados.yaml`, `infraestrutura.yaml` e `financas.yaml`. Cada termo tem definição, domínio e, para anglicismos, gênero. A opção `--dominios software,dados` restringe os glossários usados; o padrão é usar todos.
+
+### 7.7. Amostra
 
 | Prefira | Evite quando desnecessário | Observação |
 |---|---|---|
@@ -241,6 +290,7 @@ versao_inclusao: 0.1.0
 
 **Antes:**
 
+<!-- ptc-ignorar: exemplo do texto original, com os problemas que a seção corrige -->
 > Quando o certificado utilizado para a autenticação encontrar-se fora do seu período de validade, deverá ser realizado o procedimento de renovação para possibilitar a continuidade da operação.
 
 **Depois (PTC-T):**
@@ -257,6 +307,7 @@ versao_inclusao: 0.1.0
 
 **Antes:**
 
+<!-- ptc-ignorar: exemplo do texto original, com os problemas que a seção corrige -->
 > O presente estudo objetiva proceder à comparação de metodologias estocásticas aplicadas à maximização do desempenho de configurações aeronáuticas sujeitas a alterações regulamentares.
 
 **Depois (PTC-T):**
@@ -277,6 +328,7 @@ versao_inclusao: 0.1.0
 
 **Reescrita incorreta:**
 
+<!-- ptc-ignorar: exemplo de reescrita incorreta -->
 > O sistema aprova a assinatura quando o certificado é válido.
 
 **Reescrita correta:**
@@ -296,6 +348,9 @@ versao_inclusao: 0.1.0
 | Siglas sem definição | PTC-17 | P | `ptc_check.py` |
 | Vocabulário controlado | PTC-25, PTC-07 | A | `ptc_check.py` + `vocabulario.json` |
 | Palavras com mais de um sentido | PTC-08 | P | relatório `vocabulario_polissemico` + revisão |
+| Gênero dos termos do glossário | PTC-08 | A | `ptc_check.py` + glossários |
+| Probabilidade com percentual coerente | PTC-26 | A | `ptc_check.py` |
+| Grau de certeza preservado na reescrita | PTC-22, PTC-26 | A | `ptc_diff.py` |
 | Voz passiva analítica | PTC-05 | P | `ptc_check.py` + revisão |
 | Aviso sem consequência | PTC-21 | P | `ptc_check.py` + revisão |
 | Negações e subordinadas encadeadas | PTC-23 | P | `ptc_check.py` + revisão |
@@ -324,8 +379,11 @@ Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam
 ## 11. Próximas versões
 
 - **0.2.0:** vocabulário controlado com 68 verbetes, schema validado e flexão automática; regra PTC-25; PTC-23 com concordância negativa; precisão do verificador medida em corpus real.
-- **0.3.0 (atual):** camadas de vocabulário do time; sinônimos aceitos; 164 verbetes; lematização opcional.
-- **0.4.0:** glossários de domínio (software e dados); política de anglicismos; casos de teste de ambiguidade.
+- **0.3.0:** camadas de vocabulário do time; sinônimos aceitos; 164 verbetes; lematização opcional.
+- **0.4.0 (atual):** escala de probabilidade (PTC-26) e política de anglicismos.
+  - Glossários de software, dados, infraestrutura e finanças, com gênero.
+  - Diretivas de idioma, de menção e de bloco ignorado.
+  - Casos de ambiguidade e documentação do projeto revisada com o PTC-BR.
 - **0.5.0–0.9.0:** uso real; taxa de aceitação por regra; ajustes.
 - **1.0.0:** IDs estáveis; teste de compreensão com leitores; licença e governança definidas.
 

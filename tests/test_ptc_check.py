@@ -70,6 +70,9 @@ class Regras(unittest.TestCase):
         r = pc.verificar("O arquivo é validado pelo sistema.")["achados"]
         self.assertTrue(any(a["regra"] == "PTC-05" and a["confianca"] == "media" for a in r))
 
+    def test_ptc05_ignora_muito(self):
+        self.assertNotIn("PTC-05", regras("A falha é muito rara."))
+
     def test_ptc05_ignora_adjetivo(self):
         self.assertNotIn("PTC-05", regras("O valor é adequado para o teste."))
 
@@ -169,3 +172,66 @@ class Perfis(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Diretivas(unittest.TestCase):
+    """0.4.0: ptc-ignorar, ptc-idioma, ptc-mencoes e detecção automática de inglês."""
+
+    def test_ignorar_proximo_bloco(self):
+        res = pc.verificar("<!-- ptc-ignorar: exemplo incorreto -->\nRealize a verificação.\n\nRealize a análise.")
+        self.assertEqual(len([a for a in res["achados"] if a["regra"] == "PTC-11"]), 1)
+        self.assertEqual(res["blocos_ignorados"][0]["motivo"], "ignorar: exemplo incorreto")
+
+    def test_regiao_ignorada(self):
+        txt = "<!-- ptc-ignorar-inicio: exemplos -->\nRealize a verificação.\n\nUtilize o token.\n<!-- ptc-ignorar-fim -->\n\nRealize a análise."
+        res = pc.verificar(txt)
+        self.assertEqual([a["linha"] for a in res["achados"]], [7])
+
+    def test_idioma_marcado(self):
+        res = pc.verificar("<!-- ptc-idioma: en -->\nExecute os testes rapidamente.")
+        self.assertEqual(res["achados"], [])
+
+    def test_ingles_detectado(self):
+        res = pc.verificar("Execute the query and check the results quickly.")
+        self.assertEqual(res["achados"], [])
+        self.assertEqual(res["blocos_ignorados"][0]["motivo"], "idioma detectado: en")
+
+    def test_termos_ingleses_em_frase_portuguesa_nao_e_ingles(self):
+        self.assertFalse(pc.parece_ingles("Faça o commit da branch e abra o pull request."))
+
+    def test_deteccao_desligada(self):
+        res = pc.verificar("Execute the query and check the results.", detectar_idioma=False)
+        self.assertEqual(res["blocos_ignorados"], [])
+
+    def test_mencoes_em_italico(self):
+        txt = "<!-- ptc-mencoes: italico -->\nNão use *utilizar* nem *a nível de*. Utilize o verbo usar."
+        msgs = [a["mensagem"] for a in pc.verificar(txt)["achados"]]
+        self.assertEqual(len([m for m in msgs if "V-0100" in m]), 1)
+        self.assertFalse([m for m in msgs if "V-0210" in m])
+
+    def test_mencao_conta_como_uma_palavra(self):
+        self.assertEqual(pc.contar_palavras(pc.mascarar_mencoes("Use *dar início a* aqui.", {"italico"})), 3)
+
+
+class PrecisaoDocumentacao(unittest.TestCase):
+    """Falsos positivos achados ao aplicar o PTC-BR na própria documentação (0.4.0)."""
+
+    def regras(self, texto):
+        return [a["regra"] for a in pc.verificar(texto)["achados"]]
+
+    def test_sigla_definida_no_titulo(self):
+        self.assertNotIn("PTC-17", self.regras("# PTC-BR — Português Técnico Controlado\n\nO PTC-BR define regras."))
+        self.assertNotIn("PTC-17", self.regras("# Planejamento de Recursos (ERP)\n\nO ERP grava pedidos."))
+
+    def test_sigla_com_sufixo_definida(self):
+        self.assertNotIn("PTC-17", self.regras("O PTC-BR (Português Técnico Controlado) define regras. O PTC-T é o perfil."))
+
+    def test_marcador_de_posicao_nao_e_sigla(self):
+        self.assertNotIn("PTC-17", self.regras("Cite o ID da regra (PTC-NN)."))
+
+    def test_execute_a_aplicacao(self):
+        self.assertNotIn("PTC-11", self.regras("Execute a aplicação com o perfil de teste."))
+
+    def test_adjetivo_proparoxitono_nao_e_passiva(self):
+        self.assertNotIn("PTC-05", self.regras("O certificado é válido."))
+        self.assertIn("PTC-05", self.regras("O arquivo foi incluído pelo sistema."))

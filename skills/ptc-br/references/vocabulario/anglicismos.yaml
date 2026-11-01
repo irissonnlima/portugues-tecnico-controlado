@@ -1,0 +1,230 @@
+# Vocabulário controlado PTC-BR — verbos aportuguesados do inglês (spec 0.4.0)
+#
+# Política de anglicismos:
+#   - substantivos técnicos consolidados (commit, branch, pipeline) são aprovados nos glossários de domínio,
+#     sem itálico e com gênero registrado (references/glossarios/);
+#   - verbos aportuguesados (commitar, deployar, setar) são não preferidos: use o verbo em português
+#     ou "fazer + substantivo" (fazer commit, fazer merge).
+# Faixa de ID: V-0800..0899.
+
+- id: V-0800
+  lema: commitar
+  classe: verbo
+  status: nao_preferido
+  preferir: [fazer commit, registrar]
+  significado_aprovado: gravar alterações no repositório
+  exemplo_correto: Faça commit das alterações.
+  exemplo_incorreto: Commite as alterações.
+  versao_inclusao: 0.4.0
+
+- id: V-0801
+  lema: deployar
+  classe: verbo
+  status: nao_preferido
+  preferir: [publicar, implantar, fazer deploy]
+  significado_aprovado: publicar uma versão em um ambiente
+  formas: [deployar, deploya, deployam, deploye, deployem, deployou, deployado, deployada, deployando, deployará, deploiar, deploia, deploie, deploiou, deploiado, deploiando]
+  exemplo_correto: Publique a versão em homologação.
+  exemplo_incorreto: Deploye a versão em homologação.
+  versao_inclusao: 0.4.0
+
+- id: V-0802
+  lema: setar
+  classe: verbo
+  status: nao_preferido
+  preferir: [definir, configurar, atribuir]
+  significado_aprovado: atribuir um valor
+  formas: [setar, setou, setado, setada, setados, setadas, setando, setam, setem, setará]
+  motivo: '"Seta" (substantivo) e "sete" (número) não são marcados.'
+  exemplo_correto: Defina a variável TIMEOUT com 30.
+  exemplo_incorreto: Seta a variável TIMEOUT com 30. Depois de setar, reinicie.
+  versao_inclusao: 0.4.0
+
+- id: V-0803
+  lema: startar
+  classe: verbo
+  status: nao_preferido
+  preferir: [iniciar]
+  significado_aprovado: iniciar
+  exemplo_correto: Inicie o container.
+  exemplo_incorreto: Starte o container.
+  versao_inclusao: 0.4.0
+
+- id: V-0804
+  lema: buildar
+  classe: verbo
+  status: nao_preferido
+  preferir: [gerar o build, compilar]
+  significado_aprovado: gerar o artefato de uma versão
+  exemplo_correto: Gere o build da imagem.
+  exemplo_incorreto: Builde a imagem.
+  versao_inclusao: 0.4.0
+
+- id: V-0805
+  lema: debugar
+  classe: verbo
+  status: nao_preferido
+  preferir: [depurar]
+  significado_aprovado: depurar
+  formas: [debugar, debuga, debugam, debugue, debuguem, debugou, debugado, debugando, debuggar, debugga, debuggue, debuggou, debuggando]
+  exemplo_correto: Depure o serviço com o log em nível DEBUG.
+  exemplo_incorreto: Debugue o serviço com o log em nível DEBUG.
+  versao_inclusao: 0.4.0
+
+- id: V-0806
+  lema: logar
+  classe: verbo
+  status: nao_preferido
+  preferir: [entrar, fazer login, registrar no log]
+  significado_aprovado: entrar em um sistema ou registrar no log
+  motivo: Ambíguo. Pode ser "fazer login" ou "registrar no log". Diga qual.
+  exemplo_correto: Entre no portal com o seu usuário.
+  exemplo_incorreto: Logue no portal com o seu usuário.
+  versao_inclusao: 0.4.0
+
+- id: V-0807
+  lema: upar
+  classe: verbo
+  status: nao_preferido
+  preferir: [enviar, fazer upload]
+  significado_aprovado: enviar um arquivo
+  formas: [upar, upou, upado, upada, upando, upe, upem, upará]
+  exemplo_correto: Envie o CSV pelo portal.
+  exemplo_incorreto: Upe o CSV pelo portal.
+  versao_inclusao: 0.4.0
+
+- id: V-0808
+  lema: deletar
+  classe: verbo
+  status: nao_preferido
+  preferir: [excluir, apagar]
+  significado_aprovado: excluir
+  exemplo_correto: Exclua o arquivo temporário.
+  exemplo_incorreto: Delete o arquivo temporário.
+  versao_inclusao: 0.4.0
+
+- id: V-0809
+  lema: printar
+  classe: verbo
+  status: nao_preferido
+  preferir: [exibir, imprimir, capturar a tela]
+  significado_aprovado: exibir ou capturar
+  exemplo_correto: Capture a tela do erro.
+  exemplo_incorreto: Printe a tela do erro.
+  versao_inclusao: 0.4.0
+
+- id: V-0810
+  lema: linkar
+  classe: verbo
+  status: nao_preferido
+  preferir: [vincular, ligar]
+  significado_aprovado: vincular
+  exemplo_correto: Vincule o card ao PR.
+  exemplo_incorreto: Linke o card ao PR.
+  versao_inclusao: 0.4.0
+
+- id: V-0811
+  lema: resetar
+  classe: verbo
+  status: nao_preferido
+  preferir: [redefinir, reiniciar, restaurar]
+  significado_aprovado: voltar ao estado inicial
+  exemplo_correto: Redefina a senha do usuário.
+  exemplo_incorreto: Resete a senha do usuário.
+  versao_inclusao: 0.4.0
+
+- id: V-0812
+  lema: mergear
+  classe: verbo
+  status: nao_preferido
+  preferir: [fazer merge, mesclar]
+  significado_aprovado: integrar uma branch em outra
+  formas: [mergear, mergeia, mergeiam, mergeie, mergeiem, mergeou, mergeado, mergeada, mergeando, mergiar, mergiou, mergiado]
+  exemplo_correto: Faça merge da branch na main.
+  exemplo_incorreto: Mergeie a branch na main.
+  versao_inclusao: 0.4.0
+
+- id: V-0813
+  lema: pushar
+  classe: verbo
+  status: nao_preferido
+  preferir: [fazer push, enviar]
+  significado_aprovado: enviar commits ao repositório remoto
+  formas: [pushar, pusha, pushe, pushou, pushado, pushando, pushear, pusheie, pusheou, pusheado]
+  exemplo_correto: Faça push da branch.
+  exemplo_incorreto: Pushe a branch.
+  versao_inclusao: 0.4.0
+
+- id: V-0814
+  lema: dropar
+  classe: verbo
+  status: nao_preferido
+  preferir: [excluir, remover]
+  significado_aprovado: excluir um objeto do banco
+  exemplo_correto: Exclua a tabela temporária.
+  exemplo_incorreto: Drope a tabela temporária.
+  versao_inclusao: 0.4.0
+
+- id: V-0815
+  lema: forkar
+  classe: verbo
+  status: nao_preferido
+  preferir: [fazer fork]
+  significado_aprovado: copiar um repositório para outra conta
+  exemplo_correto: Faça fork do repositório.
+  exemplo_incorreto: Forke o repositório.
+  versao_inclusao: 0.4.0
+
+- id: V-0816
+  lema: taguear
+  classe: verbo
+  status: nao_preferido
+  preferir: [criar a tag, marcar com a tag]
+  significado_aprovado: criar uma tag de versão
+  formas: [taguear, tagueia, tagueie, tagueou, tagueado, tagueando, tagear, tageou, tageado, tagueamos]
+  exemplo_correto: Crie a tag v1.2.0.
+  exemplo_incorreto: Tagueie a versão v1.2.0.
+  versao_inclusao: 0.4.0
+
+- id: V-0817
+  lema: updatar
+  classe: verbo
+  status: nao_preferido
+  preferir: [atualizar]
+  significado_aprovado: atualizar
+  exemplo_correto: O time atualizou a dependência.
+  exemplo_incorreto: O time updatou a dependência.
+  formas: [updatar, updata, updatou, updatado, updatando, updatem]
+  versao_inclusao: 0.4.0
+
+- id: V-0818
+  lema: performar
+  classe: verbo
+  status: nao_preferido
+  preferir: [ter desempenho, funcionar, render]
+  significado_aprovado: ter desempenho
+  exemplo_correto: A consulta tem desempenho ruim com 1 milhão de linhas.
+  exemplo_incorreto: A consulta performa mal com 1 milhão de linhas.
+  versao_inclusao: 0.4.0
+
+- id: V-0819
+  lema: schedular
+  classe: verbo
+  status: nao_preferido
+  preferir: [agendar]
+  significado_aprovado: agendar
+  exemplo_correto: Agende o job para as 2h.
+  exemplo_incorreto: Schedule o job para as 2h.
+  formas: [schedular, schedulou, schedulado, schedulada, schedulando, schedule]
+  versao_inclusao: 0.4.0
+
+- id: V-0820
+  lema: hardcodar
+  classe: verbo
+  status: nao_preferido
+  preferir: [fixar no código, escrever direto no código]
+  significado_aprovado: escrever um valor fixo no código
+  formas: [hardcodar, hardcodou, hardcodado, hardcodada, hardcodados, hardcodando, hardcode]
+  exemplo_correto: Não escreva a senha direto no código.
+  exemplo_incorreto: Não hardcode a senha.
+  versao_inclusao: 0.4.0

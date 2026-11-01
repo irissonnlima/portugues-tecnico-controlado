@@ -1,13 +1,14 @@
 ---
 name: ptc-br
-description: Revisa, reescreve e verifica textos técnicos em português segundo o PTC-BR (Português Técnico Controlado), um padrão de linguagem controlada inspirado no ASD-STE100 e na linguagem simples (ISO 24495-1). Use quando pedirem "revise em PTC", "português técnico controlado", "linguagem controlada", "simplifique este texto técnico", "deixe o procedimento mais claro", "verifique a conformidade PTC", ou ao revisar manuais, procedimentos, requisitos, relatórios e documentação técnica em pt-BR. Use também para conferir se uma reescrita preservou o sentido do original. Se o time tiver uma skill de escrita própria, combine as duas: ela acrescenta o vocabulário e as siglas do domínio.
+description: Revisa, reescreve e verifica textos técnicos em português segundo o PTC-BR (Português Técnico Controlado), um padrão de linguagem controlada inspirado no ASD-STE100 e na linguagem simples (ISO 24495-1). Use quando pedirem "revise em PTC", "português técnico controlado", "linguagem controlada", "simplifique este texto técnico", "deixe o procedimento mais claro", "verifique a conformidade PTC", ou ao revisar manuais, procedimentos, requisitos, relatórios e documentação técnica em pt-BR. Use também para conferir se uma reescrita preservou o sentido do original, e para expressar probabilidade com a escala de estimativa (provável, quase certo) e o percentual. Se o time tiver uma skill de escrita própria, combine as duas: ela acrescenta o vocabulário e as siglas do domínio.
 argument-hint: "[revisar|reescrever|verificar] <arquivo> [perfil L|T|C]"
 ---
 
 # PTC-BR — Português Técnico Controlado
 
-Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.3.0).
-Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (seção 3.1) ou das regras de contagem (seção 5).
+<!-- ptc-mencoes: italico -->
+
+Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.4.0). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
 
 ## Modos
 
@@ -17,7 +18,7 @@ Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (se
 | **reescrever** | "reescreva", "simplifique", "corrija" | Diff mínimo: só as frases com achado. Cada par passa pelo judge. |
 | **verificar** | "esta reescrita mantém o sentido?" | Veredito do judge para cada par original → reescrita. |
 
-**Perfil:** PTC-T, salvo pedido explícito. Use PTC-C para procedimentos de operação e segurança, e PTC-L para e-mail e mensagem.
+**Perfil:** use o perfil técnico (PTC-T), salvo pedido explícito. Use o perfil crítico (PTC-C) para procedimentos de operação e segurança, e o leve (PTC-L) para e-mail e mensagem.
 
 ## Fluxo
 
@@ -27,16 +28,29 @@ Leia a spec quando precisar do texto exato de uma regra, da matriz de perfis (se
 python3 ${CLAUDE_SKILL_DIR}/scripts/ptc_check.py <arquivo> --perfil T --json
 ```
 
-Para texto colado no chat, use `--texto "..."`. Se o time tiver uma camada de vocabulário (escolhas de termos e siglas do time), passe `--vocabulario camada.yaml`; para só uma lista de siglas, `--siglas arquivo.txt`. Se o `simplemma` estiver instalado, acrescente `--lematizar` para achar formas verbais irregulares. O script cobre as regras (A) e (P), inclusive o vocabulário controlado (PTC-25). Ele **não** decide sozinho:
+Opções úteis:
+
+- `--texto "..."`: texto colado no chat, em vez de arquivo.
+- `--vocabulario camada.yaml`: escolhas de termos e siglas do time.
+- `--siglas arquivo.txt`: só uma lista de siglas conhecidas.
+- `--dominios software,dados`: restringe os glossários de domínio.
+- `--lematizar`: acha formas verbais irregulares (requer `simplemma`).
+
+O script cobre as regras (A) e (P), inclusive o vocabulário controlado (PTC-25) e a escala de probabilidade (PTC-26). Ele **não** decide sozinho:
 
 - confiança `alta`: trate como violação, salvo erro evidente do script;
 - confiança `media` ou `baixa`: confirme lendo a frase. Descarte o falso positivo e registre o motivo em uma linha;
-- PTC-25 com status `em_analise` (confiança baixa): não trate como violação. Cite o termo uma vez no relatório, como decisão pendente do vocabulário;
-- sinônimos aceitos (*verificar*/*conferir*, *executar*/*rodar*) não geram alerta. Se o documento alternar os dois para o mesmo conceito, aponte na passada global (PTC-08) e sugira um só.
+- PTC-25 com status `em_analise`: não trate como violação. Cite o termo uma vez no relatório, como decisão pendente do vocabulário;
+- sinônimos aceitos (*verificar*/*conferir*, *executar*/*rodar*) não geram alerta. Se o documento alternar os dois para o mesmo conceito, aponte na passada global (PTC-08) e sugira um só;
+- `blocos_ignorados` lista os blocos fora da verificação (exemplos marcados, outro idioma). Não revise esses blocos.
 
 ### 2. Passada global (arquivo inteiro)
 
-Leia o documento inteiro uma vez e monte um **inventário de termos**: cada conceito, o termo usado e as variações encontradas. Comece pelo campo `vocabulario_polissemico` da saída do script: ele lista as palavras com mais de um sentido técnico, as linhas e os sentidos possíveis. Para cada uma, confira se o documento usa **um único** sentido; se usar dois (*subir* = publicar e *subir* = enviar), sugira o termo sem ambiguidade de cada sentido. Use o inventário para:
+Leia o documento inteiro uma vez e monte um **inventário de termos**: cada conceito, o termo usado e as variações encontradas.
+
+Comece pelo campo `vocabulario_polissemico` da saída do script. Ele lista as palavras com mais de um sentido técnico, as linhas e os sentidos possíveis. Confira se o documento usa **um único** sentido de cada palavra. Se usar dois (*subir* = publicar e *subir* = enviar), sugira o termo sem ambiguidade de cada sentido.
+
+Use o inventário para:
 
 - **PTC-08:** o mesmo conceito com nomes diferentes (*servidor* × *host* × *máquina*);
 - **PTC-17:** siglas que o script não pegou (minúsculas, com acento);
@@ -52,8 +66,9 @@ Avalie as regras de julgamento (J): PTC-01, 02, 06, 07, 13, 14, 16, 19 e 20. Con
 
 - Reescreva **somente** as frases com achado confirmado. Não reescreva o texto inteiro: cada frase alterada sem necessidade é um risco de mudar o sentido (PTC-22).
 - Mantenha termos técnicos, nomes, identificadores, código e números exatamente como estão.
-- Não acrescente nada que o original não diga. Se a frase original for ambígua, **pergunte** ou marque `[ambíguo: …]`. Não escolha uma interpretação em silêncio.
-- Se a regra não puder ser cumprida sem perda de sentido, mantenha a frase e sugira uma exceção (seção 6 da spec).
+- Use só a informação que o original contém. Se a frase original for ambígua, **pergunte** ou marque `[ambíguo: …]`. Não escolha uma interpretação em silêncio.
+- **Probabilidade (PTC-26):** se o original usa uma expressão vaga (*talvez*, *possivelmente*), o nível da escala é uma decisão do autor. Pergunte, ou marque `[confirmar nível: provável (55–80%)?]`.
+- Se cumprir a regra mudar o sentido, mantenha a frase e sugira uma exceção (seção 6 da spec).
 
 ### 5. Judge (cada par original → reescrita)
 
@@ -63,7 +78,7 @@ Antes de entregar, rode a checagem determinística de preservação:
 python3 ${CLAUDE_SKILL_DIR}/scripts/ptc_diff.py --original "<original>" --reescrita "<reescrita>" --json
 ```
 
-Para vários pares, grave um JSONL (`{"id", "original", "reescrita"}` por linha) e use `--pares arquivo.jsonl`.
+Para mais de um par, grave um JSONL (`{"id", "original", "reescrita"}` por linha) e use `--pares arquivo.jsonl`. O diff também compara o grau de certeza: trocar *provável* por *quase certo* é perda de sentido.
 
 Depois, aplique a rubrica de `${CLAUDE_SKILL_DIR}/references/rubrica-judge.md` a cada par. Avalie como um revisor independente: procure o que a reescrita perdeu ou acrescentou, não confirme o próprio trabalho. Se o par for reprovado por Q1–Q4, refaça a reescrita a partir do original.
 
@@ -96,7 +111,6 @@ O script dá só uma classificação **preliminar**. A classificação final inc
 
 ## Limites
 
-- O PTC-BR é uma proposta experimental. Não declare conformidade com a ABNT NBR ISO 24495-1 nem com o ASD-STE100.
+- O PTC-BR é uma proposta experimental. Não declare conformidade com a ABNT NBR ISO 24495-1 nem com o ASD-STE100 (Simplified Technical English).
 - Títulos, código, tabelas e citações literais de terceiros ficam fora da reescrita.
-- Glossários de domínio ainda não existem (previstos para a 0.4.0). Enquanto isso, o inventário de termos do próprio documento e a lista `--siglas` fazem esse papel.
-- O vocabulário está em `references/vocabulario/geral.yaml`. Para consultar um verbete, procure pelo lema ou pelo ID citado no alerta (ex.: V-0100).
+- O vocabulário fica em `references/vocabulario/` e os glossários de domínio em `references/glossarios/`. Para consultar um verbete, procure pelo lema ou pelo ID citado no alerta (ex.: V-0100).

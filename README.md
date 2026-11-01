@@ -1,17 +1,32 @@
 # PTC-BR — Português Técnico Controlado
 
-Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em português brasileiro com regras de linguagem controlada. A especificação se inspira no ASD-STE100 e na linguagem simples (ABNT NBR ISO 24495-1), mas é uma proposta independente e experimental.
+<!-- ptc-mencoes: italico -->
+
+Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em português brasileiro com regras de linguagem controlada. A especificação se inspira no ASD-STE100 (Simplified Technical English) e na linguagem simples (ABNT NBR ISO 24495-1), mas é uma proposta independente e experimental.
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.3.0 |
-| Especificação (`skills/ptc-br/references/regras.md`) | 0.3.0 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.4.0 |
+| Especificação (`skills/ptc-br/references/regras.md`) | 0.4.0 |
 
 ## O que o plugin faz
 
 - **Revisar:** aponta violações com o ID da regra (PTC-NN), o nível e uma sugestão. Classifica o texto como *Conforme*, *Conforme com exceções* ou *Não conforme*.
 - **Reescrever:** reescreve só as frases com achado (diff mínimo). Cada par original → reescrita passa pelo judge.
 - **Verificar:** diz se uma reescrita preserva o sentido do original.
+
+## Probabilidade com percentual (PTC-26)
+
+Termos de certeza seguem uma escala fixa, baseada na Intelligence Community Directive 203 (ICD 203), padrão da comunidade de inteligência dos EUA. A ICD 203 atualiza a tabela de Sherman Kent (CIA, 1964). Toda ocorrência traz a faixa entre parênteses: *A causa provável (55–80%) é o certificado.*
+
+| Termo | Faixa | Termo | Faixa |
+|---|---|---|---|
+| quase impossível | 1–5% | provável | 55–80% |
+| muito improvável | 5–20% | muito provável | 80–95% |
+| improvável | 20–45% | quase certo | 95–99% |
+| chance equilibrada | 45–55% | | |
+
+O verificador aponta o termo sem percentual e o número fora da faixa (*muito provável (60%)*). Expressões vagas (*talvez*, *possivelmente*) devem virar um termo da escala, e a escolha do nível é do autor.
 
 ## Instalação
 
@@ -31,7 +46,8 @@ skills/ptc-br/
   references/
     regras.md            especificação PTC-BR (regras, perfis, contagem, exceções)
     rubrica-judge.md     perguntas binárias Q1–Q6 e formato JSON do judge
-    vocabulario/         verbetes em YAML (geral, formal, polissemia) e schema.json
+    vocabulario/         verbetes em YAML (geral, formal, polissemia, probabilidade, anglicismos) e schema.json
+    glossarios/          glossários de domínio: software, dados, infraestrutura, finanças
   scripts/
     ptc_check.py         verificador das regras automáticas e parciais
     ptc_diff.py          checagem determinística de preservação de sentido (PTC-22)
@@ -46,6 +62,7 @@ exemplos/
 tests/                   testes unitários dos scripts
 tests/judge/             pares rotulados e calibração do judge
 evals/                   casos do `claude plugin eval` (comportamento da skill)
+.github/workflows/       CI: testes com e sem dependências opcionais
 ```
 
 ## Scripts (só biblioteca padrão do Python 3.10+)
@@ -56,10 +73,20 @@ python3 skills/ptc-br/scripts/ptc_check.py --texto "Realize a verificação do l
 python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --siglas siglas-do-time.txt   # siglas conhecidas do público
 python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --vocabulario exemplos/camada-time.yaml
 python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --lematizar   # opcional: pip install simplemma
+python3 skills/ptc-br/scripts/ptc_check.py docs/manual.md --dominios software,dados
 python3 skills/ptc-br/scripts/ptc_diff.py --original "Só admins acessam." --reescrita "Admins acessam."
 ```
 
 Código de saída: `0` sem problema grave, `1` com violação obrigatória de alta confiança (check) ou alerta alto (diff), `2` erro.
+
+## Marcações no próprio documento
+
+Comentários HTML ajustam a verificação sem mudar o texto renderizado (seção 6 da spec):
+
+- `<!-- ptc-ignorar: motivo -->`: o próximo bloco fica fora (ex.: um exemplo incorreto de propósito).
+- `<!-- ptc-idioma: en -->`: o próximo bloco está em inglês. Blocos em inglês também são detectados automaticamente.
+- `<!-- ptc-mencoes: italico -->`: termos em itálico são citações (*utilizar*), não uso.
+- `<!-- ptc-excecao: PTC-03; motivo: ... -->` e `<!-- ptc-siglas: API, SQL -->`.
 
 ## Camada de vocabulário do time
 
@@ -71,6 +98,10 @@ O PTC-BR geral fica neutro em escolhas que variam por time. Por exemplo, aceita 
 2. Compile e valide: `python3 tools/compilar_vocabulario.py`.
 3. Rode os testes. O teste `ExemplosDosVerbetes` exige que o `exemplo_incorreto` dispare o alerta e o `exemplo_correto` não.
 4. Meça o ruído em um corpus real: `python3 tools/medir_corpus.py <pasta>`.
+
+## O projeto segue as próprias regras
+
+A documentação deste repositório (README, CHANGELOG, SKILL.md, spec e rubrica) passa no verificador. O teste `tests/test_documentacao.py` falha se um desses arquivos tiver achado de confiança média ou alta. A CI do GitHub roda esse teste em todo push.
 
 ## Testes em três camadas
 

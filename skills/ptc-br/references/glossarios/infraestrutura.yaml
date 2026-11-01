@@ -1,0 +1,131 @@
+# Glossário PTC-BR — Infraestrutura (spec 0.4.0)
+#
+# Termos aprovados do domínio. Anglicismos consolidados ficam aprovados, sem itálico e com gênero
+# registrado: o verificador aponta o gênero oposto (PTC-08). Para trocar uma escolha, use uma camada
+# de vocabulário do time. Faixa de ID: V-1200..V-1299.
+
+- id: V-1200
+  lema: container
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "processo isolado com a aplicação e as dependências"
+  versao_inclusao: 0.4.0
+
+- id: V-1201
+  lema: cluster
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "conjunto de máquinas gerenciadas como um sistema"
+  versao_inclusao: 0.4.0
+
+- id: V-1202
+  lema: pod
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "menor unidade de execução do Kubernetes"
+  versao_inclusao: 0.4.0
+
+- id: V-1203
+  lema: namespace
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "divisão lógica de recursos em um cluster"
+  versao_inclusao: 0.4.0
+
+- id: V-1204
+  lema: load balancer
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "componente que distribui requisições entre instâncias"
+  versao_inclusao: 0.4.0
+
+- id: V-1205
+  lema: proxy
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "intermediário entre cliente e servidor"
+  versao_inclusao: 0.4.0
+
+- id: V-1206
+  lema: firewall
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "filtro de tráfego de rede"
+  versao_inclusao: 0.4.0
+
+- id: V-1207
+  lema: cache
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "armazenamento temporário para acelerar o acesso"
+  versao_inclusao: 0.4.0
+
+- id: V-1208
+  lema: host
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "máquina ou nome de rede que hospeda um serviço"
+  versao_inclusao: 0.4.0
+
+- id: V-1209
+  lema: runner
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "máquina ou processo que executa os jobs de um pipeline"
+  versao_inclusao: 0.4.0
+
+- id: V-1210
+  lema: secret
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "valor sensível guardado fora do código (senha, chave)"
+  versao_inclusao: 0.4.0
+
+- id: V-1211
+  lema: bucket
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "contêiner de objetos em um armazenamento em nuvem"
+  versao_inclusao: 0.4.0
+
+- id: V-1212
+  lema: job
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "tarefa executada por um agendador ou pipeline"
+  versao_inclusao: 0.4.0
+
+- id: V-1213
+  lema: log
+  classe: substantivo
+  status: aprovado
+  dominio: infraestrutura
+  genero: m
+  significado_aprovado: "registro de eventos de um sistema"
+  versao_inclusao: 0.4.0

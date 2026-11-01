@@ -1,0 +1,212 @@
+# Glossário PTC-BR — Software e desenvolvimento (spec 0.4.0)
+#
+# Termos aprovados do domínio. Anglicismos consolidados ficam aprovados, sem itálico e com gênero
+# registrado: o verificador aponta o gênero oposto (PTC-08). Para trocar uma escolha, use uma camada
+# de vocabulário do time. Faixa de ID: V-1000..V-1099.
+
+- id: V-1000
+  lema: commit
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "registro de um conjunto de alterações no repositório git"
+  versao_inclusao: 0.4.0
+
+- id: V-1001
+  lema: branch
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: f
+  significado_aprovado: "linha de desenvolvimento independente no repositório"
+  versao_inclusao: 0.4.0
+
+- id: V-1002
+  lema: merge
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "integração das alterações de uma branch em outra"
+  versao_inclusao: 0.4.0
+
+- id: V-1003
+  lema: pull request
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "pedido de revisão e merge de uma branch"
+  versao_inclusao: 0.4.0
+
+- id: V-1004
+  lema: deploy
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "publicação de uma versão em um ambiente"
+  versao_inclusao: 0.4.0
+
+- id: V-1005
+  lema: pipeline
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "sequência automatizada de etapas de build, teste e deploy"
+  versao_inclusao: 0.4.0
+
+- id: V-1006
+  lema: build
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "artefato gerado a partir do código-fonte, ou o processo que o gera"
+  versao_inclusao: 0.4.0
+
+- id: V-1007
+  lema: release
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  significado_aprovado: "versão publicada de um software"
+  motivo: 'Gênero sem registro: "a release" (versão) e "o release" (instalação do Helm) são comuns.'
+  versao_inclusao: 0.4.0
+
+- id: V-1008
+  lema: tag
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: f
+  significado_aprovado: "marcador fixo de um commit, em geral uma versão"
+  versao_inclusao: 0.4.0
+
+- id: V-1009
+  lema: bug
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "defeito no software"
+  versao_inclusao: 0.4.0
+
+- id: V-1010
+  lema: issue
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: f
+  significado_aprovado: "registro de tarefa, defeito ou pedido no rastreador do projeto"
+  versao_inclusao: 0.4.0
+
+- id: V-1011
+  lema: fork
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "cópia de um repositório em outra conta"
+  versao_inclusao: 0.4.0
+
+- id: V-1012
+  lema: endpoint
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "endereço de uma operação de uma API"
+  versao_inclusao: 0.4.0
+
+- id: V-1013
+  lema: token
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "credencial temporária de acesso"
+  versao_inclusao: 0.4.0
+
+- id: V-1014
+  lema: framework
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "conjunto de bibliotecas e convenções para construir uma aplicação"
+  versao_inclusao: 0.4.0
+
+- id: V-1015
+  lema: feature
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: f
+  significado_aprovado: "funcionalidade de um produto"
+  versao_inclusao: 0.4.0
+
+- id: V-1016
+  lema: hotfix
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "correção urgente publicada fora do ciclo normal"
+  versao_inclusao: 0.4.0
+
+- id: V-1017
+  lema: rollback
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "volta a uma versão anterior"
+  versao_inclusao: 0.4.0
+
+- id: V-1018
+  lema: backlog
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "lista priorizada de trabalho pendente"
+  versao_inclusao: 0.4.0
+
+- id: V-1019
+  lema: sprint
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: f
+  significado_aprovado: "ciclo curto e fixo de trabalho de um time"
+  versao_inclusao: 0.4.0
+
+- id: V-1020
+  lema: script
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "programa curto que automatiza uma tarefa"
+  versao_inclusao: 0.4.0
+
+- id: V-1021
+  lema: payload
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "conteúdo enviado no corpo de uma requisição ou mensagem"
+  versao_inclusao: 0.4.0
+
+- id: V-1022
+  lema: webhook
+  classe: substantivo
+  status: aprovado
+  dominio: software
+  genero: m
+  significado_aprovado: "chamada HTTP que um sistema dispara quando um evento acontece"
+  versao_inclusao: 0.4.0

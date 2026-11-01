@@ -112,3 +112,62 @@
   original: "Efetue o envio do arquivo para o servidor de homologação."
   reescrita: "Envie o arquivo para o servidor de homologação, que normalmente responde rapidamente e grava os dados no SGBD configurado pelo time."
   esperado: {Q2: true, Q6: true, veredito: reprovado}
+
+# ------------------------------------------------------------ 0.4.0: ambiguidade e probabilidade
+
+# 1ª calibração: "reinicie-o" (arquivo ou servidor) só tinha uma leitura plausível; o judge acertou.
+# Este caso usa dois referentes que podem ser validados.
+- id: ambig-pronome-escolhido
+  regras_alvo: [PTC-07]
+  original: "Copie o backup para o servidor de testes e valide-o."
+  reescrita: "Copie o backup para o servidor de testes. Depois, valide o servidor de testes."
+  esperado: {Q2: true, veredito: reprovado}
+
+- id: ambig-pronome-marcado
+  regras_alvo: [PTC-07]
+  original: "Copie o backup para o servidor de testes e valide-o."
+  reescrita: "Copie o backup para o servidor de testes. Depois, valide [ambíguo: o backup ou o servidor de testes?]."
+  esperado: {Q1: false, Q2: false, veredito: aprovado}
+
+- id: ambig-alcance-adjetivo
+  regras_alvo: [PTC-02]
+  original: "Apague os arquivos e as pastas antigas."
+  reescrita: "Apague os arquivos antigos. Apague as pastas antigas."
+  esperado: {Q2: true, veredito: reprovado}
+
+- id: ambig-uma-vez-que-temporal
+  regras_alvo: [PTC-25]
+  original: "Atualize o cadastro uma vez que o cliente confirmar os dados."
+  reescrita: "Atualize o cadastro porque o cliente confirmou os dados."
+  esperado: {Q3: true, veredito: reprovado}
+
+- id: ambig-uma-vez-que-correto
+  regras_alvo: [PTC-25, PTC-06]
+  original: "Atualize o cadastro uma vez que o cliente confirmar os dados."
+  reescrita: "Depois que o cliente confirmar os dados, atualize o cadastro."
+  esperado: {Q1: false, Q2: false, Q3: false, veredito: aprovado}
+
+- id: ambig-todos-nao
+  regras_alvo: [PTC-23]
+  original: "Todos os usuários não podem exportar o relatório."
+  reescrita: "Nenhum usuário pode exportar o relatório."
+  esperado: {Q2: true, veredito: reprovado}
+
+- id: prob-nivel-escolhido
+  regras_alvo: [PTC-26]
+  original: "Talvez o lote atrase amanhã."
+  reescrita: "O atraso do lote amanhã é provável (55–80%)."
+  esperado: {Q2: true, veredito: reprovado}
+
+- id: prob-grau-alterado
+  regras_alvo: [PTC-01]
+  original: "A causa provável (55–80%) da falha é o certificado vencido."
+  reescrita: "A falha quase certamente (95–99%) vem do certificado vencido."
+  esperado: {Q3: true, veredito: reprovado}
+
+# 1ª calibração: o original não tinha violação, então Q5 reprovou com razão. Este caso tem o que corrigir.
+- id: prob-preservada
+  regras_alvo: [PTC-25]
+  original: "Um pico de acesso na sexta é muito provável (80–95%), tendo em vista que a campanha começa na quinta."
+  reescrita: "A campanha começa na quinta. Por isso, um pico de acesso na sexta é muito provável (80–95%)."
+  esperado: {Q1: false, Q2: false, Q3: false, veredito: aprovado}

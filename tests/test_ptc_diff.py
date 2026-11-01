@@ -72,5 +72,29 @@ class Classes(unittest.TestCase):
         self.assertEqual(altos("O usuário deve reiniciar o serviço.", "Reinicie o serviço."), set())
 
 
+class Probabilidade(unittest.TestCase):
+    def alertas(self, o, r):
+        return [(a["tipo"], a["severidade"]) for a in pd.comparar(o, r)["alertas"] if a["classe"] == "probabilidade"]
+
+    def test_mudanca_de_grau_e_alta(self):
+        self.assertEqual(self.alertas("A falha é provável (55–80%).", "A falha é quase certa (95–99%)."),
+                         [("perda", "alta")])
+
+    def test_mesmo_grau_com_percentual_nao_alerta(self):
+        self.assertEqual(altos("A causa provável (55–80%) é o certificado.",
+                               "O certificado é a causa provável (55–80%)."), set())
+
+    def test_percentual_da_escala_nao_conta_como_numero_novo(self):
+        self.assertEqual(altos("A causa provável é o certificado.", "A causa provável (55–80%) é o certificado."), set())
+
+    def test_vago_para_escala_pede_confirmacao(self):
+        self.assertEqual(self.alertas("Talvez o lote atrase.", "O atraso do lote é provável (55–80%)."),
+                         [("adicao", "media")])
+
+    def test_grau_inventado_e_alto(self):
+        self.assertEqual(self.alertas("O lote atrasa às sextas.", "O atraso do lote às sextas é provável (55–80%)."),
+                         [("adicao", "alta")])
+
+
 if __name__ == "__main__":
     unittest.main()

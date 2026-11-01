@@ -1,0 +1,170 @@
+# Vocabulário controlado PTC-BR — escala de probabilidade (spec 0.4.0, regra PTC-26)
+#
+# Escala baseada no padrão de linguagem de estimativa da comunidade de inteligência dos EUA
+# (ICD 203, 2015), que atualiza a tabela "Words of Estimative Probability" de Sherman Kent (CIA, 1964).
+#
+# Uso: toda expressão da escala vem seguida da faixa percentual entre parênteses:
+#     "A falha é provável (55–80%)."   "O lote quase certamente (95–99%) termina às 6h."
+# O verificador confere se o número informado cabe na faixa do termo.
+#
+# Faixa de ID: V-0700..0799.
+
+# ------------------------------------------------------------ escala (aprovados, exigem percentual)
+
+- id: V-0700
+  lema: quase impossível
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [1, 5]
+  significado_aprovado: chance entre 1% e 5%
+  formas: [quase impossível, quase impossíveis, praticamente impossível, quase nenhuma chance]
+  exemplo_correto: A perda de dados é quase impossível (1–5%).
+  exemplo_incorreto: A perda de dados é quase impossível.
+  versao_inclusao: 0.4.0
+
+- id: V-0701
+  lema: muito improvável
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [5, 20]
+  significado_aprovado: chance entre 5% e 20%
+  formas: [muito improvável, muito improváveis, altamente improvável]
+  exemplo_correto: Um novo atraso é muito improvável (5–20%).
+  exemplo_incorreto: Um novo atraso é muito improvável.
+  versao_inclusao: 0.4.0
+
+- id: V-0702
+  lema: improvável
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [20, 45]
+  significado_aprovado: chance entre 20% e 45%
+  formas: [improvável, improváveis, provavelmente não]
+  exemplo_correto: Terminar a migração hoje é improvável (20–45%).
+  exemplo_incorreto: É improvável que a migração termine hoje.
+  versao_inclusao: 0.4.0
+
+- id: V-0703
+  lema: chance equilibrada
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [45, 55]
+  significado_aprovado: chance entre 45% e 55%
+  formas: [chance equilibrada, chances equilibradas, tão provável quanto improvável]
+  exemplo_correto: Há chance equilibrada (45–55%) de o fornecedor entregar na data.
+  exemplo_incorreto: Há chance equilibrada de o fornecedor entregar na data.
+  versao_inclusao: 0.4.0
+
+- id: V-0704
+  lema: provável
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [55, 80]
+  significado_aprovado: chance entre 55% e 80%
+  formas: [provável, prováveis, provavelmente]
+  exemplo_correto: A causa provável (55–80%) é o certificado vencido.
+  exemplo_incorreto: A causa provável é o certificado vencido.
+  versao_inclusao: 0.4.0
+
+- id: V-0705
+  lema: muito provável
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [80, 95]
+  significado_aprovado: chance entre 80% e 95%
+  formas: [muito provável, muito prováveis, muito provavelmente, altamente provável]
+  exemplo_correto: Um pico de acesso na sexta é muito provável (80–95%).
+  exemplo_incorreto: Um pico de acesso na sexta é muito provável.
+  versao_inclusao: 0.4.0
+
+- id: V-0706
+  lema: quase certo
+  classe: adjetivo
+  status: aprovado
+  regra: PTC-26
+  probabilidade: [95, 99]
+  significado_aprovado: chance entre 95% e 99%
+  formas: [quase certo, quase certa, quase certos, quase certas, quase certamente, praticamente certo, praticamente certa]
+  exemplo_correto: O lote quase certamente (95–99%) termina antes das 6h.
+  exemplo_incorreto: O lote quase certamente termina antes das 6h.
+  versao_inclusao: 0.4.0
+
+# ------------------------------------------------------------ expressões vagas (trocar por um termo da escala)
+
+- id: V-0710
+  lema: talvez
+  classe: adverbio
+  status: nao_preferido
+  regra: PTC-26
+  preferir: [termo da escala com percentual]
+  significado_aprovado: incerteza sem grau definido
+  motivo: '"Talvez" cobre de 5% a 95%. Escolha o nível: improvável (20–45%), chance equilibrada (45–55%) ou provável (55–80%).'
+  exemplo_correto: A falha é provável (55–80%).
+  exemplo_incorreto: Talvez a falha volte amanhã.
+  versao_inclusao: 0.4.0
+
+- id: V-0711
+  lema: possivelmente
+  classe: adverbio
+  status: nao_preferido
+  regra: PTC-26
+  preferir: [termo da escala com percentual]
+  significado_aprovado: incerteza sem grau definido
+  exemplo_correto: O erro é improvável (20–45%) em produção.
+  exemplo_incorreto: O erro possivelmente ocorre em produção.
+  versao_inclusao: 0.4.0
+
+- id: V-0712
+  lema: é possível que
+  classe: conectivo
+  status: nao_preferido
+  regra: PTC-26
+  preferir: [termo da escala com percentual]
+  significado_aprovado: incerteza sem grau definido
+  formas: [é possível que, pode ser que, há a possibilidade de que, existe a possibilidade de que]
+  motivo: '"É possível exportar em CSV" (capacidade) não é marcado; só a construção com "que".'
+  exemplo_correto: O atraso é provável (55–80%).
+  exemplo_incorreto: É possível que o lote atrase.
+  versao_inclusao: 0.4.0
+
+- id: V-0713
+  lema: certamente
+  classe: adverbio
+  status: nao_preferido
+  regra: PTC-26
+  preferir: [quase certo (95–99%), certo (só para fato determinístico)]
+  significado_aprovado: certeza sem fonte
+  formas: [certamente, com certeza, sem dúvida, sem dúvidas, com toda certeza, com toda a certeza, indubitavelmente]
+  motivo: Se for regra do sistema (100%), afirme o fato sem advérbio. Se for estimativa, use quase certo (95–99%).
+  exemplo_correto: O token expira em 1 h.
+  exemplo_incorreto: O token certamente expira em 1 h.
+  versao_inclusao: 0.4.0
+
+- id: V-0714
+  lema: dificilmente
+  classe: adverbio
+  status: nao_preferido
+  regra: PTC-26
+  preferir: [improvável (20–45%), muito improvável (5–20%)]
+  significado_aprovado: baixa probabilidade sem grau definido
+  exemplo_correto: Um novo atraso é muito improvável (5–20%).
+  exemplo_incorreto: Dificilmente o lote atrasa de novo.
+  versao_inclusao: 0.4.0
+
+- id: V-0715
+  lema: grande chance
+  classe: conectivo
+  status: nao_preferido
+  regra: PTC-26
+  preferir: [termo da escala com percentual]
+  significado_aprovado: probabilidade sem grau definido
+  formas: [grande chance, grandes chances, boa chance, boas chances, chance alta, alta chance, pequena chance, chance baixa, baixa chance, alta probabilidade, baixa probabilidade, grande probabilidade]
+  exemplo_correto: Um pico de acesso é muito provável (80–95%).
+  exemplo_incorreto: Há grande chance de pico de acesso.
+  versao_inclusao: 0.4.0

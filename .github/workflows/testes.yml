@@ -1,0 +1,31 @@
+name: testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      # 1. Sem dependências: o plugin precisa funcionar só com a biblioteca padrão.
+      #    Os testes que dependem de PyYAML ou simplemma são pulados.
+      - name: Testes sem dependências
+        run: python -m unittest discover -s tests
+
+      # 2. Com as dependências de desenvolvimento: vocabulário sincronizado e todos os testes.
+      - name: Instalar dependências de desenvolvimento
+        run: pip install pyyaml jsonschema simplemma
+      - name: Vocabulário compilado está atualizado
+        run: python tools/compilar_vocabulario.py --checar
+      - name: Testes completos (inclui a documentação do projeto)
+        run: python -m unittest discover -s tests -v

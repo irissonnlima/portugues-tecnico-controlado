@@ -48,7 +48,7 @@ class ExemplosDosVerbetes(unittest.TestCase):
 
     def test_exemplos(self):
         for v in VERBETES:
-            if v["status"] == "aprovado" or v.get("sentidos"):
+            if (v["status"] == "aprovado" and not v.get("probabilidade")) or v.get("sentidos"):
                 continue
             with self.subTest(v["id"]):
                 if v.get("exemplo_incorreto"):
@@ -177,3 +177,78 @@ class Lematizacao(unittest.TestCase):
 
     def test_sem_lematizar_nao_acha(self):
         self.assertFalse([a for a in pc.verificar("Nós utilizaremos o token.")["achados"] if "V-0100" in a["mensagem"]])
+
+
+class Probabilidade(unittest.TestCase):
+    """PTC-26: termo da escala exige percentual entre parênteses, e o número precisa caber na faixa."""
+
+    def msgs(self, texto):
+        return [a["mensagem"] for a in pc.verificar(texto)["achados"] if a["regra"] == "PTC-26"]
+
+    def test_sem_percentual(self):
+        self.assertTrue(any("sem percentual" in m for m in self.msgs("A causa provável é o certificado.")))
+
+    def test_faixa_coerente_passa(self):
+        for f in ["A causa provável (55–80%) é o certificado.", "É provável (70%) que atrase.",
+                  "É provável (60% a 75%) que atrase.", "É provável (~70%) que atrase.",
+                  "É provável (70,5 %) que atrase.", "O lote quase certamente (95–99%) termina."]:
+            self.assertEqual(self.msgs(f), [], f)
+
+    def test_faixa_incoerente(self):
+        m = self.msgs("A falha é muito provável (60%).")
+        self.assertTrue(any("incoerente" in x for x in m))
+        r = [a for a in pc.verificar("A falha é muito provável (60%).")["achados"] if a["regra"] == "PTC-26"]
+        self.assertIn("provável (55–80%)", r[0]["sugestao"])
+
+    def test_faixa_que_ultrapassa_o_termo(self):
+        self.assertTrue(self.msgs("O atraso é provável (50–90%)."))
+
+    def test_termo_aninhado_conta_uma_vez(self):
+        m = self.msgs("O pico é muito provável (85%).")
+        self.assertEqual(m, [])
+
+    def test_improvavel_nao_e_provavel(self):
+        self.assertEqual(self.msgs("O erro é improvável (30%)."), [])
+
+    def test_vagos(self):
+        for f in ["Talvez volte amanhã.", "É possível que atrase.", "O token certamente expira.", "Há grande chance de pico."]:
+            self.assertTrue(self.msgs(f), f)
+
+    def test_capacidade_nao_e_probabilidade(self):
+        self.assertEqual(self.msgs("É possível exportar em CSV."), [])
+
+    def test_nivel_por_perfil(self):
+        r = [a for a in pc.verificar("A causa provável é X.", "L")["achados"] if a["regra"] == "PTC-26"]
+        self.assertEqual(r[0]["nivel"], "R")
+        r = [a for a in pc.verificar("A causa provável é X.", "T")["achados"] if a["regra"] == "PTC-26"]
+        self.assertEqual(r[0]["nivel"], "O")
+
+
+class GeneroDoGlossario(unittest.TestCase):
+    def ptc08(self, texto):
+        return [a["mensagem"] for a in pc.verificar(texto)["achados"] if a["regra"] == "PTC-08"]
+
+    def test_genero_oposto(self):
+        self.assertTrue(self.ptc08("Rode a pipeline de novo."))
+        self.assertTrue(self.ptc08("O query falhou."))
+
+    def test_genero_certo_e_plural(self):
+        self.assertEqual(self.ptc08("Rode o pipeline. Revise os commits e as branches."), [])
+
+    def test_preposicao_ao_nao_e_artigo_feminino(self):
+        self.assertEqual(self.ptc08("Aplique a correção ao deploy."), [])
+
+    def test_substantivo_ingles_aprovado_nao_gera_ptc25(self):
+        self.assertFalse([a for a in pc.verificar("Faça o commit e o deploy.")["achados"] if a["regra"] == "PTC-25"])
+
+
+class PrecisaoCorpus040(unittest.TestCase):
+    def test_palavra_chave_sql_nao_e_verbo(self):
+        self.assertFalse([a for a in pc.verificar("O cliente bloqueia INSERT/UPDATE/DELETE.")["achados"]
+                          if "V-0808" in a["mensagem"]])
+
+    def test_ingles_com_do_not(self):
+        self.assertTrue(pc.parece_ingles("Do not delete files."))
+
+    def test_release_sem_genero(self):
+        self.assertFalse([a for a in pc.verificar("O release fica instalado.")["achados"] if a["regra"] == "PTC-08"])

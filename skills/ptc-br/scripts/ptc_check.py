@@ -23,9 +23,16 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ptc_vocab  # noqa: E402
 
-SPEC_VERSION = "0.3.0"
+SPEC_VERSION = "0.4.0"
 LEXICO = json.loads((Path(__file__).with_name("lexico.json")).read_text(encoding="utf-8"))
 _VOCAB_ARQ = Path(__file__).with_name("vocabulario.json")
+
+
+DETERMINANTES = {
+    # determinantes que denunciam o gênero oposto ao registrado no glossário
+    "m": r"a|as|da|das|na|nas|uma|umas|pela|pelas|esta|estas|essa|essas|nesta|nessa|desta|dessa|sua|suas|nova|novas|primeira|última",
+    "f": r"o|os|do|dos|no|nos|um|uns|pelo|pelos|este|estes|esse|esses|neste|nesse|deste|desse|seu|seus|novo|novos|primeiro|último",
+}
 
 
 def preparar_vocabulario(verbetes: list[dict]) -> list[dict]:
@@ -34,6 +41,8 @@ def preparar_vocabulario(verbetes: list[dict]) -> list[dict]:
     for v in verbetes:
         v = dict(v)
         v["_re"] = re.compile(v.get("regex") or ptc_vocab.regex_do_verbete(v), re.I)
+        if v.get("genero") in DETERMINANTES:
+            v["_re_genero"] = re.compile(rf"(?<![\wÀ-ÿ])(?:{DETERMINANTES[v['genero']]})\s+(?:{v['_re'].pattern})", re.I)
         saida.append(v)
     return saida
 
@@ -66,14 +75,14 @@ def carregar_camadas(caminhos: list[str]) -> tuple[list[dict], set[str], list[st
 
 # Nível de cada regra por perfil (seção 3.1 da spec). Ausente = não se aplica.
 MATRIZ = {
-    "L": {"PTC-03": "R", "PTC-05": "R", "PTC-07": "O", "PTC-11": "R", "PTC-12": "R", "PTC-17": "R",
-          "PTC-18": "R", "PTC-21": "O", "PTC-23": "R", "PTC-25": "R"},
-    "T": {"PTC-03": "O", "PTC-04": "R", "PTC-05": "O", "PTC-07": "O", "PTC-11": "R", "PTC-12": "R",
+    "L": {"PTC-03": "R", "PTC-05": "R", "PTC-07": "O", "PTC-08": "R", "PTC-11": "R", "PTC-12": "R", "PTC-17": "R",
+          "PTC-18": "R", "PTC-21": "O", "PTC-23": "R", "PTC-25": "R", "PTC-26": "R"},
+    "T": {"PTC-03": "O", "PTC-04": "R", "PTC-05": "O", "PTC-07": "O", "PTC-08": "O", "PTC-11": "R", "PTC-12": "R",
           "PTC-15": "R", "PTC-17": "O", "PTC-18": "O", "PTC-21": "O", "PTC-23": "R", "PTC-24": "O",
-          "PTC-25": "R"},
-    "C": {"PTC-03": "O", "PTC-04": "O", "PTC-05": "O", "PTC-07": "O", "PTC-11": "O", "PTC-12": "O",
+          "PTC-25": "R", "PTC-26": "O"},
+    "C": {"PTC-03": "O", "PTC-04": "O", "PTC-05": "O", "PTC-07": "O", "PTC-08": "O", "PTC-11": "O", "PTC-12": "O",
           "PTC-15": "O", "PTC-17": "O", "PTC-18": "O", "PTC-21": "O", "PTC-23": "O", "PTC-24": "O",
-          "PTC-25": "O"},
+          "PTC-25": "O", "PTC-26": "O"},
 }
 CONFIANCA = {"baixa": 0, "media": 1, "alta": 2}
 
@@ -88,6 +97,7 @@ class Bloco:
     linha: int
     texto: str
     excecoes: dict = field(default_factory=dict)   # regra -> motivo
+    ignorado: str = ""                               # motivo, quando o bloco fica fora da verificação
 
 
 @dataclass
@@ -106,16 +116,25 @@ class Achado:
 RE_LISTA = re.compile(r"^(\s*)([-*+]|\d+[.)])\s+(.*)$")
 RE_EXCECAO = re.compile(r"ptc-excecao:\s*(?P<regras>[A-Z0-9,\s-]+?)\s*(?:;\s*motivo:\s*(?P<motivo>.*?))?\s*-->", re.I)
 RE_SIGLAS_DECL = re.compile(r"ptc-siglas:\s*(?P<lista>.*?)\s*-->", re.I)
+RE_DIRETIVA = re.compile(
+    r"ptc-(?P<nome>ignorar-inicio|ignorar-fim|ignorar|idioma-inicio|idioma-fim|idioma|mencoes)\b\s*:?\s*(?P<valor>.*?)\s*-->",
+    re.I)
 
 
-def ler_blocos(texto: str) -> tuple[list[Bloco], set[str], list[Achado]]:
-    """Divide o markdown em blocos verificáveis. Ignora código, tabelas, títulos e front matter."""
+def ler_blocos(texto: str) -> tuple[list[Bloco], set[str], list[Achado], dict]:
+    """Divide o markdown em blocos verificáveis. Ignora código, tabelas, títulos e front matter.
+
+    Também lê as diretivas em comentário HTML: ptc-excecao, ptc-siglas, ptc-ignorar[-inicio|-fim],
+    ptc-idioma[-inicio|-fim] e ptc-mencoes. Devolve (blocos, siglas, achados, meta)."""
     linhas = texto.splitlines()
     blocos: list[Bloco] = []
     siglas_decl: set[str] = set()
     achados: list[Achado] = []
+    meta = {"ignorados": [], "mencoes": set()}
     atual: Bloco | None = None
     excecao_pendente: dict = {}
+    ignorar_pendente = ""     # vale para o próximo bloco
+    regiao_ignorada = ""      # vale até a diretiva de fim
     em_codigo = False
     em_comentario = ""
     i = 0
@@ -123,8 +142,17 @@ def ler_blocos(texto: str) -> tuple[list[Bloco], set[str], list[Achado]]:
     def fechar():
         nonlocal atual
         if atual and atual.texto.strip():
-            blocos.append(atual)
+            if atual.ignorado:
+                meta["ignorados"].append({"linha": atual.linha, "motivo": atual.ignorado})
+            else:
+                blocos.append(atual)
         atual = None
+
+    def novo(tipo: str, n: int, conteudo: str) -> Bloco:
+        nonlocal excecao_pendente, ignorar_pendente
+        b = Bloco(tipo, n, conteudo, excecao_pendente, ignorar_pendente or regiao_ignorada)
+        excecao_pendente, ignorar_pendente = {}, ""
+        return b
 
     # front matter YAML
     if linhas and linhas[0].strip() == "---":
@@ -170,12 +198,36 @@ def ler_blocos(texto: str) -> tuple[list[Bloco], set[str], list[Achado]]:
             m = RE_SIGLAS_DECL.search(s)
             if m:
                 siglas_decl.update(x.strip() for x in m.group("lista").split(",") if x.strip())
+            m = RE_DIRETIVA.search(s)
+            if m:
+                nome, valor = m.group("nome").lower(), m.group("valor").strip()
+                motivo = valor or "ignorado"
+                if nome == "ignorar":
+                    ignorar_pendente = f"ignorar: {motivo}"
+                elif nome == "ignorar-inicio":
+                    regiao_ignorada = f"ignorar: {motivo}"
+                elif nome in ("ignorar-fim", "idioma-fim"):
+                    regiao_ignorada = ""
+                elif nome == "idioma" and valor.lower() not in ("pt", "pt-br"):
+                    ignorar_pendente = f"idioma: {valor.lower()}"
+                elif nome == "idioma-inicio" and valor.lower() not in ("pt", "pt-br"):
+                    regiao_ignorada = f"idioma: {valor.lower()}"
+                elif nome == "mencoes":
+                    meta["mencoes"] |= {x.strip().lower() for x in valor.split(",") if x.strip()}
             continue
 
         if not s:
             fechar()
             continue
-        if s.startswith("#") or s.startswith("|") or re.fullmatch(r"[-*_ ]{3,}", s):
+        if s.startswith("#"):
+            # um título também define siglas: "# PTC-BR — Português Técnico Controlado" ou "# Nome (SIGLA)"
+            m = re.match(r"#+\s*([A-Z][A-Z0-9]{1,5})[\w-]*\s*[—–:-]\s+\S", s)
+            if m:
+                siglas_decl.add(m.group(1))
+            siglas_decl.update(re.findall(r"\(([A-Z][A-Z0-9]{1,5})s?\)", s))
+            fechar()
+            continue
+        if s.startswith("|") or re.fullmatch(r"[-*_ ]{3,}", s):
             fechar()
             continue
 
@@ -183,8 +235,7 @@ def ler_blocos(texto: str) -> tuple[list[Bloco], set[str], list[Achado]]:
         if m:
             fechar()
             tipo = "item_numerado" if m.group(2)[0].isdigit() else "item"
-            atual = Bloco(tipo, n, m.group(3), excecao_pendente)
-            excecao_pendente = {}
+            atual = novo(tipo, n, m.group(3))
             continue
 
         if s.startswith(">"):
@@ -193,18 +244,55 @@ def ler_blocos(texto: str) -> tuple[list[Bloco], set[str], list[Achado]]:
                 atual.texto += " " + conteudo
             else:
                 fechar()
-                atual = Bloco("citacao", n, conteudo, excecao_pendente)
-                excecao_pendente = {}
+                atual = novo("citacao", n, conteudo)
             continue
 
         if atual and (atual.tipo in ("paragrafo",) or linha.startswith((" ", "\t"))):
             atual.texto += " " + s
         else:
             fechar()
-            atual = Bloco("paragrafo", n, s, excecao_pendente)
-            excecao_pendente = {}
+            atual = novo("paragrafo", n, s)
     fechar()
-    return blocos, siglas_decl, achados
+    return blocos, siglas_decl, achados, meta
+
+
+MENCAO_TOKEN = "⟦menção⟧"
+RE_PERCENTUAL = re.compile(
+    r"^\s*\(\s*(?:~|≈|cerca de\s+)?(\d+(?:[.,]\d+)?)\s*%?\s*(?:(?:–|—|-|a)\s*(\d+(?:[.,]\d+)?)\s*)?%\s*\)")
+
+
+def _num(x: str) -> float:
+    return float(x.replace(",", "."))
+
+
+def _faixa(v: dict) -> str:
+    lo, hi = v["probabilidade"]
+    return f"{lo:g}–{hi:g}%"
+
+
+def mascarar_mencoes(texto: str, tipos: set[str]) -> str:
+    """Troca menções metalinguísticas (*utilizar*, "a nível de") por um token: elas citam o termo, não o usam."""
+    if "italico" in tipos or "itálico" in tipos:
+        texto = re.sub(r"(?<![*\w])\*(?!\*)([^*\n]+?)\*(?![*\w])", MENCAO_TOKEN, texto)
+        texto = re.sub(r"(?<![_\w])_(?!_)([^_\n]+?)_(?![_\w])", MENCAO_TOKEN, texto)
+    if "aspas" in tipos:
+        texto = re.sub(r"“[^”\n]+”|\"[^\"\n]+\"", MENCAO_TOKEN, texto)
+    return texto
+
+
+EN_STOP = set("""the of and to in is are for with this that it be by on from an or not you your will can if when
+should must all any each which has have was were at its into than then there these those we our does""".split())
+PT_STOP = set("""o os de da dos das que é em na nos nas um uma para com não por se ao à aos às mais como pelo
+pela pelos pelas seu sua seus suas este esta isso esse essa ou""".split())
+# "do", "no", "a", "as" existem nas duas línguas: não contam para nenhum lado
+
+
+def parece_ingles(texto: str) -> bool:
+    """Heurística por palavras funcionais. Termos técnicos em inglês dentro de frase em português não contam."""
+    pal = re.findall(r"[A-Za-zÀ-ÿ']+", texto.lower())
+    en = sum(1 for p in pal if p in EN_STOP)
+    pt = sum(1 for p in pal if p in PT_STOP)
+    return (len(pal) >= 3 and en >= 1 and pt == 0) or (en >= 2 and en >= 4 * pt)
 
 
 def limpar_inline(texto: str) -> str:
@@ -247,7 +335,7 @@ def contar_palavras(frase: str) -> int:
     brutos = frase.split()
     toks = []
     for b in brutos:
-        if b in (CODE_TOKEN, URL_TOKEN):
+        if b in (CODE_TOKEN, URL_TOKEN, MENCAO_TOKEN):
             toks.append(b)
             continue
         limpo = b.strip(".,;:!?()[]{}\"'“”‘’«»")
@@ -291,6 +379,9 @@ ARTIGOS = r"(?:a|o|à|ao|as|os|às|aos|uma|um|umas|uns|esta|este|essa|esse|nova|
 SUPORTE_FRACO = {"executar", "executa", "execute", "executam", "fazer", "faz", "faça", "fazem", "fez", "feito", "feita",
                  "faz-se", "dar", "dá", "dê", "dão", "deu", "levar", "leva", "leve", "levam"}
 RE_NOMINAL = re.compile(r"(ção|ções|mento|mentos|agem|agens)$")
+# substantivos em -ção que nomeiam um objeto, não uma ação: "execute a aplicação" é natural
+NOMES_DE_OBJETO = {"operação", "operações", "aplicação", "aplicações", "função", "funções", "instrução", "instruções",
+                   "transação", "transações", "migração", "migrações", "integração", "integrações"}
 
 
 def regra_nominalizacao(frase: str) -> list[tuple[str, str]]:
@@ -305,14 +396,14 @@ def regra_nominalizacao(frase: str) -> list[tuple[str, str]]:
         verbo, nome = m.group(1), m.group(2)
         if nome in LEXICO["deverbais"] and verbo not in SUPORTE_FRACO:
             saida.append((m.group(0), LEXICO["deverbais"][nome]))
-        elif RE_NOMINAL.search(nome) and len(nome) > 5:
+        elif RE_NOMINAL.search(nome) and len(nome) > 5 and not (verbo in SUPORTE_FRACO and nome in NOMES_DE_OBJETO):
             saida.append((m.group(0), LEXICO["deverbais"].get(nome, "o verbo correspondente")))
     return saida
 
 
 AUX_PASSIVA = r"é|são|foi|foram|será|serão|seja|sejam|era|eram|fosse|fossem|ser|sido|sendo|seria|seriam"
 RE_PASSIVA = re.compile(
-    rf"(?<![\wÀ-ÿ])({AUX_PASSIVA})\s+(?:[\wÀ-ÿ]+mente\s+)?([\wÀ-ÿ]+(?:ado|ada|ados|adas|ido|ida|idos|idas|ito|ita|itos|itas|osto|osta|eito|eita))(?![\wÀ-ÿ])(\s+pel[oa]s?|\s+por)?",
+    rf"(?<![\wÀ-ÿ])({AUX_PASSIVA})\s+(?:[\wÀ-ÿ]+mente\s+)?([\wÀ-ÿ]+(?:ado|ada|ados|adas|ido|ida|idos|idas|ído|ída|ídos|ídas|ito|ita|itos|itas|osto|osta|eito|eita))(?![\wÀ-ÿ])(\s+pel[oa]s?|\s+por)?",
     re.I)
 PART_ADJ = set(LEXICO["participios_adjetivos"])
 
@@ -338,14 +429,16 @@ RE_SIGLA = re.compile(r"(?<![\wÀ-ÿ])([A-Z][A-Z0-9]{1,5})(s?)(?![\wÀ-ÿ])")
 
 def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = None,
               vocabulario: list[dict] | None = None, camadas: list[str] | None = None,
-              lematizar=None) -> dict:
+              lematizar=None, detectar_idioma: bool = True) -> dict:
     perfil = perfil.upper()
     niveis = MATRIZ[perfil]
-    blocos, siglas_decl, achados = ler_blocos(texto)
+    blocos, siglas_decl, achados, meta = ler_blocos(texto)
+    ignorados = meta["ignorados"]
     excecoes_aplicadas = []
     conhecidas = set(LEXICO["siglas_conhecidas"]) | siglas_decl | (siglas_extra or set())
     vocab = VOCABULARIO if vocabulario is None else vocabulario
     por_lema = {v["lema"].lower(): v for v in vocab if v.get("lematizavel")} if lematizar else {}
+    escala = sorted((v for v in vocab if v.get("probabilidade")), key=lambda v: v["probabilidade"][0])
     siglas_vistas: dict[str, bool] = {}
 
     polissemicos: dict[str, dict] = {}
@@ -363,7 +456,10 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
     achados[:] = [a for a in achados if a.regra in niveis]
 
     for b in blocos:
-        limpo = limpar_inline(b.texto)
+        limpo = limpar_inline(mascarar_mencoes(b.texto, meta["mencoes"]) if meta["mencoes"] else b.texto)
+        if detectar_idioma and parece_ingles(limpo):
+            ignorados.append({"linha": b.linha, "motivo": "idioma detectado: en"})
+            continue
         frases = dividir_frases(limpo)
 
         # PTC-21 — aviso sem consequência
@@ -413,22 +509,55 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
                         "Se a quantidade importar para o leitor, informe o número ou liste os itens.")
 
             for pm in RE_PASSIVA.finditer(f):
-                if pm.group(2).lower() in PART_ADJ:
-                    continue
+                part = pm.group(2).lower()
+                if part in PART_ADJ or (re.search(r"[áéóúâêô]", part) and not re.search(r"[íú]d[oa]s?$", part)):
+                    continue   # válido, rápido: adjetivo; incluído, construído: particípio
                 conf = "media" if pm.group(3) else "baixa"
                 add("PTC-05", conf, b, f, f"Possível voz passiva: “{pm.group(0).strip()}”.",
                     "Se o agente for conhecido, use a voz ativa: “O sistema valida o arquivo.”")
 
             # PTC-25 (e regras dos padrões) — vocabulário controlado
-            ocorrencias = [(v, vm.group(0), "") for v in vocab for vm in v["_re"].finditer(f)]
+            ocorrencias = [(v, vm.group(0), "", vm.start(), vm.end()) for v in vocab for vm in v["_re"].finditer(f)
+                           # palavra toda em maiúsculas (DELETE, UPDATE) é palavra-chave ou sigla, não o termo
+                           if v.get("padrao") or not (vm.group(0).isupper() and len(vm.group(0)) >= 3)]
             if lematizar:   # formas que a flexão automática não gera (fez, dispõe, utilizaremos)
-                ja = {(v["id"], t.lower()) for v, t, _ in ocorrencias}
-                for tok in re.findall(r"[\wÀ-ÿ]+", f):
-                    v = por_lema.get(lematizar(tok.lower()))
-                    if v and (v["id"], tok.lower()) not in ja:
-                        ocorrencias.append((v, tok, " — por lema"))
-                        ja.add((v["id"], tok.lower()))
-            for v, encontrado, via in ocorrencias:
+                ja = {(o[0]["id"], o[1].lower()) for o in ocorrencias}
+                for tm in re.finditer(r"[\wÀ-ÿ]+", f):
+                    v = por_lema.get(lematizar(tm.group(0).lower()))
+                    if v and (v["id"], tm.group(0).lower()) not in ja:
+                        ocorrencias.append((v, tm.group(0), " — por lema", tm.start(), tm.end()))
+                        ja.add((v["id"], tm.group(0).lower()))
+            # uma ocorrência dentro de outra maior não conta ("provável" dentro de "muito provável")
+            ocorrencias = [o for o in ocorrencias
+                           if not any(p[3] <= o[3] and o[4] <= p[4] and p[4] - p[3] > o[4] - o[3] for p in ocorrencias)]
+            for v in vocab:   # PTC-08: gênero diferente do registrado no glossário
+                if v.get("_re_genero"):
+                    for gm in v["_re_genero"].finditer(f):
+                        art = "o" if v["genero"] == "m" else "a"
+                        add("PTC-08", "media", b, f,
+                            f"Gênero diferente do glossário: “{gm.group(0)}” (glossário: {art} {v['lema']}, {v['id']}).",
+                            f"Use o gênero do glossário{' de ' + v['dominio'] if v.get('dominio') else ''}: "
+                            f"{art} {v['lema']}.")
+            for v, encontrado, via, _ini, fim in ocorrencias:
+                if v.get("probabilidade"):   # PTC-26: termo da escala exige percentual coerente
+                    lo, hi = v["probabilidade"]
+                    pm = RE_PERCENTUAL.match(f[fim:])
+                    if not pm:
+                        add(v.get("regra", "PTC-26"), "alta", b, f,
+                            f"Termo de probabilidade sem percentual: “{encontrado}” ({v['id']}).",
+                            f"Escreva a faixa entre parênteses: “{encontrado} ({_faixa(v)})”.")
+                        continue
+                    a = _num(pm.group(1))
+                    z = _num(pm.group(2)) if pm.group(2) else a
+                    if not (lo <= a <= z <= hi):
+                        meio = (a + z) / 2
+                        certo = next((e for e in escala if e["probabilidade"][0] <= meio <= e["probabilidade"][1]), None)
+                        dica = f"“{certo['lema']} ({_faixa(certo)})”" if certo else "um termo da escala"
+                        add(v.get("regra", "PTC-26"), "alta", b, f,
+                            f"Percentual incoerente: “{encontrado}” vale {_faixa(v)}, mas o texto diz "
+                            f"{pm.group(0).strip()} ({v['id']}).",
+                            f"Para esse número, use {dica}; ou corrija o percentual.")
+                    continue
                 if v.get("sentidos"):
                     reg = polissemicos.setdefault(v["id"], {"id": v["id"], "lema": v["lema"], "ocorrencias": 0,
                                                             "linhas": [], "sentidos": v["sentidos"]})
@@ -468,15 +597,15 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
             sigla = sm.group(1)
             if sigla in NAO_SIGLAS or sigla in conhecidas or sigla + sm.group(2) in conhecidas or sigla in siglas_vistas:
                 continue
-            if not re.search(r"[A-Z].*[A-Z]", sigla) or sigla.isdigit():
-                continue
+            if not re.search(r"[A-Z].*[A-Z]", sigla) or sigla.isdigit() or len(set(sigla)) == 1:
+                continue   # NN, XX: marcador de posição, não sigla
             ini, fim = sm.span()
             antes, depois = limpo[max(0, ini - 2):ini], limpo[fim:fim + 3]
             if re.match(r"\.[a-z]{1,5}\b", limpo[fim:fim + 7]):   # nome de arquivo: SKILL.md, README.txt
                 continue
             # caixa alta de ênfase (LEIA, NUNCA, DEPENDE) parece palavra, não sigla: confiança baixa
             enfase = len(sigla) >= 4 and sum(c in "AEIOU" for c in sigla) >= 2
-            definida = "(" in antes or depois.lstrip().startswith(("(", "—", "–", ":")) or \
+            definida = "(" in antes or re.match(r"[\w-]*\s*[(—–:]", limpo[fim:fim + 15]) is not None or \
                 re.search(rf"\(\s*{sigla}s?\s*\)", limpo[:ini + len(sigla) + 3]) is not None
             siglas_vistas[sigla] = definida
             if not definida:
@@ -498,6 +627,7 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
         "blocos_verificados": len(blocos),
         "achados": [asdict(a) for a in achados],
         "excecoes_aplicadas": excecoes_aplicadas,
+        "blocos_ignorados": sorted(ignorados, key=lambda x: x["linha"]),
         "vocabulario_polissemico": sorted(polissemicos.values(), key=lambda x: -x["ocorrencias"]),
         "resumo": {
             "total": len(achados),
@@ -535,6 +665,11 @@ def imprimir(res: dict) -> None:
         for p in res["vocabulario_polissemico"]:
             sentidos = "; ".join(s["sentido"] for s in p["sentidos"])
             print(f"  {p['lema']} ×{p['ocorrencias']} (linhas {', '.join(map(str, p['linhas'][:8]))}) — {sentidos}")
+    if res.get("blocos_ignorados"):
+        motivos: dict[str, int] = {}
+        for x in res["blocos_ignorados"]:
+            motivos[x["motivo"]] = motivos.get(x["motivo"], 0) + 1
+        print("\nBlocos fora da verificação: " + "; ".join(f"{m} ×{q}" for m, q in motivos.items()))
     print(f"\n{res['observacao']}")
 
 
@@ -547,6 +682,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--min-confianca", default="baixa", choices=list(CONFIANCA))
     ap.add_argument("--vocabulario", action="append", default=[], metavar="CAMADA",
                     help="Camada de vocabulário do time (.yaml ou .json). Pode repetir; a última vence.")
+    ap.add_argument("--dominios", default="",
+                    help="Restringe os glossários de domínio (ex.: software,dados). Padrão: todos")
+    ap.add_argument("--sem-deteccao-idioma", action="store_true",
+                    help="Não pula blocos detectados como inglês (a marcação ptc-idioma continua valendo)")
     ap.add_argument("--lematizar", action="store_true",
                     help="Usa lematização (requer simplemma: pip install simplemma) para achar formas irregulares")
     ap.add_argument("--siglas", default="",
@@ -577,6 +716,9 @@ def main(argv: list[str] | None = None) -> int:
             print(f"erro: {e}", file=sys.stderr)
             return 2
         siglas |= siglas_camada
+    if args.dominios:
+        quero = {d.strip().lower() for d in args.dominios.split(",") if d.strip()}
+        vocab = [v for v in (vocab if vocab is not None else VOCABULARIO) if not v.get("dominio") or v["dominio"] in quero]
     lem = None
     if args.lematizar:
         try:
@@ -584,7 +726,8 @@ def main(argv: list[str] | None = None) -> int:
         except ImportError:
             print("erro: --lematizar requer simplemma (pip install simplemma)", file=sys.stderr)
             return 2
-    res = filtrar(verificar(texto, args.perfil, siglas, vocab, camadas, lem), args.min_confianca)
+    res = filtrar(verificar(texto, args.perfil, siglas, vocab, camadas, lem, not args.sem_deteccao_idioma),
+                  args.min_confianca)
     if args.json:
         json.dump(res, sys.stdout, ensure_ascii=False, indent=2)
         print()

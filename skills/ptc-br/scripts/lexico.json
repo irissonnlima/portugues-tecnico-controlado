@@ -1,5 +1,5 @@
 {
-  "spec_version": "0.3.0",
+  "spec_version": "0.4.0",
   "abreviacoes": [
     "ex",
     "p. ex",
@@ -378,7 +378,28 @@
     "mercado",
     "chamado",
     "chamados",
-    "módulo"
+    "módulo",
+    "muito",
+    "muita",
+    "muitos",
+    "muitas",
+    "infinito",
+    "infinita",
+    "explícito",
+    "explícita",
+    "explícitos",
+    "explícitas",
+    "implícito",
+    "implícita",
+    "gratuito",
+    "gratuita",
+    "bonito",
+    "bonita",
+    "conflito",
+    "circuito",
+    "esquisito",
+    "favorito",
+    "favorita"
   ],
   "siglas_conhecidas": [
     "API",
@@ -467,7 +488,9 @@
     "SSL",
     "UUID",
     "ASCII",
-    "UTF"
+    "UTF",
+    "MIT",
+    "EUA"
   ],
   "quantificadores_vagos": [
     "alguns",

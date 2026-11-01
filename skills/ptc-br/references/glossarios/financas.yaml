@@ -1,0 +1,104 @@
+# Glossário PTC-BR — Finanças e crédito (spec 0.4.0)
+#
+# Termos aprovados do domínio. Anglicismos consolidados ficam aprovados, sem itálico e com gênero
+# registrado: o verificador aponta o gênero oposto (PTC-08). Para trocar uma escolha, use uma camada
+# de vocabulário do time. Faixa de ID: V-1300..V-1399.
+
+- id: V-1300
+  lema: spread
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "diferença entre a taxa cobrada e o custo de captação"
+  versao_inclusao: 0.4.0
+
+- id: V-1301
+  lema: score
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "pontuação de risco de crédito"
+  versao_inclusao: 0.4.0
+
+- id: V-1302
+  lema: chargeback
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "contestação de uma compra no cartão que estorna o valor"
+  versao_inclusao: 0.4.0
+
+- id: V-1303
+  lema: cashback
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "devolução de parte do valor de uma compra"
+  versao_inclusao: 0.4.0
+
+- id: V-1304
+  lema: rating
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "classificação de risco"
+  versao_inclusao: 0.4.0
+
+- id: V-1305
+  lema: write-off
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "baixa contábil de uma dívida considerada perdida"
+  versao_inclusao: 0.4.0
+
+- id: V-1306
+  lema: compliance
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: m
+  significado_aprovado: "conformidade com leis, normas e políticas internas"
+  versao_inclusao: 0.4.0
+
+- id: V-1307
+  lema: inadimplência
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: f
+  significado_aprovado: "atraso no pagamento além do prazo definido pela política"
+  versao_inclusao: 0.4.0
+
+- id: V-1308
+  lema: safra
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: f
+  significado_aprovado: "conjunto de contratos originados no mesmo período, acompanhado ao longo do tempo"
+  versao_inclusao: 0.4.0
+
+- id: V-1309
+  lema: rolagem
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: f
+  significado_aprovado: "passagem de contratos de uma faixa de atraso para a seguinte (roll rate)"
+  versao_inclusao: 0.4.0
+
+- id: V-1310
+  lema: provisão
+  classe: substantivo
+  status: aprovado
+  dominio: financas
+  genero: f
+  significado_aprovado: "valor reservado para cobrir perdas esperadas com crédito"
+  versao_inclusao: 0.4.0

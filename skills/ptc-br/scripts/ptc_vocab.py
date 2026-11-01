@@ -27,7 +27,8 @@ from pathlib import Path
 LIMITE = r"[\wÀ-ÿ-]"
 STATUS = {"aprovado", "nao_preferido", "proibido", "em_analise"}
 CLASSES = {"verbo", "substantivo", "adjetivo", "adverbio", "locucao_verbal", "conectivo", "padrao"}
-CAMPOS_SOBREPOR = {"id", "lema", "status", "preferir", "motivo", "regra", "significado_aprovado", "sinonimo_de"}
+CAMPOS_SOBREPOR = {"id", "lema", "status", "preferir", "motivo", "regra", "significado_aprovado", "sinonimo_de",
+                   "probabilidade", "genero", "dominio"}
 RE_ID = re.compile(r"^[A-Z]{1,4}-[0-9]{4}$")
 
 

@@ -1,6 +1,55 @@
 # Changelog
 
-Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
+<!-- ptc-mencoes: italico, aspas -->
+
+Histórico de versões do PTC-BR (Português Técnico Controlado). O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
+
+## [plugin 0.4.0 · spec 0.4.0] — 2026-11-01
+
+### Probabilidade com percentual (novo)
+
+- Regra **PTC-26**: termos de certeza seguem uma escala de 7 níveis, baseada na Intelligence Community Directive 203 (ICD 203). Toda ocorrência traz a faixa entre parênteses: "provável (55–80%)".
+- O verificador aponta o termo sem percentual e o número fora da faixa, e sugere o termo certo para o número.
+- Expressões vagas (*talvez*, *possivelmente*, *é possível que*, *certamente*) viram alerta. "É possível exportar" (capacidade) não é marcado.
+- `ptc_diff.py` compara o grau de certeza. Trocar *provável* por *quase certo* é alerta alto. Escolher um nível para um *talvez* pede confirmação do autor.
+
+### Anglicismos e glossários (novo)
+
+- Política: substantivos técnicos em inglês aprovados, sem itálico e com gênero; verbos aportuguesados não preferidos (*commitar*, *deployar*, *setar*: 21 verbetes).
+- Glossários de domínio: software (23 termos), dados (14), infraestrutura (14) e finanças (11).
+- **PTC-08** automática para gênero: "a pipeline" gera alerta quando o glossário registra "o pipeline".
+- `--dominios` restringe os glossários usados.
+
+### Diretivas no documento (novo)
+
+- `ptc-ignorar` e `ptc-ignorar-inicio`/`-fim`: blocos fora da verificação, como os exemplos incorretos de propósito.
+- `ptc-idioma`: marca um bloco em outro idioma. Blocos em inglês também são detectados automaticamente (`--sem-deteccao-idioma` desliga).
+- `ptc-mencoes: italico, aspas`: trechos citados não geram alerta de vocabulário e contam como uma palavra.
+- `blocos_ignorados` na saída lista cada bloco fora da verificação, com o motivo.
+
+### O projeto segue as próprias regras
+
+- README, CHANGELOG, SKILL.md, spec e rubrica revisados com o PTC-BR: de 84 achados para 9, todos de voz passiva com agente irrelevante (confiança baixa).
+- `tests/test_documentacao.py` impede a regressão.
+- A revisão revelou 6 falsos positivos no verificador, agora corrigidos:
+  - sigla definida em título ou com sufixo (*PTC-BR (Português…)*);
+  - marcador de posição (*PTC-NN*);
+  - "execute a aplicação" tratado como nominalização;
+  - adjetivo proparoxítono (*válido*) tratado como voz passiva;
+  - "muito" tratado como particípio;
+  - particípio acentuado (*incluído*) não reconhecido.
+
+### Ambiguidade
+
+- 9 pares novos de calibração do judge: pronome com dois referentes, alcance de adjetivo, *uma vez que*, *todos… não* e grau de certeza.
+- A rubrica trata a escolha silenciosa de uma leitura como informação acrescentada (Q2).
+- Calibração com 27 pares: 25 de 27 vereditos na primeira rodada. Os 2 casos divergentes tinham defeito de rótulo e foram corrigidos; depois da correção, 100% em 2 execuções.
+- 2 casos novos de eval: frase ambígua e probabilidade.
+
+### Outros
+
+- Palavra em maiúsculas (DELETE, UPDATE) não casa com verbete: é palavra-chave ou sigla.
+- CI no GitHub Actions: testes sem dependências e com dependências, em Python 3.10 e 3.12.
 
 ## [plugin 0.3.0 · spec 0.3.0] — 2026-10-30
 
@@ -18,7 +67,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Vocabulário: 68 → 164 verbetes
 
-- `formal.yaml` (novo): 73 verbetes de registro formal e burocrático: verbos (*ensejar*, *possuir*, *prosseguir*), conectivos (*outrossim*, *mediante*, *uma vez que*), padrões (introdução vazia, mesóclise), adjetivos, advérbios e substantivos (*supracitado*, *primeiramente*, *metodologia*).
+- `formal.yaml` (novo): 73 verbetes de registro formal e burocrático.
+  - Verbos (*ensejar*, *possuir*, *prosseguir*) e conectivos (*outrossim*, *mediante*, *uma vez que*).
+  - Padrões (introdução vazia, mesóclise), adjetivos, advérbios e substantivos (*supracitado*, *primeiramente*, *metodologia*).
 - `polissemia.yaml` (novo): 23 palavras com mais de um sentido técnico, com foco em software e finanças (*taxa*, *título*, *transação*, *homologação*, *padrão*, *modelo*).
 - Flexão de adjetivos (gênero e número) e plural de *-vel* (*imprescindíveis*).
 - Correção: *se encontrar* (condição com o verbo *encontrar*) deixa de ser marcado como *encontrar-se*.
@@ -39,7 +90,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Vocabulário controlado (novo)
 
-- 68 verbetes em `references/vocabulario/geral.yaml`: 34 não preferidos, 21 palavras com mais de um sentido técnico, 8 verbos de instrução aprovados, 4 em análise e 1 proibido.
+- 68 verbetes em `references/vocabulario/geral.yaml`. São 34 não preferidos, 21 palavras com mais de um sentido técnico, 8 verbos de instrução aprovados, 4 em análise e 1 proibido.
 - `schema.json` (JSON Schema) e `tools/compilar_vocabulario.py`: valida os verbetes, gera a flexão (verbos regulares e plural) e compila `scripts/vocabulario.json`. O build é reprodutível.
 - Nova regra **PTC-25** (vocabulário controlado). Termo proibido é violação obrigatória em qualquer perfil.
 - Relatório `vocabulario_polissemico` na saída do verificador, usado na passada global da PTC-08.
@@ -78,7 +129,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - `ptc_diff.py`: checagem de preservação de números, negações, restrições, condições, alternativas, comparadores e modais.
 - Rubrica do judge com perguntas binárias Q1–Q6 e saída JSON.
 - 45 testes unitários, 18 pares de calibração do judge e 4 casos de `claude plugin eval`.
-- Calibração do judge: concordância no veredito de 71% → 97% (2 execuções × 18 pares) depois de corrigir os rótulos e a rubrica (Q5 para PTC-06, Q6 com a lista de regras obrigatórias, alcance de condições em frases divididas).
+- Calibração do judge: concordância no veredito de 71% → 97% (2 execuções × 18 pares).
+  - O ganho veio da correção dos rótulos e de três ajustes na rubrica.
+  - Ajustes: Q5 para PTC-06, Q6 com a lista de regras obrigatórias e alcance de condições em frases divididas.
 
 ### Especificação 0.1.0 → 0.1.1
 

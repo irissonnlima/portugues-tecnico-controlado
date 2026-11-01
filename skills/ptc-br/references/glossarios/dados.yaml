@@ -1,0 +1,131 @@
+# Glossário PTC-BR — Dados (spec 0.4.0)
+#
+# Termos aprovados do domínio. Anglicismos consolidados ficam aprovados, sem itálico e com gênero
+# registrado: o verificador aponta o gênero oposto (PTC-08). Para trocar uma escolha, use uma camada
+# de vocabulário do time. Faixa de ID: V-1100..V-1199.
+
+- id: V-1100
+  lema: query
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: f
+  significado_aprovado: "consulta a um banco de dados"
+  versao_inclusao: 0.4.0
+
+- id: V-1101
+  lema: dataset
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "conjunto de dados organizado para uma finalidade"
+  versao_inclusao: 0.4.0
+
+- id: V-1102
+  lema: schema
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "estrutura de um banco: tabelas, colunas e tipos; ou o espaço de nomes que agrupa tabelas"
+  versao_inclusao: 0.4.0
+
+- id: V-1103
+  lema: view
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: f
+  significado_aprovado: "consulta salva que funciona como tabela virtual"
+  versao_inclusao: 0.4.0
+
+- id: V-1104
+  lema: join
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "combinação de linhas de duas tabelas por uma condição"
+  versao_inclusao: 0.4.0
+
+- id: V-1105
+  lema: data lake
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "repositório de dados brutos em formato aberto"
+  versao_inclusao: 0.4.0
+
+- id: V-1106
+  lema: data warehouse
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "banco analítico com dados tratados e modelados"
+  versao_inclusao: 0.4.0
+
+- id: V-1107
+  lema: lakehouse
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "plataforma que combina data lake e data warehouse"
+  versao_inclusao: 0.4.0
+
+- id: V-1108
+  lema: dashboard
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "painel com indicadores"
+  versao_inclusao: 0.4.0
+
+- id: V-1109
+  lema: backup
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "cópia de segurança de dados"
+  versao_inclusao: 0.4.0
+
+- id: V-1110
+  lema: dump
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "exportação completa de um banco em arquivo"
+  versao_inclusao: 0.4.0
+
+- id: V-1111
+  lema: trigger
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: m
+  significado_aprovado: "rotina do banco disparada por um evento em uma tabela"
+  versao_inclusao: 0.4.0
+
+- id: V-1112
+  lema: stored procedure
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: f
+  significado_aprovado: "rotina armazenada e executada no banco de dados"
+  versao_inclusao: 0.4.0
+
+- id: V-1113
+  lema: constraint
+  classe: substantivo
+  status: aprovado
+  dominio: dados
+  genero: f
+  significado_aprovado: "regra de integridade de uma tabela"
+  versao_inclusao: 0.4.0

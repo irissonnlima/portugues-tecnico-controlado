@@ -1,6 +1,8 @@
-# Rubrica do judge — PTC-BR 0.1.1
+# Rubrica do judge — PTC-BR 0.4.0
 
-O judge avalia **um par**: o trecho original e a reescrita. Ele responde perguntas binárias com evidência. Ele **não** dá nota de 1 a 10.
+<!-- ptc-mencoes: italico -->
+
+O judge do PTC-BR (Português Técnico Controlado) avalia **um par**: o trecho original e a reescrita. Ele responde perguntas binárias com evidência. Ele **não** dá nota de 1 a 10.
 
 Use esta rubrica em dois momentos:
 
@@ -21,20 +23,28 @@ Responda cada pergunta com `true` ou `false` e cite o trecho que comprova a resp
 
 | ID | Pergunta | Resposta que aprova |
 |---|---|---|
-| **Q1** | A reescrita **remove** uma condição, negação, restrição (*só*, *exceto*), número, unidade, alternativa (*ou*) ou relação de causa? | `false` |
-| **Q2** | A reescrita **acrescenta** informação que o original não contém (quantidade, entidade, contexto, causa, prazo)? | `false` |
-| **Q3** | A reescrita **muda o escopo** de um termo, ampliando ou reduzindo o conjunto de casos (ex.: *fora da validade* → *expirado*)? | `false` |
+| **Q1** | A reescrita **remove** uma condição, negação, restrição (*só*, *exceto*), número, unidade, alternativa (*ou*), relação de causa ou grau de certeza? | `false` |
+| **Q2** | A reescrita **acrescenta** informação que o original não contém (quantidade, entidade, contexto, causa, prazo, grau de certeza)? | `false` |
+| **Q3** | A reescrita **muda o escopo** de um termo ou o grau de certeza (ex.: *fora da validade* → *expirado*; *provável* → *quase certo*)? | `false` |
 | **Q4** | A reescrita **troca um termo técnico preciso** por uma palavra mais vaga ou com outro sentido (PTC-13)? | `false` |
 | **Q5** | A reescrita **corrige** as violações de `regras_alvo`? | `true` |
 | **Q6** | A reescrita **cria** uma nova violação de regra obrigatória do perfil? | `false` |
 
-**Responda todas as perguntas**, mesmo depois de encontrar um motivo de reprovação. Cada pergunta é medida separadamente.
+**Responda todas as perguntas**, mesmo depois de encontrar um motivo de reprovação. A calibração mede cada pergunta em separado.
 
-**Q6 — regras obrigatórias no perfil PTC-T:** PTC-01, 02, 03, 05, 06, 07, 08, 10, 13, 14, 17, 18, 19, 20, 21, 22, 24. Para os perfis L e C, veja a seção 3.1 da spec. Exemplos frequentes: sigla nova sem definição (PTC-17), voz passiva com agente conhecido (PTC-05), instrução com mais de 20 palavras (PTC-03), duas ações na mesma frase de um procedimento (PTC-02).
+**Q6 — regras obrigatórias no perfil PTC-T:** PTC-01, 02, 03, 05, 06, 07, 08, 10, 13, 14, 17, 18, 19, 20, 21, 22, 24 e 26. Para os perfis L e C, veja a seção 3.1 da spec. Exemplos frequentes:
 
-**Q5 para PTC-06:** a regra só é corrigida se, no texto da reescrita, a condição (*se…*, *somente se…*, *quando…*) aparece **antes** do verbo da ação principal. *O sistema aprova X somente se Y* ainda viola a PTC-06; *Somente se Y, o sistema aprova X* corrige.
+- sigla nova sem definição (PTC-17);
+- voz passiva com agente conhecido (PTC-05);
+- instrução com mais de 20 palavras (PTC-03);
+- duas ações na mesma frase de um procedimento (PTC-02);
+- termo de probabilidade sem percentual, ou com percentual fora da faixa (PTC-26).
 
-**Escopo de condições em frases divididas:** quando uma frase com condição vira várias, confira se **todas** as ações que dependiam da condição continuam dependentes dela. *Se X, faça A e B* → *Se X, faça A. Faça B.* tira B do alcance da condição (Q1).
+**Q5 para PTC-06:** a condição (*se…*, *somente se…*, *quando…*) precisa aparecer **antes** do verbo da ação principal. *O sistema aprova X somente se Y* ainda viola a PTC-06. *Somente se Y, o sistema aprova X* corrige.
+
+**Escopo de condições em frases divididas:** quando uma frase com condição vira duas ou mais, confira o alcance da condição. **Todas** as ações que dependiam dela continuam dependentes? *Se X, faça A e B* → *Se X, faça A. Faça B.* tira B do alcance da condição (Q1).
+
+**Ambiguidade:** se o original admite duas leituras e a reescrita escolhe uma em silêncio, responda Q2 = `true`. A reescrita aprovada mantém a ambiguidade marcada (`[ambíguo: …]`) ou resolve com uma pergunta ao autor. O mesmo vale para *talvez* → *provável (55–80%)*: o nível é decisão do autor (`[confirmar nível: …]`).
 
 **Como usar o `diff`:** cada alerta `alta` do diff é um candidato a Q1 ou Q2, não uma resposta pronta. Confirme lendo o texto. A troca de *quando* por *se* mantém a condição. A troca de *deverá ser feito* pelo imperativo mantém a obrigação.
 
@@ -42,7 +52,7 @@ Responda cada pergunta com `true` ou `false` e cite o trecho que comprova a resp
 
 - Q2 inclui números por extenso (*três*), nomes de eventos, sistemas ou organizações e causas que o original não cita.
 - Q3 cobre hiperônimos e hipônimos: *dispositivo* → *celular*, *usuários autorizados* → *usuários*.
-- Dividir uma frase em duas **não** é perda (Q1), desde que a relação entre as partes continue explícita (*Depois*, *Se*, *Por isso*) e o alcance das condições não mude.
+- Dividir uma frase em duas **não** é perda (Q1). Confira só duas coisas: a relação entre as partes continua explícita (*Depois*, *Se*, *Por isso*) e o alcance das condições não muda.
 - Trocar a finalidade por outra ação é perda e adição: *para continuar a operação* → *execute a operação novamente*.
 
 ## Veredito

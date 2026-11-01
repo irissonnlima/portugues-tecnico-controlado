@@ -24,10 +24,11 @@ import yaml
 
 RAIZ = Path(__file__).resolve().parents[1]
 SKILL = RAIZ / "skills" / "ptc-br"
-FONTES = sorted((SKILL / "references" / "vocabulario").glob("*.yaml"))
+FONTES = sorted((SKILL / "references" / "vocabulario").glob("*.yaml")) + \
+    sorted((SKILL / "references" / "glossarios").glob("*.yaml"))
 SCHEMA = SKILL / "references" / "vocabulario" / "schema.json"
 SAIDA = SKILL / "scripts" / "vocabulario.json"
-SPEC_VERSION = "0.3.0"
+SPEC_VERSION = "0.4.0"
 
 sys.path.insert(0, str(SKILL / "scripts"))
 from ptc_vocab import (flexionar_adjetivo, flexionar_nome, flexionar_verbo,  # noqa: E402,F401
@@ -83,7 +84,7 @@ def compilar() -> dict:
     saida = []
     for v in sorted(verbetes, key=lambda x: x["id"]):
         item = {k: v[k] for k in ("id", "lema", "classe", "status", "significado_aprovado") if k in v}
-        for k in ("preferir", "preferida_em_instrucoes", "sinonimo_de", "sentidos", "motivo", "exemplo_correto",
+        for k in ("preferir", "preferida_em_instrucoes", "sinonimo_de", "probabilidade", "dominio", "genero", "sentidos", "motivo", "exemplo_correto",
                   "exemplo_incorreto"):
             if k in v:
                 item[k] = v[k]
