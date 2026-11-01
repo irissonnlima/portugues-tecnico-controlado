@@ -187,21 +187,32 @@ class Diretivas(unittest.TestCase):
         res = pc.verificar(txt)
         self.assertEqual([a["linha"] for a in res["achados"]], [7])
 
-    def test_idioma_marcado(self):
+    def test_idioma_marcado_usa_perfil_ste(self):
         res = pc.verificar("<!-- ptc-idioma: en -->\nExecute os testes rapidamente.")
-        self.assertEqual(res["achados"], [])
+        self.assertEqual(res["blocos_ingles_ste"], 1)
+        self.assertFalse([a for a in res["achados"] if a["regra"] == "PTC-12"])   # regra do português não vale
 
-    def test_ingles_detectado(self):
-        res = pc.verificar("Execute the query and check the results quickly.")
+    def test_outro_idioma_marcado_fica_fora(self):
+        res = pc.verificar("<!-- ptc-idioma: es -->\nUtilice el token rápidamente.")
         self.assertEqual(res["achados"], [])
-        self.assertEqual(res["blocos_ignorados"][0]["motivo"], "idioma detectado: en")
+        self.assertEqual(res["blocos_ignorados"][0]["motivo"], "idioma: es")
+
+    def test_ingles_detectado_usa_perfil_ste(self):
+        res = pc.verificar("Execute the query and check the results quickly.")
+        self.assertEqual(res["blocos_ingles_ste"], 1)
+        self.assertEqual(res["blocos_ignorados"], [])
+
+    def test_ingles_pode_ser_ignorado(self):
+        res = pc.verificar("Utilize the token and check the results.", ingles="ignorar")
+        self.assertEqual(res["achados"], [])
+        self.assertEqual(res["blocos_ignorados"][0]["motivo"], "idioma: en")
 
     def test_termos_ingleses_em_frase_portuguesa_nao_e_ingles(self):
         self.assertFalse(pc.parece_ingles("Faça o commit da branch e abra o pull request."))
 
     def test_deteccao_desligada(self):
         res = pc.verificar("Execute the query and check the results.", detectar_idioma=False)
-        self.assertEqual(res["blocos_ignorados"], [])
+        self.assertEqual(res["blocos_ingles_ste"], 0)
 
     def test_mencoes_em_italico(self):
         txt = "<!-- ptc-mencoes: italico -->\nNão use *utilizar* nem *a nível de*. Utilize o verbo usar."
@@ -235,3 +246,62 @@ class PrecisaoDocumentacao(unittest.TestCase):
     def test_adjetivo_proparoxitono_nao_e_passiva(self):
         self.assertNotIn("PTC-05", self.regras("O certificado é válido."))
         self.assertIn("PTC-05", self.regras("O arquivo foi incluído pelo sistema."))
+
+
+class PerfilSTE(unittest.TestCase):
+    """Blocos em inglês: núcleo do ASD-STE100. Regras próprias do português não valem."""
+
+    def achados(self, texto):
+        return pc.verificar(texto)["achados"]
+
+    def msgs(self, texto, regra):
+        return [a["mensagem"] for a in self.achados(texto) if a["regra"] == regra]
+
+    def test_passo_longo(self):
+        passo = "1. Open the " + " ".join(["file"] * 20) + " now."
+        self.assertTrue(self.msgs(passo, "PTC-03"))
+
+    def test_voz_passiva_com_agente(self):
+        r = [a for a in self.achados("The file is validated by the system.") if a["regra"] == "PTC-05"]
+        self.assertEqual(r[0]["confianca"], "media")
+        self.assertIn("[EN · STE]", r[0]["mensagem"])
+
+    def test_passiva_irregular(self):
+        self.assertTrue(self.msgs("The report was written by the team.", "PTC-05"))
+
+    def test_imperativo_no_passo(self):
+        self.assertTrue(self.msgs("1. You should open the file in the editor.", "PTC-18"))
+        self.assertTrue(self.msgs("1. Opening the file in the editor is the first step.", "PTC-18"))
+        self.assertEqual(self.msgs("1. Open the file in the editor.", "PTC-18"), [])
+
+    def test_vocabulario_nao_preferido(self):
+        self.assertTrue(any("utilize" in m for m in self.msgs("Utilize the token to access the API.", "PTC-25")))
+        self.assertTrue(any("in order to" in m for m in self.msgs("Restart the service in order to apply it.", "PTC-25")))
+
+    def test_forma_ing_baixa_e_excecoes(self):
+        r = [a for a in self.achados("The service keeps retrying the request.") if "-ing" in a["mensagem"]]
+        self.assertEqual([a["confianca"] for a in r], ["baixa"])
+        self.assertFalse([a for a in self.achados("The string is empty during the test.") if "-ing" in a["mensagem"]])
+
+    def test_aviso_sem_consequencia(self):
+        self.assertTrue(self.msgs("> **Warning:** check the file.", "PTC-21"))
+        self.assertEqual(self.msgs("> **Warning:** do not stop the server: the database can become corrupt.", "PTC-21"), [])
+
+    def test_genero_nao_vale_em_ingles(self):
+        doc = "The pipeline runs every night.\n\nThe query returns the issues and the results.\n\nNo issues found."
+        self.assertEqual(self.msgs(doc, "PTC-08"), [])
+
+    def test_frase_curta_segue_a_maioria_do_documento(self):
+        doc = ("The service reads the queue and writes the result to the database.\n\n"
+               "If the queue is empty, the service waits for the next message.\n\n- No issues found")
+        res = pc.verificar(doc)
+        self.assertEqual(res["blocos_ingles_ste"], 3)
+
+    def test_frase_curta_em_documento_portugues_continua_portugues(self):
+        doc = "O serviço lê a fila e grava o resultado no banco.\n\n- Pipeline OK"
+        self.assertEqual(pc.verificar(doc)["blocos_ingles_ste"], 0)
+
+    def test_regras_do_portugues_nao_valem(self):
+        r = {a["regra"] for a in self.achados("The causa provável is the certificate and the result arrives quickly.")}
+        self.assertNotIn("PTC-26", r)
+        self.assertNotIn("PTC-12", r)

@@ -4,6 +4,24 @@
 
 Histórico de versões do PTC-BR (Português Técnico Controlado). O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
 
+## [plugin 0.5.0 · spec 0.5.0] — 2026-11-01
+
+### Blocos em inglês: perfil ASD-STE100 (novo)
+
+- Blocos em inglês, marcados com `ptc-idioma: en` ou detectados, deixam de ser ignorados. Eles seguem o núcleo do ASD-STE100 (seção 6.2 da spec):
+  - limites de 20 palavras por instrução, 25 por descrição e 6 frases por parágrafo;
+  - voz ativa, imperativo nos passos e aviso com consequência;
+  - amostra de substituições de vocabulário (*utilize* → *use*) e forma *-ing* com confiança baixa.
+- As regras próprias do português não valem nesses blocos: gênero do glossário, vocabulário em português, escala de probabilidade e negações.
+- `--ingles ignorar` volta ao comportamento anterior. Outro idioma marcado (`es`, `fr`) continua fora da verificação.
+- Um bloco sem palavra funcional (*No issues found*) segue o idioma da maioria do documento. Isso resolve o alerta de gênero em frase curta em inglês.
+- No corpus de skills de um time (60 arquivos), 122 blocos em inglês passaram a ser verificados, com 15 achados, a maioria de confiança baixa.
+
+### Outros
+
+- CI: `actions/checkout@v5` e `actions/setup-python@v6` (as versões anteriores usavam Node 20, descontinuado).
+- 129 testes unitários.
+
 ## [plugin 0.4.0 · spec 0.4.0] — 2026-11-01
 
 ### Probabilidade com percentual (novo)

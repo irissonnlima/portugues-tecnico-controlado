@@ -6,8 +6,8 @@ Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em p
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.4.0 |
-| Especificação (`skills/ptc-br/references/regras.md`) | 0.4.0 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.5.0 |
+| Especificação (`skills/ptc-br/references/regras.md`) | 0.5.0 |
 
 ## O que o plugin faz
 
@@ -84,7 +84,7 @@ Código de saída: `0` sem problema grave, `1` com violação obrigatória de al
 Comentários HTML ajustam a verificação sem mudar o texto renderizado (seção 6 da spec):
 
 - `<!-- ptc-ignorar: motivo -->`: o próximo bloco fica fora (ex.: um exemplo incorreto de propósito).
-- `<!-- ptc-idioma: en -->`: o próximo bloco está em inglês. Blocos em inglês também são detectados automaticamente.
+- `<!-- ptc-idioma: en -->`: o próximo bloco está em inglês. Blocos em inglês também são detectados automaticamente e seguem o perfil ASD-STE100 (Simplified Technical English): frases curtas, voz ativa, imperativo nos passos. A checagem de gênero e as demais regras próprias do português não valem para eles.
 - `<!-- ptc-mencoes: italico -->`: termos em itálico são citações (*utilizar*), não uso.
 - `<!-- ptc-excecao: PTC-03; motivo: ... -->` e `<!-- ptc-siglas: API, SQL -->`.
 

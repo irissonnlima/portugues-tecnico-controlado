@@ -2,7 +2,7 @@
 
 <!-- ptc-mencoes: italico -->
 
-- **Versão:** 0.4.0 (especificação experimental)
+- **Versão:** 0.5.0 (especificação experimental)
 - **Status:** rascunho para discussão
 - **Idioma:** português brasileiro (pt-BR)
 - **Referências conceituais:** a linguagem simples da ABNT NBR ISO 24495-1 e a linguagem controlada ASD-STE100 (Simplified Technical English)
@@ -186,13 +186,28 @@ Para um time ou domínio inteiro, passe a lista ao verificador: `ptc_check.py ar
 |---|---|
 | `<!-- ptc-ignorar: motivo -->` | O bloco seguinte fica fora da verificação. Use para exemplos incorretos de propósito. |
 | `<!-- ptc-ignorar-inicio: motivo -->` … `<!-- ptc-ignorar-fim -->` | A região inteira fica fora da verificação. |
-| `<!-- ptc-idioma: en -->` | O bloco seguinte está em outro idioma e fica fora da verificação. |
-| `<!-- ptc-idioma-inicio: en -->` … `<!-- ptc-idioma-fim -->` | A região inteira está em outro idioma. |
+| `<!-- ptc-idioma: en -->` | O bloco seguinte está em inglês e segue o perfil ASD-STE100 (seção 6.2). Outro idioma (`es`, `fr`) fica fora da verificação. |
+| `<!-- ptc-idioma-inicio: en -->` … `<!-- ptc-idioma-fim -->` | A região inteira está no idioma indicado. |
 | `<!-- ptc-mencoes: italico, aspas -->` | Vale para o documento. Trechos em itálico ou entre aspas são **menções** a um termo, não uso. A menção não gera alerta de vocabulário e conta como uma palavra. |
 
-O verificador também **detecta blocos em inglês** pelas palavras funcionais (*the*, *of*, *is*) e os deixa fora da verificação. Termos técnicos em inglês dentro de uma frase em português não mudam o idioma do bloco. A opção `--sem-deteccao-idioma` desliga a detecção.
+O verificador também **detecta blocos em inglês** pelas palavras funcionais (*the*, *of*, *is*). Termos técnicos em inglês dentro de uma frase em português não mudam o idioma do bloco. Um bloco sem palavra funcional (*No issues found*) segue a maioria do documento. A opção `--sem-deteccao-idioma` desliga a detecção.
 
 Todo bloco fora da verificação aparece em `blocos_ignorados`, com a linha e o motivo.
+
+### 6.2. Blocos em inglês: perfil ASD-STE100
+
+Um bloco em inglês, marcado ou detectado, segue o núcleo do ASD-STE100 (Simplified Technical English). As regras próprias do português **não** valem para ele: gênero do glossário, vocabulário em português, escala de probabilidade e negações.
+
+| Regra | No bloco em inglês |
+|---|---|
+| PTC-03, PTC-04, PTC-15 | Mesmos limites: instrução até 20 palavras, descrição até 25, parágrafo até 6 frases. |
+| PTC-05 | Voz ativa. O verificador aponta *is/are/was/were/be/been* + particípio. |
+| PTC-18 | Passo começa com o verbo no imperativo (*Open the file*), não com *You should* ou forma *-ing*. |
+| PTC-21 | Aviso (*Warning*, *Caution*, *Note*) descreve o risco ou a consequência. |
+| PTC-25 | Amostra de substituições (*utilize* → *use*, *in order to* → *to*) e forma *-ing* com confiança baixa. |
+| PTC-17 | Igual ao português: sigla definida na primeira ocorrência. |
+
+A amostra de vocabulário é inspirada no ASD-STE100; o dicionário oficial do STE não é reproduzido aqui. Para ignorar blocos em inglês, use `--ingles ignorar`. As mensagens desses achados começam com `[EN · STE]`.
 
 ## 7. Vocabulário controlado
 
@@ -380,10 +395,11 @@ Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam
 
 - **0.2.0:** vocabulário controlado com 68 verbetes, schema validado e flexão automática; regra PTC-25; PTC-23 com concordância negativa; precisão do verificador medida em corpus real.
 - **0.3.0:** camadas de vocabulário do time; sinônimos aceitos; 164 verbetes; lematização opcional.
-- **0.4.0 (atual):** escala de probabilidade (PTC-26) e política de anglicismos.
+- **0.4.0:** escala de probabilidade (PTC-26) e política de anglicismos.
   - Glossários de software, dados, infraestrutura e finanças, com gênero.
   - Diretivas de idioma, de menção e de bloco ignorado.
   - Casos de ambiguidade e documentação do projeto revisada com o PTC-BR.
+- **0.5.0 (atual):** blocos em inglês verificados com o perfil ASD-STE100; frases curtas seguem o idioma da maioria do documento.
 - **0.5.0–0.9.0:** uso real; taxa de aceitação por regra; ajustes.
 - **1.0.0:** IDs estáveis; teste de compreensão com leitores; licença e governança definidas.
 

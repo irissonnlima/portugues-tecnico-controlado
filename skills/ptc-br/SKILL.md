@@ -8,7 +8,7 @@ argument-hint: "[revisar|reescrever|verificar] <arquivo> [perfil L|T|C]"
 
 <!-- ptc-mencoes: italico -->
 
-Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.4.0). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
+Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.5.0). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
 
 ## Modos
 
@@ -42,7 +42,8 @@ O script cobre as regras (A) e (P), inclusive o vocabulário controlado (PTC-25)
 - confiança `media` ou `baixa`: confirme lendo a frase. Descarte o falso positivo e registre o motivo em uma linha;
 - PTC-25 com status `em_analise`: não trate como violação. Cite o termo uma vez no relatório, como decisão pendente do vocabulário;
 - sinônimos aceitos (*verificar*/*conferir*, *executar*/*rodar*) não geram alerta. Se o documento alternar os dois para o mesmo conceito, aponte na passada global (PTC-08) e sugira um só;
-- `blocos_ignorados` lista os blocos fora da verificação (exemplos marcados, outro idioma). Não revise esses blocos.
+- `blocos_ignorados` lista os blocos fora da verificação (exemplos marcados, idioma que não seja português nem inglês). Não revise esses blocos.
+- blocos em inglês seguem o perfil ASD-STE100 (achados com o prefixo `[EN · STE]`, seção 6.2 da spec). Na passada local, revise esses blocos pelo STE: frases curtas, voz ativa, imperativo nos passos, uma instrução por frase. Não aplique a eles as regras próprias do português.
 
 ### 2. Passada global (arquivo inteiro)
 
