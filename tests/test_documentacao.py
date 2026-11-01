@@ -15,6 +15,7 @@ import ptc_check as pc  # noqa: E402
 DOCUMENTOS = [
     "README.md",
     "CHANGELOG.md",
+    "CONTRIBUTING.md",
     "skills/ptc-br/SKILL.md",
     "skills/ptc-br/references/regras.md",
     "skills/ptc-br/references/rubrica-judge.md",

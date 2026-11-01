@@ -8,7 +8,7 @@ argument-hint: "[revisar|reescrever|verificar] <arquivo> [perfil L|T|C]"
 
 <!-- ptc-mencoes: italico -->
 
-Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.5.1). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
+Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.6.0). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
 
 ## Modos
 
@@ -82,6 +82,16 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/ptc_diff.py --original "<original>" --reescr
 Para mais de um par, grave um JSONL (`{"id", "original", "reescrita"}` por linha) e use `--pares arquivo.jsonl`. O diff também compara o grau de certeza: trocar *provável* por *quase certo* é perda de sentido.
 
 Depois, aplique a rubrica de `${CLAUDE_SKILL_DIR}/references/rubrica-judge.md` a cada par. Avalie como um revisor independente: procure o que a reescrita perdeu ou acrescentou, não confirme o próprio trabalho. Se o par for reprovado por Q1–Q4, refaça a reescrita a partir do original.
+
+### 6. Registro de aceitação (quando a pessoa decide sobre os achados)
+
+Depois que a pessoa aceitar, descartar ou registrar exceção para os achados, grave as decisões no registro local. Não registre achados sobre os quais ninguém decidiu.
+
+```bash
+python3 ${CLAUDE_SKILL_DIR}/scripts/ptc_registro.py registrar --entrada decisoes.json
+```
+
+O arquivo `decisoes.json` é uma lista de objetos. Os campos obrigatórios são `regra` e `decisao` (`aceito`, `descartado` ou `excecao`). Os opcionais são `id` do verbete, `confianca`, `arquivo` e `motivo`, este em especial nos descartes. O registro fica só na máquina da pessoa e não guarda o trecho do texto. Para ver a taxa de aceitação por regra: `ptc_registro.py resumo`.
 
 ## Formato de saída
 

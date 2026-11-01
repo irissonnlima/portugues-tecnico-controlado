@@ -1,5 +1,5 @@
 {
- "spec_version": "0.5.1",
+ "spec_version": "0.6.0",
  "aviso": "Arquivo gerado por tools/compilar_vocabulario.py. Edite os .yaml em references/vocabulario/.",
  "total": 260,
  "verbetes": [
@@ -3867,7 +3867,7 @@
    "status": "aprovado",
    "significado_aprovado": "correção urgente publicada fora do ciclo normal",
    "dominio": "software",
-   "genero": "m",
+   "genero": "f",
    "regra": "PTC-25",
    "fonte": "software.yaml",
    "regex": "(?<![\\wÀ-ÿ-])(?:hotfixs|hotfix)(?![\\wÀ-ÿ-])",
@@ -4049,7 +4049,7 @@
    "status": "aprovado",
    "significado_aprovado": "plataforma que combina data lake e data warehouse",
    "dominio": "dados",
-   "genero": "m",
+   "genero": "f",
    "regra": "PTC-25",
    "fonte": "dados.yaml",
    "regex": "(?<![\\wÀ-ÿ-])(?:lakehouses|lakehouse)(?![\\wÀ-ÿ-])",

@@ -4,6 +4,38 @@
 
 Histórico de versões do PTC-BR (Português Técnico Controlado). O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
 
+## [plugin 0.6.0 · spec 0.6.0] — 2026-11-01
+
+### Uso no fluxo do time (novo)
+
+- **GitHub Action** (`action.yml`): verifica os `.md` alterados no push ou no PR e anota os achados nas linhas do diff.
+  - Gera um resumo na página da execução.
+  - Entradas: `arquivos`, `ignorar`, `perfil`, `vocabulario`, `siglas`, `min-confianca` e `falhar-em`.
+- **Hook de pre-commit** (`.pre-commit-hooks.yaml`, id `ptc-br`).
+- `tools/ptc_lote.py`: verificação em lote, com saída em texto, anotações do GitHub ou JSON. A Action e o hook usam esse script.
+- Este repositório usa a própria Action na documentação (`.github/workflows/ptc.yml`).
+
+### Registro de aceitação (novo)
+
+- `ptc_registro.py registrar`: grava o que a pessoa fez com cada achado (aceito, descartado ou exceção). O registro fica só na máquina da pessoa e não guarda o texto.
+- `ptc_registro.py resumo`: mostra a taxa de aceitação por regra e os verbetes mais descartados.
+  - Aponta as regras a revisar: aceitação abaixo de 50% com pelo menos 10 decisões.
+  - Também conta as exceções registradas no texto.
+- A skill ganhou o passo 6: registrar as decisões da pessoa.
+
+### Governança
+
+- Só o mantenedor do repositório aprova mudança de regra, de verbete e de versão. Cada time ajusta o vocabulário na própria camada.
+- `CONTRIBUTING.md` e modelos de issue para propor verbete e regra.
+
+### Glossários
+
+- O mantenedor revisou o gênero dos termos de domínio. *Hotfix* e *lakehouse* passam a feminino (*a hotfix*, *a lakehouse*). Os outros gêneros ficam como estavam.
+
+### Qualidade
+
+- 151 testes unitários.
+
 ## [plugin 0.5.1 · spec 0.5.1] — 2026-11-01
 
 - Substantivos técnicos em *-ing* deixam de gerar alerta nos blocos em inglês.

@@ -2,7 +2,7 @@
 
 <!-- ptc-mencoes: italico -->
 
-- **Versão:** 0.5.1 (especificação experimental)
+- **Versão:** 0.6.0 (especificação experimental)
 - **Status:** rascunho para discussão
 - **Idioma:** português brasileiro (pt-BR)
 - **Referências conceituais:** a linguagem simples da ABNT NBR ISO 24495-1 e a linguagem controlada ASD-STE100 (Simplified Technical English)
@@ -392,6 +392,8 @@ A especificação usa versionamento semântico, separado da versão do plugin:
 
 Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam registradas no CHANGELOG.
 
+**Aprovação:** só o mantenedor do repositório aprova mudança de regra, de verbete, de glossário e de versão. Cada time ajusta o próprio vocabulário na camada (seção 7.3), sem aprovação do mantenedor.
+
 ## 11. Próximas versões
 
 - **0.2.0:** vocabulário controlado com 68 verbetes, schema validado e flexão automática; regra PTC-25; PTC-23 com concordância negativa; precisão do verificador medida em corpus real.
@@ -401,10 +403,11 @@ Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam
   - Diretivas de idioma, de menção e de bloco ignorado.
   - Casos de ambiguidade e documentação do projeto revisada com o PTC-BR.
 - **0.5.0:** blocos em inglês verificados com o perfil ASD-STE100; frases curtas seguem o idioma da maioria do documento.
-- **0.5.1 (atual):** substantivos técnicos em *-ing* aceitos, na lista geral e na camada do time.
-- **0.5.0–0.9.0:** uso real; taxa de aceitação por regra; ajustes.
-- **1.0.0:** IDs estáveis; teste de compreensão com leitores; licença e governança definidas.
+- **0.5.1:** substantivos técnicos em *-ing* aceitos, na lista geral e na camada do time.
+- **0.6.0 (atual):** GitHub Action e hook de pre-commit; registro de aceitação por regra; governança definida.
+- **0.7.0–0.9.0:** taxa de aceitação por regra com dados de uso; corpus de textos não revisados para medir o que o verificador deixa passar.
+- **1.0.0:** IDs estáveis; teste de compreensão com leitores; regras revisadas com a taxa de aceitação.
 
 ---
 
-**Licença:** MIT (arquivo `LICENSE` na raiz do repositório). **Governança:** ainda não definida. Este protótipo é material de trabalho para debate e revisão.
+**Licença:** MIT (arquivo `LICENSE` na raiz do repositório). **Governança:** o mantenedor do repositório aprova toda mudança de regra, de verbete e de versão (`CONTRIBUTING.md`). Este protótipo é material de trabalho para debate e revisão.

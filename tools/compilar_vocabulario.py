@@ -28,7 +28,7 @@ FONTES = sorted((SKILL / "references" / "vocabulario").glob("*.yaml")) + \
     sorted((SKILL / "references" / "glossarios").glob("*.yaml"))
 SCHEMA = SKILL / "references" / "vocabulario" / "schema.json"
 SAIDA = SKILL / "scripts" / "vocabulario.json"
-SPEC_VERSION = "0.5.1"
+SPEC_VERSION = "0.6.0"
 
 sys.path.insert(0, str(SKILL / "scripts"))
 from ptc_vocab import (flexionar_adjetivo, flexionar_nome, flexionar_verbo,  # noqa: E402,F401

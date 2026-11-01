@@ -1,0 +1,65 @@
+name: PTC-BR — Português Técnico Controlado
+description: Verifica arquivos Markdown com as regras do PTC-BR e anota os achados nas linhas do pull request.
+author: Irisson do Nascimento de Lima
+branding:
+  icon: check-square
+  color: green
+
+inputs:
+  arquivos:
+    description: Arquivos a verificar, separados por espaço. Vazio = arquivos .md alterados no push ou no PR.
+    required: false
+    default: ""
+  ignorar:
+    description: Padrões glob a pular, separados por espaço (ex.: "evals/** CHANGELOG.md").
+    required: false
+    default: ""
+  perfil:
+    description: Perfil PTC-BR (L, T ou C).
+    required: false
+    default: T
+  vocabulario:
+    description: Caminho da camada de vocabulário do time (.json ou .yaml; YAML exige PyYAML).
+    required: false
+    default: ""
+  siglas:
+    description: Siglas conhecidas do público (arquivo, uma por linha, ou lista separada por vírgula).
+    required: false
+    default: ""
+  min-confianca:
+    description: Confiança mínima dos achados anotados (baixa, media ou alta).
+    required: false
+    default: media
+  falhar-em:
+    description: Quando falhar o job (obrigatoria-alta, obrigatoria, qualquer ou nunca).
+    required: false
+    default: obrigatoria-alta
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.12"
+    - name: Verificar com o PTC-BR
+      shell: bash
+      env:
+        PTC_ARQUIVOS: ${{ inputs.arquivos }}
+        PTC_IGNORAR: ${{ inputs.ignorar }}
+        PTC_PERFIL: ${{ inputs.perfil }}
+        PTC_VOCABULARIO: ${{ inputs.vocabulario }}
+        PTC_SIGLAS: ${{ inputs.siglas }}
+        PTC_MIN_CONFIANCA: ${{ inputs.min-confianca }}
+        PTC_FALHAR_EM: ${{ inputs.falhar-em }}
+        PTC_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+      run: |
+        args=(--formato github --perfil "$PTC_PERFIL" --min-confianca "$PTC_MIN_CONFIANCA" --falhar-em "$PTC_FALHAR_EM")
+        [ -n "$PTC_VOCABULARIO" ] && args+=(--vocabulario "$PTC_VOCABULARIO")
+        [ -n "$PTC_SIGLAS" ] && args+=(--siglas "$PTC_SIGLAS")
+        [ -n "$PTC_IGNORAR" ] && args+=(--ignorar "$PTC_IGNORAR")
+        if [ -n "$PTC_ARQUIVOS" ]; then
+          # shellcheck disable=SC2086
+          python "$GITHUB_ACTION_PATH/tools/ptc_lote.py" "${args[@]}" $PTC_ARQUIVOS
+        else
+          python "$GITHUB_ACTION_PATH/tools/ptc_lote.py" "${args[@]}" --alterados "$PTC_BASE"
+        fi

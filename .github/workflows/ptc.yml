@@ -1,0 +1,20 @@
+name: ptc-br
+
+# O projeto usa a própria Action na documentação para pessoas.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  texto:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: ./
+        with:
+          arquivos: README.md CHANGELOG.md CONTRIBUTING.md skills/ptc-br/SKILL.md skills/ptc-br/references/regras.md skills/ptc-br/references/rubrica-judge.md
+          min-confianca: media
+          falhar-em: qualquer

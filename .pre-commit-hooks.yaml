@@ -1,0 +1,7 @@
+- id: ptc-br
+  name: PTC-BR (Português Técnico Controlado)
+  description: Verifica arquivos Markdown com as regras do PTC-BR. Falha com regra obrigatória de confiança alta.
+  entry: tools/ptc_lote.py
+  language: script
+  types: [markdown]
+  args: [--min-confianca, media, --falhar-em, obrigatoria-alta]

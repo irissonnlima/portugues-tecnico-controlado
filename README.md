@@ -6,8 +6,8 @@ Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em p
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.5.1 |
-| Especificação (`skills/ptc-br/references/regras.md`) | 0.5.1 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.6.0 |
+| Especificação (`skills/ptc-br/references/regras.md`) | 0.6.0 |
 
 ## O que o plugin faz
 
@@ -79,6 +79,48 @@ python3 skills/ptc-br/scripts/ptc_diff.py --original "Só admins acessam." --ree
 
 Código de saída: `0` sem problema grave, `1` com violação obrigatória de alta confiança (check) ou alerta alto (diff), `2` erro.
 
+## Usar no CI (GitHub Action)
+
+A Action anota os achados nas linhas do pull request e escreve um resumo na página da execução:
+
+```yaml
+- uses: actions/checkout@v5
+  with:
+    fetch-depth: 0            # para comparar com a base do PR
+- uses: irissonnlima/portugues-tecnico-controlado@v0.6.0
+  with:
+    ignorar: "evals/** CHANGELOG.md"        # opcional
+    vocabulario: docs/camada-do-time.json   # opcional
+    min-confianca: media                    # padrão
+    falhar-em: obrigatoria-alta             # padrão; também: obrigatoria, qualquer, nunca
+```
+
+Sem `arquivos`, a Action verifica os `.md` alterados no push ou no PR.
+
+## Usar no pre-commit
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/irissonnlima/portugues-tecnico-controlado
+    rev: v0.6.0
+    hooks:
+      - id: ptc-br
+        args: [--min-confianca, media, --falhar-em, obrigatoria-alta, --vocabulario, docs/camada-do-time.json]
+```
+
+O hook roda `tools/ptc_lote.py`, que também funciona sozinho: `python3 tools/ptc_lote.py docs/*.md`.
+
+## Registro de aceitação
+
+A skill registra o que a pessoa fez com cada achado: aceito, descartado ou exceção. O registro fica só na máquina da pessoa (`~/.local/share/ptc-br/aceitacao.jsonl`) e não guarda o texto. O resumo mostra a taxa de aceitação por regra e aponta as regras a revisar:
+
+```bash
+python3 skills/ptc-br/scripts/ptc_registro.py resumo --excecoes docs/
+```
+
+Um time pode juntar os registros de várias pessoas com `--registro a.jsonl --registro b.jsonl`.
+
 ## Marcações no próprio documento
 
 Comentários HTML ajustam a verificação sem mudar o texto renderizado (seção 6 da spec):
@@ -122,3 +164,7 @@ Rode os unitários a cada mudança. Rode a calibração quando mudar a rubrica o
 ## Licença
 
 [MIT](LICENSE). Vale para o código, a especificação e o vocabulário.
+
+## Governança
+
+Só o mantenedor do repositório aprova mudança de regra, de verbete e de versão. Para propor, veja o [CONTRIBUTING.md](CONTRIBUTING.md).

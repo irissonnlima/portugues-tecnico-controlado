@@ -23,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ptc_vocab  # noqa: E402
 
-SPEC_VERSION = "0.5.1"
+SPEC_VERSION = "0.6.0"
 LEXICO = json.loads((Path(__file__).with_name("lexico.json")).read_text(encoding="utf-8"))
 _VOCAB_ARQ = Path(__file__).with_name("vocabulario.json")
 

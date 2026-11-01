@@ -1,6 +1,6 @@
 {
   "name": "ptc-br",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "PTC-BR — Português Técnico Controlado: revisa, reescreve e verifica textos técnicos em pt-BR com regras de linguagem controlada, verificador automático e judge de preservação de sentido.",
   "author": {
     "name": "Irisson do Nascimento de Lima"

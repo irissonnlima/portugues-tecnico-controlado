@@ -72,7 +72,7 @@
   classe: substantivo
   status: aprovado
   dominio: dados
-  genero: m
+  genero: f
   significado_aprovado: "plataforma que combina data lake e data warehouse"
   versao_inclusao: 0.4.0
 
