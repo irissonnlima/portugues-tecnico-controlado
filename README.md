@@ -6,8 +6,8 @@ Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em p
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.5.0 |
-| Especificação (`skills/ptc-br/references/regras.md`) | 0.5.0 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.5.1 |
+| Especificação (`skills/ptc-br/references/regras.md`) | 0.5.1 |
 
 ## O que o plugin faz
 
@@ -90,7 +90,7 @@ Comentários HTML ajustam a verificação sem mudar o texto renderizado (seção
 
 ## Camada de vocabulário do time
 
-O PTC-BR geral fica neutro em escolhas que variam por time. Por exemplo, aceita *verificar* e *conferir* como sinônimos. Cada time registra as próprias escolhas em uma camada (YAML ou JSON): muda verbetes (`sobrepor`), acrescenta verbetes (`verbetes`) e declara siglas (`siglas`). Veja `exemplos/camada-time.yaml` e a seção 7.3 da spec.
+O PTC-BR geral fica neutro em escolhas que variam por time. Por exemplo, aceita *verificar* e *conferir* como sinônimos. Cada time registra as próprias escolhas em uma camada (YAML ou JSON). A camada muda verbetes (`sobrepor`), acrescenta verbetes (`verbetes`) e declara siglas (`siglas`). Ela também aceita substantivos técnicos em *-ing* nos blocos em inglês (`ingles.ing_aceitos`). Veja `exemplos/camada-time.yaml` e a seção 7.3 da spec.
 
 ## Editar o vocabulário
 

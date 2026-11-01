@@ -7,6 +7,8 @@ Camada de vocabulário do time (JSON ou YAML; YAML exige PyYAML):
 
     nome: meu-time
     siglas: [DDL, HML]
+    ingles:
+      ing_aceitos: [pooling, tracing]  # substantivos técnicos em -ing aceitos nos blocos em inglês
     sobrepor:                       # muda verbetes do vocabulário geral, por id ou lema
       - id: V-0001                  # verificar
         status: nao_preferido
@@ -173,9 +175,13 @@ def carregar_camada(caminho: str | Path) -> dict:
     dados = _ler(caminho) or {}
     if not isinstance(dados, dict):
         raise ValueError(f"{caminho}: a camada deve ser um objeto com 'sobrepor', 'verbetes' e/ou 'siglas'")
-    desconhecidas = set(dados) - {"nome", "descricao", "siglas", "sobrepor", "verbetes"}
+    desconhecidas = set(dados) - {"nome", "descricao", "siglas", "sobrepor", "verbetes", "ingles"}
     if desconhecidas:
         raise ValueError(f"{caminho}: chaves desconhecidas: {sorted(desconhecidas)}")
+    ingles = dados.get("ingles") or {}
+    if not isinstance(ingles, dict) or set(ingles) - {"ing_aceitos"} or \
+            not all(isinstance(x, str) for x in ingles.get("ing_aceitos") or []):
+        raise ValueError(f"{caminho}: 'ingles' aceita só 'ing_aceitos' (lista de palavras em -ing aceitas)")
     dados.setdefault("nome", caminho.stem)
     return dados
 

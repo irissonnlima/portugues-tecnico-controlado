@@ -23,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ptc_vocab  # noqa: E402
 
-SPEC_VERSION = "0.5.0"
+SPEC_VERSION = "0.5.1"
 LEXICO = json.loads((Path(__file__).with_name("lexico.json")).read_text(encoding="utf-8"))
 _VOCAB_ARQ = Path(__file__).with_name("vocabulario.json")
 
@@ -63,15 +63,23 @@ VOCABULARIO_GERAL = json.loads(_VOCAB_ARQ.read_text(encoding="utf-8"))["verbetes
 VOCABULARIO = preparar_vocabulario(VOCABULARIO_GERAL)
 
 
-def carregar_camadas(caminhos: list[str]) -> tuple[list[dict], set[str], list[str]]:
-    """Aplica as camadas na ordem dada (a última vence). Devolve verbetes, siglas e nomes das camadas."""
-    verbetes, siglas, nomes = VOCABULARIO_GERAL, set(), []
+def carregar_camadas_completo(caminhos: list[str]) -> dict:
+    """Aplica as camadas na ordem dada (a última vence).
+    Devolve {vocabulario, siglas, nomes, ing_aceitos}."""
+    verbetes, siglas, nomes, ing = VOCABULARIO_GERAL, set(), [], set()
     for c in caminhos:
         camada = ptc_vocab.carregar_camada(c)
         verbetes, s = ptc_vocab.aplicar_camada(verbetes, camada)
         siglas |= s
+        ing |= {x.strip().lower() for x in (camada.get("ingles") or {}).get("ing_aceitos") or [] if x.strip()}
         nomes.append(camada["nome"])
-    return preparar_vocabulario(verbetes), siglas, nomes
+    return {"vocabulario": preparar_vocabulario(verbetes), "siglas": siglas, "nomes": nomes, "ing_aceitos": ing}
+
+
+def carregar_camadas(caminhos: list[str]) -> tuple[list[dict], set[str], list[str]]:
+    """Compatibilidade: devolve (verbetes, siglas, nomes das camadas)."""
+    c = carregar_camadas_completo(caminhos)
+    return c["vocabulario"], c["siglas"], c["nomes"]
 
 # Nível de cada regra por perfil (seção 3.1 da spec). Ausente = não se aplica.
 MATRIZ = {
@@ -323,7 +331,7 @@ RE_ING = re.compile(r"\b[a-z]{3,}ing\b")
 _EN_NP = sorted(EN["nao_preferidos"].items(), key=lambda x: -len(x[0]))
 
 
-def verificar_bloco_en(b: Bloco, limpo: str, frases: list[str], add) -> None:
+def verificar_bloco_en(b: Bloco, limpo: str, frases: list[str], add, ing_aceitos: set[str] = frozenset()) -> None:
     """Regras do núcleo do ASD-STE100 para um bloco em inglês. Mensagens em português, com o prefixo [EN · STE]."""
     m = re.match(rf"^({'|'.join(EN['rotulos_aviso'])})\s*[:!.—-]\s*(.*)$", limpo, re.I)
     if m:
@@ -357,7 +365,7 @@ def verificar_bloco_en(b: Bloco, limpo: str, frases: list[str], add) -> None:
             if re.search(rf"(?<![\w-]){re.escape(termo)}(?![\w-])", fl):
                 add("PTC-25", "media", b, f, f"[EN · STE] Termo não preferido: “{termo}”.", f"Prefira: {sug}.")
         for im in RE_ING.finditer(fl):
-            if im.group(0) not in EN["excecoes_ing"]:
+            if im.group(0) not in EN["excecoes_ing"] and im.group(0) not in ing_aceitos:
                 add("PTC-25", "baixa", b, f, f"[EN · STE] Forma -ing: “{im.group(0)}”.",
                     "O STE evita a forma -ing, salvo em nome técnico. Use o verbo conjugado: “When you start…”.")
 
@@ -496,7 +504,8 @@ RE_SIGLA = re.compile(r"(?<![\wÀ-ÿ])([A-Z][A-Z0-9]{1,5})(s?)(?![\wÀ-ÿ])")
 
 def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = None,
               vocabulario: list[dict] | None = None, camadas: list[str] | None = None,
-              lematizar=None, detectar_idioma: bool = True, ingles: str = "ste") -> dict:
+              lematizar=None, detectar_idioma: bool = True, ingles: str = "ste",
+              ing_aceitos: set[str] | None = None) -> dict:
     perfil = perfil.upper()
     niveis = MATRIZ[perfil]
     blocos, siglas_decl, achados, meta = ler_blocos(texto)
@@ -539,7 +548,7 @@ def verificar(texto: str, perfil: str = "T", siglas_extra: set[str] | None = Non
 
         if idioma == "en":   # perfil ASD-STE100; regras próprias do português (gênero, vocabulário pt) não valem
             blocos_en += 1
-            verificar_bloco_en(b, limpo, frases, add)
+            verificar_bloco_en(b, limpo, frases, add, {x.lower() for x in (ing_aceitos or set())})
         else:
             # PTC-21 — aviso sem consequência
             m = re.match(rf"^({'|'.join(LEXICO['rotulos_aviso'])})\s*[:!.—-]\s*(.*)$", limpo, re.I)
@@ -792,10 +801,11 @@ def main(argv: list[str] | None = None) -> int:
         fonte = Path(args.siglas)
         bruto = fonte.read_text(encoding="utf-8") if fonte.is_file() else args.siglas
         siglas = {s.strip() for s in re.split(r"[,\n]", bruto) if s.strip() and not s.strip().startswith("#")}
-    vocab, camadas = None, []
+    vocab, camadas, ing_aceitos = None, [], set()
     if args.vocabulario:
         try:
-            vocab, siglas_camada, camadas = carregar_camadas(args.vocabulario)
+            cc = carregar_camadas_completo(args.vocabulario)
+            vocab, siglas_camada, camadas, ing_aceitos = cc["vocabulario"], cc["siglas"], cc["nomes"], cc["ing_aceitos"]
         except (OSError, ValueError) as e:
             print(f"erro: {e}", file=sys.stderr)
             return 2
@@ -810,7 +820,8 @@ def main(argv: list[str] | None = None) -> int:
         except ImportError:
             print("erro: --lematizar requer simplemma (pip install simplemma)", file=sys.stderr)
             return 2
-    res = filtrar(verificar(texto, args.perfil, siglas, vocab, camadas, lem, not args.sem_deteccao_idioma, args.ingles),
+    res = filtrar(verificar(texto, args.perfil, siglas, vocab, camadas, lem, not args.sem_deteccao_idioma, args.ingles,
+                            ing_aceitos),
                   args.min_confianca)
     if args.json:
         json.dump(res, sys.stdout, ensure_ascii=False, indent=2)

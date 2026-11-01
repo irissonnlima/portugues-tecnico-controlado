@@ -8,7 +8,7 @@ argument-hint: "[revisar|reescrever|verificar] <arquivo> [perfil L|T|C]"
 
 <!-- ptc-mencoes: italico -->
 
-Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.5.0). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
+Esta skill aplica a especificação em `${CLAUDE_SKILL_DIR}/references/regras.md` (versão 0.5.1). Leia a spec quando precisar do texto exato de uma regra. Ela também traz a matriz de perfis (seção 3.1), as regras de contagem (seção 5) e as diretivas (seção 6.1).
 
 ## Modos
 

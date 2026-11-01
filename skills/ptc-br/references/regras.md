@@ -2,7 +2,7 @@
 
 <!-- ptc-mencoes: italico -->
 
-- **Versão:** 0.5.0 (especificação experimental)
+- **Versão:** 0.5.1 (especificação experimental)
 - **Status:** rascunho para discussão
 - **Idioma:** português brasileiro (pt-BR)
 - **Referências conceituais:** a linguagem simples da ABNT NBR ISO 24495-1 e a linguagem controlada ASD-STE100 (Simplified Technical English)
@@ -204,7 +204,7 @@ Um bloco em inglês, marcado ou detectado, segue o núcleo do ASD-STE100 (Simpli
 | PTC-05 | Voz ativa. O verificador aponta *is/are/was/were/be/been* + particípio. |
 | PTC-18 | Passo começa com o verbo no imperativo (*Open the file*), não com *You should* ou forma *-ing*. |
 | PTC-21 | Aviso (*Warning*, *Caution*, *Note*) descreve o risco ou a consequência. |
-| PTC-25 | Amostra de substituições (*utilize* → *use*, *in order to* → *to*) e forma *-ing* com confiança baixa. |
+| PTC-25 | Amostra de substituições (*utilize* → *use*, *in order to* → *to*) e forma *-ing* com confiança baixa. Substantivos técnicos em *-ing* (*pooling*, *parsing*, *tracing*) são aceitos; o time acrescenta os dele na camada (`ingles.ing_aceitos`). |
 | PTC-17 | Igual ao português: sigla definida na primeira ocorrência. |
 
 A amostra de vocabulário é inspirada no ASD-STE100; o dicionário oficial do STE não é reproduzido aqui. Para ignorar blocos em inglês, use `--ingles ignorar`. As mensagens desses achados começam com `[EN · STE]`.
@@ -242,7 +242,8 @@ Um time adapta o vocabulário sem alterar o PTC-BR. A camada é um arquivo YAML 
 
 - `sobrepor`: muda o status, `preferir` ou `motivo` de verbetes existentes, por `id` ou `lema`;
 - `verbetes`: acrescenta verbetes com o mesmo schema, com um prefixo de ID próprio (ex.: `T-0001`);
-- `siglas`: siglas conhecidas do público do time.
+- `siglas`: siglas conhecidas do público do time;
+- `ingles.ing_aceitos`: substantivos técnicos em *-ing* aceitos nos blocos em inglês (seção 6.2).
 
 ```bash
 ptc_check.py doc.md --vocabulario camada-do-time.yaml
@@ -399,7 +400,8 @@ Antes da 1.0.0, mudanças incompatíveis podem ocorrer em versões minor e ficam
   - Glossários de software, dados, infraestrutura e finanças, com gênero.
   - Diretivas de idioma, de menção e de bloco ignorado.
   - Casos de ambiguidade e documentação do projeto revisada com o PTC-BR.
-- **0.5.0 (atual):** blocos em inglês verificados com o perfil ASD-STE100; frases curtas seguem o idioma da maioria do documento.
+- **0.5.0:** blocos em inglês verificados com o perfil ASD-STE100; frases curtas seguem o idioma da maioria do documento.
+- **0.5.1 (atual):** substantivos técnicos em *-ing* aceitos, na lista geral e na camada do time.
 - **0.5.0–0.9.0:** uso real; taxa de aceitação por regra; ajustes.
 - **1.0.0:** IDs estáveis; teste de compreensão com leitores; licença e governança definidas.
 

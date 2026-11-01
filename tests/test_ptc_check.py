@@ -305,3 +305,29 @@ class PerfilSTE(unittest.TestCase):
         r = {a["regra"] for a in self.achados("The causa provável is the certificate and the result arrives quickly.")}
         self.assertNotIn("PTC-26", r)
         self.assertNotIn("PTC-12", r)
+
+
+class IngAceitos(unittest.TestCase):
+    """0.5.1: substantivos técnicos em -ing aceitos na lista geral e na camada do time."""
+
+    def ing(self, texto, **kw):
+        return [a["mensagem"] for a in pc.verificar(texto, **kw)["achados"] if "-ing" in a["mensagem"]]
+
+    def test_lista_geral(self):
+        self.assertEqual(self.ing("The service uses connection pooling and request tracing."), [])
+
+    def test_camada_do_time(self):
+        txt = "The job runs the backfilling of the table."
+        self.assertTrue(self.ing(txt))
+        self.assertEqual(self.ing(txt, ing_aceitos={"backfilling"}), [])
+
+    def test_camada_exemplo_carrega_ing_aceitos(self):
+        cc = pc.carregar_camadas_completo([str(Path(pc.__file__).resolve().parents[3] / "exemplos" / "camada-time.yaml")])
+        self.assertIn("backfilling", cc["ing_aceitos"])
+
+    def test_camada_ingles_invalida(self):
+        import json, tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump({"ingles": {"outra_chave": []}}, f)
+        with self.assertRaisesRegex(ValueError, "ing_aceitos"):
+            pc.carregar_camadas_completo([f.name])

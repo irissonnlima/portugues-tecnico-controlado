@@ -4,6 +4,14 @@
 
 Histórico de versões do PTC-BR (Português Técnico Controlado). O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
 
+## [plugin 0.5.1 · spec 0.5.1] — 2026-11-01
+
+- Substantivos técnicos em *-ing* deixam de gerar alerta nos blocos em inglês.
+  - A lista geral passou a aceitar 43 termos novos: *pooling*, *parsing*, *tracing*, *polling*, *monitoring*, *provisioning*, entre outros.
+  - Chave nova na camada do time: `ingles.ing_aceitos`, para os termos próprios do time (`exemplos/camada-time.yaml`).
+- `carregar_camadas_completo()` devolve também os termos em *-ing* aceitos. A `carregar_camadas()` mantém a assinatura anterior.
+- 133 testes unitários.
+
 ## [plugin 0.5.0 · spec 0.5.0] — 2026-11-01
 
 ### Blocos em inglês: perfil ASD-STE100 (novo)

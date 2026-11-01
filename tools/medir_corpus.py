@@ -31,7 +31,9 @@ def main() -> int:
     a = ap.parse_args()
 
     lem = ptc_check.criar_lematizador() if a.lematizar else None
-    vocab, siglas, camadas = ptc_check.carregar_camadas(a.vocabulario) if a.vocabulario else (None, set(), [])
+    cc = ptc_check.carregar_camadas_completo(a.vocabulario) if a.vocabulario else None
+    vocab, siglas, camadas, ing = (cc["vocabulario"], cc["siglas"], cc["nomes"], cc["ing_aceitos"]) if cc \
+        else (None, set(), [], set())
     arquivos = sorted({f for p in a.pastas for f in Path(p).expanduser().rglob("*.md")
                        if "node_modules" not in f.parts and "results" not in f.parts})
     por_regra, por_conf = Counter(), Counter()
@@ -40,7 +42,7 @@ def main() -> int:
     for f in arquivos:
         texto = f.read_text(encoding="utf-8", errors="ignore")
         palavras += len(texto.split())
-        r = ptc_check.verificar(texto, a.perfil, siglas, vocab, camadas, lem)
+        r = ptc_check.verificar(texto, a.perfil, siglas, vocab, camadas, lem, ing_aceitos=ing)
         blocos += r["blocos_verificados"]
         for ach in r["achados"]:
             por_regra[ach["regra"]] += 1

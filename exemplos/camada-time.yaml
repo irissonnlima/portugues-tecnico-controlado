@@ -10,6 +10,11 @@ descricao: Escolhas de vocabulário de um time de engenharia de dados.
 # Siglas que o público do time conhece; somam com --siglas e com <!-- ptc-siglas -->.
 siglas: [ETL, DW, SLA, HML, PRD]
 
+# Blocos em inglês (perfil ASD-STE100): substantivos técnicos em -ing que o time aceita.
+# A lista geral já aceita os mais comuns (pooling, parsing, logging, tracing…).
+ingles:
+  ing_aceitos: [backfilling, upserting]
+
 sobrepor:
   # O vocabulário geral aceita verificar e conferir como sinônimos. Este time padroniza em "conferir".
   - id: V-0001          # verificar
