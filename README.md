@@ -6,7 +6,7 @@ Plugin do Claude Code para revisar, reescrever e verificar textos técnicos em p
 
 | Componente | Versão |
 |---|---|
-| Plugin (`.claude-plugin/plugin.json`) | 0.6.0 |
+| Plugin (`.claude-plugin/plugin.json`) | 0.6.1 |
 | Especificação (`skills/ptc-br/references/regras.md`) | 0.6.0 |
 
 ## O que o plugin faz
@@ -87,7 +87,7 @@ A Action anota os achados nas linhas do pull request e escreve um resumo na pág
 - uses: actions/checkout@v5
   with:
     fetch-depth: 0            # para comparar com a base do PR
-- uses: irissonnlima/portugues-tecnico-controlado@v0.6.0
+- uses: irissonnlima/portugues-tecnico-controlado@v0.6.1
   with:
     ignorar: "evals/** CHANGELOG.md"        # opcional
     vocabulario: docs/camada-do-time.json   # opcional
@@ -103,7 +103,7 @@ Sem `arquivos`, a Action verifica os `.md` alterados no push ou no PR.
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/irissonnlima/portugues-tecnico-controlado
-    rev: v0.6.0
+    rev: v0.6.1
     hooks:
       - id: ptc-br
         args: [--min-confianca, media, --falhar-em, obrigatoria-alta, --vocabulario, docs/camada-do-time.json]

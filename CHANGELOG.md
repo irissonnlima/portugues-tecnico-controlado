@@ -4,6 +4,11 @@
 
 Histórico de versões do PTC-BR (Português Técnico Controlado). O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). O plugin e a especificação têm versões separadas.
 
+## [plugin 0.6.1 · spec 0.6.0] — 2026-11-01
+
+- Corrige o `action.yml`: uma descrição sem aspas tornava o YAML inválido, e o GitHub não carregava a Action. Use a Action a partir desta versão.
+- Teste novo: lê o `action.yml`, o hook de pre-commit e os workflows com PyYAML.
+
 ## [plugin 0.6.0 · spec 0.6.0] — 2026-11-01
 
 ### Uso no fluxo do time (novo)
