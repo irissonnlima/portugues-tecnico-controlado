@@ -321,6 +321,7 @@ class IngAceitos(unittest.TestCase):
         self.assertTrue(self.ing(txt))
         self.assertEqual(self.ing(txt, ing_aceitos={"backfilling"}), [])
 
+    @unittest.skipUnless(__import__("importlib").util.find_spec("yaml"), "PyYAML ausente (camada de exemplo em YAML)")
     def test_camada_exemplo_carrega_ing_aceitos(self):
         cc = pc.carregar_camadas_completo([str(Path(pc.__file__).resolve().parents[3] / "exemplos" / "camada-time.yaml")])
         self.assertIn("backfilling", cc["ing_aceitos"])
