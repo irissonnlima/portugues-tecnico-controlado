@@ -87,6 +87,17 @@ class Integracao(unittest.TestCase):
         self.assertIn("entry: tools/ptc_lote.py", texto)
         self.assertTrue((RAIZ / "tools" / "ptc_lote.py").read_text(encoding="utf-8").startswith("#!/usr/bin/env python3"))
 
+    @unittest.skipUnless(__import__("importlib.util").util.find_spec("yaml"), "requer PyYAML")
+    def test_yaml_da_action_e_dos_workflows_e_valido(self):
+        import yaml
+        action = yaml.safe_load((RAIZ / "action.yml").read_text(encoding="utf-8"))
+        self.assertEqual(action["runs"]["using"], "composite")
+        self.assertIn("falhar-em", action["inputs"])
+        hooks = yaml.safe_load((RAIZ / ".pre-commit-hooks.yaml").read_text(encoding="utf-8"))
+        self.assertEqual(hooks[0]["id"], "ptc-br")
+        for wf in (RAIZ / ".github" / "workflows").glob("*.yml"):
+            self.assertIsInstance(yaml.safe_load(wf.read_text(encoding="utf-8")), dict, wf.name)
+
 
 class Registro(unittest.TestCase):
     def setUp(self):

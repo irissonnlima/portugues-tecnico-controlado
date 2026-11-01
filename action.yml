@@ -7,31 +7,31 @@ branding:
 
 inputs:
   arquivos:
-    description: Arquivos a verificar, separados por espaço. Vazio = arquivos .md alterados no push ou no PR.
+    description: 'Arquivos a verificar, separados por espaço. Vazio = arquivos .md alterados no push ou no PR.'
     required: false
     default: ""
   ignorar:
-    description: Padrões glob a pular, separados por espaço (ex.: "evals/** CHANGELOG.md").
+    description: 'Padrões glob a pular, separados por espaço (ex.: "evals/** CHANGELOG.md").'
     required: false
     default: ""
   perfil:
-    description: Perfil PTC-BR (L, T ou C).
+    description: 'Perfil PTC-BR (L, T ou C).'
     required: false
     default: T
   vocabulario:
-    description: Caminho da camada de vocabulário do time (.json ou .yaml; YAML exige PyYAML).
+    description: 'Caminho da camada de vocabulário do time (.json ou .yaml; YAML exige PyYAML).'
     required: false
     default: ""
   siglas:
-    description: Siglas conhecidas do público (arquivo, uma por linha, ou lista separada por vírgula).
+    description: 'Siglas conhecidas do público (arquivo, uma por linha, ou lista separada por vírgula).'
     required: false
     default: ""
   min-confianca:
-    description: Confiança mínima dos achados anotados (baixa, media ou alta).
+    description: 'Confiança mínima dos achados anotados (baixa, media ou alta).'
     required: false
     default: media
   falhar-em:
-    description: Quando falhar o job (obrigatoria-alta, obrigatoria, qualquer ou nunca).
+    description: 'Quando falhar o job (obrigatoria-alta, obrigatoria, qualquer ou nunca).'
     required: false
     default: obrigatoria-alta
 
